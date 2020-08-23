@@ -1,3 +1,6 @@
+@import url(./__card/grid__card.css);
+@import url(./__image/grid__image.css);
+
 .grid {
   max-width: 882px;
   box-sizing: border-box;

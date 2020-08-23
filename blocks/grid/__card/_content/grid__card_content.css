@@ -1,0 +1,16 @@
+@import url(./_content-text/grid__card_content-text.css);
+@import url(./_content-icon/grid__card_content-icon.css);
+
+.grid__card_content {
+  max-width: 246px;
+  list-style: none;
+  margin: auto;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  /* Not Working as explained in brief */
+}
