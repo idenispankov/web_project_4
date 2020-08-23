@@ -1,0 +1,11 @@
+.grid {
+  max-width: 882px;
+  box-sizing: border-box;
+  height: 744px;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  gap: 18px;
+  border-radius: 10px;
+}

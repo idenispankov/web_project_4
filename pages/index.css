@@ -3,3 +3,40 @@
 @import url(../blocks/page/page.css);
 @import url(../blocks/header/header.css);
 @import url(../blocks/profile/profile.css);
+@import url(../blocks/grid/grid.css);
+
+.grid__card {
+  max-width: 282px;
+  max-height: 361px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.grid__image {
+  width: 282px;
+  height: 282px;
+  border-radius: 10px 10px 0 0;
+}
+
+.grid__card_content {
+  max-width: 246px;
+  list-style: none;
+  margin: auto;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  /* Not Working as explained in brief */
+}
+
+.grid__card_content-text {
+  margin: 0;
+}
+
+.grid__card_content-icon {
+  margin-top: 6px;
+  cursor: pointer;
+}

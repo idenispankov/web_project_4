@@ -6,4 +6,9 @@
   margin: 35px 0;
   cursor: pointer;
   padding: 0;
+  transition: opacity 0.5s linear;
+}
+
+.profile__button_add:hover {
+  opacity: 0.6;
 }
