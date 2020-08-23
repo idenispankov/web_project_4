@@ -1,0 +1,16 @@
+@import url(./_name/profile__info_name.css);
+@import url(./_button-edit/profile__info_button-edit.css);
+@import url(./_button-icon/profile__info_button-icon.css);
+@import url(./_text/profile__info_text.css);
+
+.profile__info {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-width: 428px;
+  height: 77px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-right: 154px;
+}
