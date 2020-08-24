@@ -3,5 +3,8 @@
   height: 50px;
   background-color: #000;
   border: 2px solid #fff;
-  align-self: center;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
