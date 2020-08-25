@@ -8,6 +8,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  border-radius: 2px;
   transition: opacity 0.5s linear;
 }
 

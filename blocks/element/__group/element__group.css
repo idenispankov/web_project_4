@@ -11,4 +11,5 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  /* Please help with ellipsis is not working, tried change to display block - no luck */
 }
