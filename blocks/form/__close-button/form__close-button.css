@@ -1,0 +1,21 @@
+.modal__close-button {
+  width: 40.7px;
+  height: 40.7px;
+  background: rgba(0, 0, 0, 0);
+  border: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.5s linear;
+  position: absolute;
+  position: absolute;
+  top: -40px;
+  right: -40px;
+}
+
+.modal__close-button:hover {
+  opacity: 0.6;
+}
