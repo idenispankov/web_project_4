@@ -1,0 +1,10 @@
+.element__like-button {
+  width: 20.75px;
+  height: 18.13px;
+  background-color: #fff;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+}
