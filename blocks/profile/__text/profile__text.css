@@ -6,3 +6,12 @@
   color: #fff;
   margin: 0;
 }
+
+@media screen and (max-width: 900px) {
+  .profile__text {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    margin-right: 12px;
+  }
+}

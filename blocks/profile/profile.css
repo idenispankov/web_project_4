@@ -9,8 +9,16 @@
 
 .profile {
   width: 882px;
-  height: 120px;
   margin: 0 auto 51px;
   display: flex;
   align-items: center;
+}
+
+@media screen and (max-width: 900px) {
+  .profile {
+    width: 282px;
+    height: 286px;
+    flex-direction: column;
+    margin-bottom: 36px;
+  }
 }
