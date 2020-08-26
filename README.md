@@ -3,7 +3,7 @@
 
 ## Overview
 
-* his project is about places around U.S.
+* This project is about places around U.S.
 * Contains profile section with edit option and pictures of  
 different places around U.S.
 * Page is responsive, created using @media quries.
