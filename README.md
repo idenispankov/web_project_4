@@ -1,16 +1,24 @@
 # Project 4: Around The U.S.
+* 
 
-### Overview
+## Overview
 
-* Figma
-* Images
+*This project is about places around U.S.
+* Contains profile section with edit option and pictures of  
+different places around U.S.
+* Page is responsive, created using @media quries.
+* Project were made using HTML, CSS and JavaScript in VScode editor.
+* File structure and css selectors were written according  
+BEM (Block__Element_Modifier) methodology.
 
-**Figma**
+## 
+* I did this project from scratch using design created in [Figma](https://www.figma.com). 
+* [Figma](https://www.figma.com) is the collaborative interface design tool. 
+* Design provided by [Practicum by Yandex](https://www.practicum.yandex.com)  
+during my study of Web Development Course. 
 
-* [Link to the project in Figma](https://www.figma.com/file/mUgu8OSHWE0M6p6vfwmdu9/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1)
 
-**Images**
+## Plans to update project:
 
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
-
-Have fun with JavaScript!
+1. Planning extend functionality of the page using JavaScript.
+2. Keep maintain and clean up a code.
