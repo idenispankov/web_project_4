@@ -7,6 +7,9 @@
   margin: 0;
   display: block;
   max-width: 318px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 900px) {

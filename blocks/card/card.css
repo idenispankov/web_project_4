@@ -1,0 +1,15 @@
+@import url(../card/__image/card__image.css);
+@import url(./__group/card__group.css);
+@import url(./__text/card__text.css);
+@import url(./__like-button/card__like-button.css);
+
+.card {
+  width: 282px;
+  height: 362px;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  border-radius: 10px;
+  display: block;
+  box-sizing: border-box;
+}

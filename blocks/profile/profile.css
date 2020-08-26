@@ -2,10 +2,8 @@
 @import url(./__info/profile__info.css);
 @import url(./__text/profile__text.css);
 @import url(./__edit-button/profile__edit-button.css);
-@import url(./__edit-icon/profile__edit-icon.css);
 @import url(./__paragraph/profile__paragraph.css);
 @import url(./__add-button/profile__add-button.css);
-@import url(./__add-icon/profile__add-icon.css);
 
 .profile {
   width: 882px;

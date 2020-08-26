@@ -8,7 +8,6 @@
   justify-content: center;
   justify-content: space-between;
   align-items: center;
-  list-style: none;
 }
 
 @media screen and (max-width: 900px) {
