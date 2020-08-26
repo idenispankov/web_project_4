@@ -21,7 +21,7 @@
             <h1 class="profile__text">Jacques Cousteau</h1>
           </li>
           <li>
-            <button class="profile__edit-button"><img class="profile__edit-icon" src="./images/edit_icon.png" alt="edit icon"></button>
+            <button class="profile__edit-button" type="button"><img class="profile__edit-icon" src="./images/edit_icon.png" alt="edit icon"></button>
           </li>
           <li>
             <p class="profile__paragraph">Explorer</p>
@@ -112,12 +112,13 @@
     <div class="modal__container">
       <form action="#" class="form">
         <h3 class="form__text">Edit Profile</h3>
-        <input type="text" value="Jacques Cousteau" placeholder="Name" class="form__input">
-        <input type="text" value="Explorer" placeholder="About me" class="form__input">
+        <input type="text" value="Jacques Cousteau" placeholder="Name" class="form__input form__input_type_name">
+        <input type="text" value="Explorer" placeholder="About me" class="form__input form__input_type_about">
         <button class="form__save-button" type="submit" value="Save">Save</button>
-        <button class="modal__close-button"><img src="./images/close_button.png" alt="close icon cross"></button>
+        <button class="modal__close-button" type="button" ><img src="./images/close_button.png" alt="close icon cross"></button>
       </form>
     </div>
   </div>
+  <script src="./pages/index.js"></script>
 </body>
 </html>
