@@ -81,12 +81,12 @@
 
   <!-- Modal Window Block -->
   <div class="modal">
-    <form action="#" class="form">
+    <form action="#" class="form" name="profileForm">
       <h3 class="form__title">Edit Profile</h3>
-      <input type="text" value="Jacques Cousteau" placeholder="Name" class="form__input form__input_type_name">
-      <input type="text" value="Explorer" placeholder="About me" class="form__input form__input_type_about">
+      <input type="text" value="Jacques Cousteau" placeholder="Name" class="form__input form__input_type_name" name="inputName" required>
+      <input type="text" value="Explorer" placeholder="About me" class="form__input form__input_type_about" name="inputAbout" required>
       <button class="form__save-button" type="submit" value="Save">Save</button>
-      <button class="form__close-button" aria-label="Close button" type="button"></button>
+      <button class="form__close-button" aria-label="Close button" type="reset"></button>
     </form>
   </div>
 

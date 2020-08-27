@@ -18,3 +18,9 @@
 .form__save-button:hover {
   opacity: 0.8;
 }
+
+@media screen and (max-width: 900px) {
+  .form__save-button {
+    width: calc(100% - 36px);
+  }
+}

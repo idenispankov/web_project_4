@@ -13,3 +13,9 @@
   display: block;
   box-sizing: border-box;
 }
+
+@media screen and (max-width:900px) {
+  .card {
+    margin: 0 auto;
+  }
+}

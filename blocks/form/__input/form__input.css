@@ -15,3 +15,9 @@
 .form__input:last-child {
   margin-bottom: 48px;
 }
+
+@media screen and (max-width: 900px) {
+  .form__input {
+    width: calc(100% - 36px);
+  }
+}

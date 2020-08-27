@@ -1,6 +1,5 @@
 .profile__info {
-  min-width: 428px;
-  max-width: 428px;
+  width: 428px;
   margin: 0 154px 0 0;
   padding: 0;
   display: flex;

@@ -6,3 +6,9 @@
   width: 330px;
   margin: 34px auto 54px;
 }
+
+@media screen and (max-width: 900px) {
+  .form__title {
+    width: calc(100% - 36px);
+  }
+}
