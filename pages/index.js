@@ -17,6 +17,7 @@ function toggleModal() {
 };
 
 editButton.addEventListener('click', toggleModal);
+
 closeButton.addEventListener('click', toggleModal);
 
 form.addEventListener('submit', function(e) {
