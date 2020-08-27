@@ -8,12 +8,18 @@
 }
 
 
+@media screen and (max-width:900px) {
+  .header {
+    max-width: 582px;
+  }
+}
 
-@media screen and (max-width: 900px) {
+
+/* @media screen and (max-width: 900px) {
   .header {
     max-width: 320px;
     min-height: 56px;
     margin-top: 28px;
     margin-bottom: 38.25px;
   }
-}
+} */
