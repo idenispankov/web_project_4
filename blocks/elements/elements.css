@@ -3,7 +3,6 @@
 .elements {
   max-width: 882px;
   margin: 0 auto 66px;
-  background-color: wheat;
 }
 
 @media screen and (max-width:900px) {

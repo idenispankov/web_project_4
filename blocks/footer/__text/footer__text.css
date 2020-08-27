@@ -7,9 +7,9 @@
   margin: 0;
 }
 
-/* @media screen and (max-width: 900px) {
+@media screen and (max-width: 750px) {
   .footer__text {
     font-size: 14px;
     line-height: 17px;
   }
-} */
+}
