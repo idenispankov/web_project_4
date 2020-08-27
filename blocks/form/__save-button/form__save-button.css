@@ -1,17 +1,16 @@
 .form__save-button {
   width: 358px;
-  border-radius: 2px;
   height: 50.15px;
-  background-color: #000;
-  color: #fff;
-  display: block;
   margin: 0 auto 36.51px;
   padding: 0;
+  display: block;
+  border-radius: 2px;
+  background-color: #000;
+  color: #fff;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
   line-height: 22px;
-  box-sizing: content-box;
   cursor: pointer;
   transition: opacity 0.5s linear;
 }

@@ -1,5 +1,5 @@
 const editButton = document.querySelector('.profile__edit-button');
-const closeButton = document.querySelector('.modal__close-button');
+const closeButton = document.querySelector('.form__close-button');
 const modal = document.querySelector('.modal');
 const form = document.querySelector('.form');
 const inputName = document.querySelector('.form__input_type_name');

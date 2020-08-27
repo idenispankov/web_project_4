@@ -1,21 +1,21 @@
-.modal__close-button {
+.form__close-button {
+  background-image: url(../../../images/close_icon.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 40.7px 40.7px;
   width: 40.7px;
   height: 40.7px;
-  background: rgba(0, 0, 0, 0);
-  border: none;
+  background-color: rgba(0, 0, 0, 0);
   margin: 0;
   padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
   transition: opacity 0.5s linear;
   position: absolute;
-  position: absolute;
-  top: -40px;
-  right: -40px;
+  border: none;
+  top: -32px;
+  right: -32px;
 }
 
-.modal__close-button:hover {
+.form__close-button:hover {
   opacity: 0.6;
 }

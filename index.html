@@ -81,16 +81,15 @@
 
   <!-- Modal Window Block -->
   <div class="modal">
-    <div class="modal__container">
-      <form action="#" class="form">
-        <h3 class="form__text">Edit Profile</h3>
-        <input type="text" value="Jacques Cousteau" placeholder="Name" class="form__input form__input_type_name">
-        <input type="text" value="Explorer" placeholder="About me" class="form__input form__input_type_about">
-        <button class="form__save-button" type="submit" value="Save">Save</button>
-        <button class="modal__close-button" type="button" ><img src="./images/close_button.png" alt="close icon cross"></button>
-      </form>
-    </div>
+    <form action="#" class="form">
+      <h3 class="form__title">Edit Profile</h3>
+      <input type="text" value="Jacques Cousteau" placeholder="Name" class="form__input form__input_type_name">
+      <input type="text" value="Explorer" placeholder="About me" class="form__input form__input_type_about">
+      <button class="form__save-button" type="submit" value="Save">Save</button>
+      <button class="form__close-button" aria-label="Close button" type="button"></button>
+    </form>
   </div>
+
   <script src="./pages/index.js"></script>
 </body>
 </html>
