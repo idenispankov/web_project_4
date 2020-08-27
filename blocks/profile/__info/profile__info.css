@@ -1,5 +1,5 @@
 .profile__info {
-  width: 428px;
+  max-width: 428px;
   margin: 0 154px 0 0;
   padding: 0;
   display: flex;
@@ -11,9 +11,15 @@
 
 @media screen and (max-width: 900px) {
   .profile__info {
-    max-width: 280px;
-    margin-right: 0;
-    justify-content: center;
-    margin-bottom: 36px;
+    margin: 0;
+    max-width: calc(428px - 200px);
   }
 }
+
+
+/* @media screen and (max-width: 875px) {
+  .profile__info {
+    margin: 0;
+    max-width: calc(428px - 200px);
+  }
+} */

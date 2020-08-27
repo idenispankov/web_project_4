@@ -13,11 +13,18 @@
   overflow: hidden;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width:900px) {
+  .profile__paragraph {
+    
+  }
+}
+
+
+/* @media screen and (max-width: 900px) {
   .profile__paragraph {
     font-size: 14px;
     line-height: 17px;
     width: 280px;
     text-align: center;
   }
-}
+} */

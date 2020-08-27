@@ -12,10 +12,17 @@
   overflow: hidden;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width:900px) {
+  .profile__text {
+    font-size: 22px;
+  }
+}
+
+
+/* @media screen and (max-width: 900px) {
   .profile__text {
     font-size: 22px;
     margin-right: 12px;
     width: 201px;
   }
-}
+} */

@@ -5,8 +5,14 @@
   margin: 0 30px 0 0;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width:900px) {
+  .profile__avatar {
+    margin: 0;
+  }
+}
+
+/* @media screen and (max-width: 900px) {
   .profile__avatar {
     margin-bottom: 14px;
   }
-}
+} */

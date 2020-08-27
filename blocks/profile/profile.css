@@ -6,16 +6,35 @@
 @import url(./__add-button/profile__add-button.css);
 
 .profile {
-  width: 882px;
+  max-width: 882px;
   margin: 0 auto 51px;
   display: flex;
   align-items: center;
 }
 
-@media screen and (max-width: 900px) {
+
+@media screen and (max-width:900px) {
+  .profile {
+    max-width: calc(100% - 199px);
+    height: 120px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+/* @media screen and (max-width:750px) {
   .profile {
     width: 282px;
     flex-direction: column;
     margin-bottom: 36px;
   }
-}
+} */
+
+
+/* @media screen and (max-width: 900px) {
+  .profile {
+    width: 282px;
+    flex-direction: column;
+    margin-bottom: 36px;
+  }
+} */
