@@ -7,24 +7,19 @@ const inputAbout = document.querySelector('.form__input_type_about');
 const profileName = document.querySelector('.profile__text');
 const profileAbout = document.querySelector('.profile__paragraph');
 
-
 function toggleModal() {
   modal.classList.toggle('modal_is-open');
-}
+
+  if (modal.classList.contains('modal_is-open')) {
+    inputName.value = profileName.textContent;
+    inputAbout.value = profileAbout.textContent;
+  }
+};
 
 editButton.addEventListener('click', toggleModal);
+closeButton.addEventListener('click', toggleModal);
 
-closeButton.addEventListener('click', (e) => {
-  e.preventDefault();
-  toggleModal();
-
-  inputName.value = profileName.textContent;
-  inputAbout.value = profileAbout.textContent;
-});
-
-
-
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', function(e) {
   e.preventDefault();
   toggleModal();
 
