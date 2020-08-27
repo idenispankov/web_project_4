@@ -22,19 +22,11 @@
   }
 }
 
-/* @media screen and (max-width:750px) {
+@media screen and (max-width: 750px) {
   .profile {
     width: 282px;
+    min-height: 286px;
     flex-direction: column;
     margin-bottom: 36px;
   }
-} */
-
-
-/* @media screen and (max-width: 900px) {
-  .profile {
-    width: 282px;
-    flex-direction: column;
-    margin-bottom: 36px;
-  }
-} */
+}

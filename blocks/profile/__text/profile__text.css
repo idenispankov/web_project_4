@@ -19,10 +19,10 @@
 }
 
 
-/* @media screen and (max-width: 900px) {
+@media screen and (max-width: 750px) {
   .profile__text {
     font-size: 22px;
     margin-right: 12px;
-    width: 201px;
+    max-width: 201px;
   }
-} */
+}

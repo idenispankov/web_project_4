@@ -17,9 +17,11 @@
 }
 
 
-/* @media screen and (max-width: 875px) {
+@media screen and (max-width: 750px) {
   .profile__info {
-    margin: 0;
-    max-width: calc(428px - 200px);
+    max-width: 280px;
+    margin-right: 0;
+    justify-content: center;
+    margin-bottom: 36px;
   }
-} */
+}
