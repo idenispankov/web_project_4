@@ -8,8 +8,8 @@
   gap: 18px;
 }
 
-/* @media screen and (max-width: 900px) {
+@media screen and (max-width: 750px) {
   .elements__list {
     gap: 20px;
   }
-} */
+}
