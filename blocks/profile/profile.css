@@ -16,7 +16,6 @@
 @media screen and (max-width:900px) {
   .profile {
     max-width: calc(100% - 199px);
-    height: 120px;
     display: flex;
     justify-content: space-between;
   }
