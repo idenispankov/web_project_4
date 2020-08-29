@@ -16,14 +16,16 @@ function toggleModal() {
   }
 };
 
-editButton.addEventListener('click', toggleModal);
-
-closeButton.addEventListener('click', toggleModal);
-
-form.addEventListener('submit', function(e) {
+function submitPrevent(e) {
   e.preventDefault();
   toggleModal();
 
   profileName.textContent = inputName.value;
   profileAbout.textContent = inputAbout.value;
-});
+};
+
+editButton.addEventListener('click', toggleModal);
+
+closeButton.addEventListener('click', toggleModal);
+
+form.addEventListener('submit', submitPrevent);
