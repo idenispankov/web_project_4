@@ -21,6 +21,6 @@
 
 @media screen and (max-width: 900px) {
   .form__save-button {
-    width: calc(100% - 36px);
+    width: calc(100% - 72px);
   }
 }

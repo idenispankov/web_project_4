@@ -1,6 +1,7 @@
 .form__input {
   width: 358px;
   height: 14px;
+  padding: 0;
   padding-bottom: 13.26px;
   display: block;
   margin: 0 36px 29.74px;
@@ -18,6 +19,6 @@
 
 @media screen and (max-width: 900px) {
   .form__input {
-    width: calc(100% - 36px);
+    width: calc(100% - 72px);
   }
 }
