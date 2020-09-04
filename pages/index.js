@@ -1,16 +1,28 @@
+// Modals
+const editProfileModal = document.querySelector('.modal_type_edit-profile');
+const addCardModal = document.querySelector('.modal_type_add-card');
+
+// Open Buttons
 const editButton = document.querySelector('.profile__edit-button');
-const closeButton = document.querySelector('.form__close-button');
-const modal = document.querySelector('.modal');
+const addButton = document.querySelector('.profile__add-button');
+
+// Close Buttons
+const closeEditButton = editProfileModal.querySelector('.form__close-button');
+const closeAddButton = addCardModal.querySelector('.form__close-button');
+
+// Form Block
 const form = document.querySelector('.form');
 const inputName = document.querySelector('.form__input_type_name');
 const inputAbout = document.querySelector('.form__input_type_about');
 const profileName = document.querySelector('.profile__text');
 const profileAbout = document.querySelector('.profile__paragraph');
 
-function toggleModal() {
+
+// Functions
+function toggleModal(modal) {
   modal.classList.toggle('modal_is-open');
 
-  if (modal.classList.contains('modal_is-open')) {
+  if (editProfileModal.classList.contains('modal_is-open')) {
     inputName.value = profileName.textContent;
     inputAbout.value = profileAbout.textContent;
   }
@@ -18,19 +30,35 @@ function toggleModal() {
 
 function submitPrevent(e) {
   e.preventDefault();
-  toggleModal();
 
   profileName.textContent = inputName.value;
   profileAbout.textContent = inputAbout.value;
+
+  toggleModal(editProfileModal);
 };
 
-editButton.addEventListener('click', toggleModal);
 
-closeButton.addEventListener('click', toggleModal);
+// Buttons Events
+editButton.addEventListener('click', () => {
+  toggleModal(editProfileModal);
+})
+
+closeEditButton.addEventListener('click', () => {
+  toggleModal(editProfileModal);
+});
 
 form.addEventListener('submit', submitPrevent);
 
+addButton.addEventListener('click', () => {
+  toggleModal(addCardModal);
+});
 
+closeAddButton.addEventListener('click', () => {
+  toggleModal(addCardModal);
+})
+
+
+// Initial Cards
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -60,6 +88,7 @@ const initialCards = [
 
 const cardTemplate = document.querySelector('.card-template').content.querySelector('.card');
 const list = document.querySelector('.elements__list');
+
 
 // Create Card
 initialCards.forEach(data => {
