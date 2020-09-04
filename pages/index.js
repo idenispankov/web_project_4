@@ -1,6 +1,7 @@
 // Modals
 const editProfileModal = document.querySelector('.modal_type_edit-profile');
 const addCardModal = document.querySelector('.modal_type_add-card');
+const imageModal = document.querySelector('.modal_type_image');
 
 // Open Buttons
 const editButton = document.querySelector('.profile__edit-button');
@@ -41,7 +42,7 @@ function submitPrevent(e) {
 // Buttons Events
 editButton.addEventListener('click', () => {
   toggleModal(editProfileModal);
-})
+});
 
 closeEditButton.addEventListener('click', () => {
   toggleModal(editProfileModal);
@@ -55,7 +56,7 @@ addButton.addEventListener('click', () => {
 
 closeAddButton.addEventListener('click', () => {
   toggleModal(addCardModal);
-})
+});
 
 
 // Initial Cards
@@ -92,6 +93,7 @@ const list = document.querySelector('.elements__list');
 
 // Create Card
 initialCards.forEach(data => {
+
   const cardElement = cardTemplate.cloneNode(true);
 
   const cardImage = cardElement.querySelector('.card__image');
@@ -101,6 +103,18 @@ initialCards.forEach(data => {
 
   cardText.textContent = data.name;
   cardImage.src = data.link;
+
+  // Card Buttons
+  cardImage.addEventListener('click', () => {
+    
+    const modalImage = imageModal.querySelector('.modal__image');
+    const modalImageTitle = imageModal.querySelector('.modal__image-title');
+
+    modalImage.src = data.link;
+    modalImageTitle.textContent = data.name;
+
+    toggleModal(imageModal);
+  });
 
   list.prepend(cardElement);
 });
