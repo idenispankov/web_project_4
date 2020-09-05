@@ -116,5 +116,9 @@ initialCards.forEach(data => {
     toggleModal(imageModal);
   });
 
+  cardDeleteButton.addEventListener('click', () => {
+    
+  })
+
   list.prepend(cardElement);
 });
