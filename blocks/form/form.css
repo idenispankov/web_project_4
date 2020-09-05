@@ -16,3 +16,10 @@
     width: calc(100% - 70px);
   }
 }
+
+@media screen and (max-width: 375px) {
+  .form {
+    width: 240px;
+    
+  }
+}

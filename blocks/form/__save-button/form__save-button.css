@@ -19,8 +19,12 @@
   opacity: 0.8;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 375px) {
   .form__save-button {
-    width: calc(100% - 72px);
+    width: 200px;
+    height: 40px;
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 30px;
   }
 }

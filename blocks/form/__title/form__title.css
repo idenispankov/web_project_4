@@ -13,3 +13,17 @@
     width: calc(100% - 100px);
   }
 }
+
+@media screen and (max-width: 375px) {
+  .form__title {
+    width: 200px;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 36px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 30px;
+  }
+}
