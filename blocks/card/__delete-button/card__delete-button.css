@@ -1,13 +1,10 @@
 .card__delete-button {
   display: inline-block;
   box-sizing: border-box;
-  background-image:
-  url(../../../images/delete_icon_bottom.svg),
-  url(../../../images/delete_icon_top.svg);
-  background-position: bottom, top;
+  background-image:url(../../../images/delete_icon.svg);
+  background-position: center;
   background-repeat: no-repeat;
   background-color: rgba(0, 0, 0, 0);
-  background-size: 15.44px 13.51px, 18px 4.49px;
   border: none;
   width: 18px;
   height: 19.3px;
