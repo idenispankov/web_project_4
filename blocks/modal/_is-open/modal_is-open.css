@@ -1,3 +1,15 @@
 .modal_is-open {
   display: flex;
+  
+}
+
+.modal_is-open > .form {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear;
+}
+
+.modal_is-open:hover > .form {
+  visibility: visible;
+  opacity: 1;
 }
