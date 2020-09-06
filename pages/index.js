@@ -123,7 +123,7 @@ initialCards.forEach(data => {
   });
 
   // Card Create Function
-  cardCreateButton,addEventListener('submit',() => {
+  cardCreateButton.addEventListener('submit',() => {
 
     const inputTitle = addCardModal.querySelector('.form__input_type_card-text');
     const inputUrl = addCardModal.querySelector('.form__input_type_card-url');
@@ -134,7 +134,16 @@ initialCards.forEach(data => {
     list.unshift(cardElement);
 
     toggleModal(addCardModal);
-  })
+  });
+
+  // Card Like Button
+  function toggleHeart(e) {
+    e.target.classList.toggle('card__like-button_active');
+  };
+
+  const likeButton = cardElement.querySelector('.card__like-button');
+
+  likeButton.addEventListener('click', toggleHeart);
 
   // Card Delete Function
   cardDeleteButton.addEventListener('click', () => {
