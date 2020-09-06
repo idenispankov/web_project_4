@@ -27,48 +27,7 @@
       <!--Elements Block  -->
       <section class="elements">
         <ul class="elements__list">
-          <li class="card">
-            <img class="card__image" src="./images/yosemite.jpg" alt="picture of lake with mountains and trees">
-            <div class="card__group">
-              <h2 class="card__text">Yosemite Valley</h2> 
-              <button class="card__like-button" aria-label="Like button" type="button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img class="card__image" src="./images/lake.jpg" alt="picture of lake between mountains">
-            <div class="card__group">
-              <h2 class="card__text">Lake Louise</h2> 
-              <button class="card__like-button" aria-label="Like button" type="button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img class="card__image" src="./images/bald.jpg" alt="picture of sunset over mountain valley">
-            <div class="card__group">
-              <h2 class="card__text">Bald mountains</h2> 
-              <button class="card__like-button" aria-label="Like button" type="button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img class="card__image" src="./images/latemar.jpg" alt="picture of mountains with night sky and stars">
-            <div class="card__group">
-              <h2 class="card__text">Latemar</h2> 
-              <button class="card__like-button" aria-label="Like button" type="button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img class="card__image" src="./images/vanoise.jpg" alt="picture of lake near mountains, sunset">
-            <div class="card__group">
-              <h2 class="card__text">Vanoise National Park</h2> 
-              <button class="card__like-button" aria-label="Like button" type="button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img class="card__image" src="./images/lago.jpg" alt="picture of lake, mountains on background, small boats, small pier">
-            <div class="card__group">
-              <h2 class="card__text">Lago di Braies</h2> 
-              <button class="card__like-button" aria-label="Like button" type="button"></button>
-            </div>
-          </li>
+          
         </ul>
       </section>
     </main>
@@ -79,8 +38,8 @@
     </footer>
   </div>
 
-  <!-- Modal Window Block -->
-  <div class="modal">
+  <!-- Edit Profile Modal Window Block -->
+  <div class="modal modal_type_edit-profile">
     <form action="#" class="form" name="profileForm">
       <h3 class="form__title">Edit profile</h3>
       <input type="text" value="Jacques Cousteau" placeholder="Name" class="form__input form__input_type_name" name="inputName" required>
@@ -89,6 +48,17 @@
       <button class="form__close-button" aria-label="Close button" type="reset"></button>
     </form>
   </div>
+
+  <!-- Card Template -->
+  <template class="card-template">
+    <li class="card">
+      <img class="card__image" src="" alt="">
+      <div class="card__group">
+        <h2 class="card__text">Yosemite Valley</h2> 
+        <button class="card__like-button" aria-label="Like button" type="button"></button>
+      </div>
+  </li>
+  </template>
 
   <script src="./pages/index.js"></script>
 </body>
