@@ -11,10 +11,12 @@ const addButton = document.querySelector('.profile__add-button');
 const closeEditButton = editProfileModal.querySelector('.form__close-button');
 const closeAddButton = addCardModal.querySelector('.form__close-button');
 
-// Form Block
-const form = document.querySelector('.form');
+// Form Profile Block
+const formProfile = document.querySelector('.form_type_profile');
+
 const inputName = document.querySelector('.form__input_type_name');
 const inputAbout = document.querySelector('.form__input_type_about');
+
 const profileName = document.querySelector('.profile__text');
 const profileAbout = document.querySelector('.profile__paragraph');
 
@@ -48,7 +50,7 @@ closeEditButton.addEventListener('click', () => {
   toggleModal(editProfileModal);
 });
 
-form.addEventListener('submit', submitPrevent);
+formProfile.addEventListener('submit', submitPrevent);
 
 addButton.addEventListener('click', () => {
   toggleModal(addCardModal);
@@ -57,6 +59,9 @@ addButton.addEventListener('click', () => {
 closeAddButton.addEventListener('click', () => {
   toggleModal(addCardModal);
 });
+
+
+// ////////////////////////////////////////////////////////////////////////////////
 
 
 // Initial Cards
@@ -100,11 +105,12 @@ initialCards.forEach(data => {
   const cardText = cardElement.querySelector('.card__text');
   const cardLikeButton = cardElement.querySelector('.card__like-button');
   const cardDeleteButton = cardElement.querySelector('.card__delete-button');
+  const cardCreateButton = addCardModal.querySelector('.form__create-button');
 
   cardText.textContent = data.name;
   cardImage.src = data.link;
 
-  // Card Buttons
+  // Card Image
   cardImage.addEventListener('click', () => {
     
     const modalImage = imageModal.querySelector('.modal__image');
@@ -116,9 +122,24 @@ initialCards.forEach(data => {
     toggleModal(imageModal);
   });
 
-  cardDeleteButton.addEventListener('click', () => {
-    
+  // Card Create Function
+  cardCreateButton,addEventListener('submit',() => {
+
+    const inputTitle = addCardModal.querySelector('.form__input_type_card-text');
+    const inputUrl = addCardModal.querySelector('.form__input_type_card-url');
+
+    inputTitle.textContent = cardText.value;
+    inputUrl.src = inputUrl.value;
+
+    list.unshift(cardElement);
+
+    toggleModal(addCardModal);
   })
+
+  // Card Delete Function
+  cardDeleteButton.addEventListener('click', () => {
+    list.removeChild(cardElement);
+  });
 
   list.prepend(cardElement);
 });
