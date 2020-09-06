@@ -13,3 +13,14 @@
   visibility: visible;
   opacity: 1;
 }
+
+.modal_is-open > .modal__figure {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear;
+}
+
+.modal_is-open:hover > .modal__figure {
+  visibility: visible;
+  opacity: 1;
+}

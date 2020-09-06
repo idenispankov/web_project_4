@@ -1,0 +1,14 @@
+@import url(./__image-title/modal__image-title.css);
+@import url(./_close-button/modal__image_close-button.css);
+
+.modal__image {
+  max-width: 816px;
+  max-height: 540px;
+}
+
+@media screen and (max-width: 750px) {
+  .modal__image {
+    max-width: 75vw;
+    max-height: 75vh;
+  }
+}

@@ -10,6 +10,7 @@ const addButton = document.querySelector('.profile__add-button');
 // Close Buttons
 const closeEditButton = editProfileModal.querySelector('.form__close-button');
 const closeAddButton = addCardModal.querySelector('.form__close-button');
+const closeImageButton = imageModal.querySelector('.modal__image_close-button');
 
 // Form Profile Block
 const formProfile = document.querySelector('.form_type_profile');
@@ -41,24 +42,30 @@ function submitPrevent(e) {
 };
 
 
-// Buttons Events
+// Open Buttons Events
 editButton.addEventListener('click', () => {
   toggleModal(editProfileModal);
 });
-
-closeEditButton.addEventListener('click', () => {
-  toggleModal(editProfileModal);
-});
-
-formProfile.addEventListener('submit', submitPrevent);
 
 addButton.addEventListener('click', () => {
   toggleModal(addCardModal);
 });
 
+// Close Button Events
+closeEditButton.addEventListener('click', () => {
+  toggleModal(editProfileModal);
+});
+
 closeAddButton.addEventListener('click', () => {
   toggleModal(addCardModal);
 });
+
+closeImageButton.addEventListener('click', () => {
+  toggleModal(imageModal);
+})
+
+// Submit Profile Button Event
+formProfile.addEventListener('submit', submitPrevent);
 
 
 // ////////////////////////////////////////////////////////////////////////////////
