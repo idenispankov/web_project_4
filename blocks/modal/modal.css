@@ -1,6 +1,3 @@
-@import url(./__image/modal__image.css);
-@import url(./__figure/modal__figure.css);
-
 .modal {
   position: fixed;
   top: 0;

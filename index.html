@@ -27,7 +27,48 @@
       <!--Elements Block  -->
       <section class="elements">
         <ul class="elements__list">
-          
+          <li class="card">
+            <img class="card__image" src="./images/yosemite.jpg" alt="picture of lake with mountains and trees">
+            <div class="card__group">
+              <h2 class="card__text">Yosemite Valley</h2> 
+              <button class="card__like-button" aria-label="Like button" type="button"></button>
+            </div>
+          </li>
+          <li class="card">
+            <img class="card__image" src="./images/lake.jpg" alt="picture of lake between mountains">
+            <div class="card__group">
+              <h2 class="card__text">Lake Louise</h2> 
+              <button class="card__like-button" aria-label="Like button" type="button"></button>
+            </div>
+          </li>
+          <li class="card">
+            <img class="card__image" src="./images/bald.jpg" alt="picture of sunset over mountain valley">
+            <div class="card__group">
+              <h2 class="card__text">Bald mountains</h2> 
+              <button class="card__like-button" aria-label="Like button" type="button"></button>
+            </div>
+          </li>
+          <li class="card">
+            <img class="card__image" src="./images/latemar.jpg" alt="picture of mountains with night sky and stars">
+            <div class="card__group">
+              <h2 class="card__text">Latemar</h2> 
+              <button class="card__like-button" aria-label="Like button" type="button"></button>
+            </div>
+          </li>
+          <li class="card">
+            <img class="card__image" src="./images/vanoise.jpg" alt="picture of lake near mountains, sunset">
+            <div class="card__group">
+              <h2 class="card__text">Vanoise National Park</h2> 
+              <button class="card__like-button" aria-label="Like button" type="button"></button>
+            </div>
+          </li>
+          <li class="card">
+            <img class="card__image" src="./images/lago.jpg" alt="picture of lake, mountains on background, small boats, small pier">
+            <div class="card__group">
+              <h2 class="card__text">Lago di Braies</h2> 
+              <button class="card__like-button" aria-label="Like button" type="button"></button>
+            </div>
+          </li>
         </ul>
       </section>
     </main>
@@ -38,9 +79,9 @@
     </footer>
   </div>
 
-  <!-- Edit Modal Window Block -->
-  <div class="modal modal_type_edit-profile">
-    <form action="#" class="form form_type_profile" name="profileForm">
+  <!-- Modal Window Block -->
+  <div class="modal">
+    <form action="#" class="form" name="profileForm">
       <h3 class="form__title">Edit profile</h3>
       <input type="text" value="Jacques Cousteau" placeholder="Name" class="form__input form__input_type_name" name="inputName" required>
       <input type="text" value="Explorer" placeholder="About me" class="form__input form__input_type_about" name="inputAbout" required>
@@ -48,38 +89,6 @@
       <button class="form__close-button" aria-label="Close button" type="reset"></button>
     </form>
   </div>
-
-  <!-- Add Modal Window Block -->
-  <div class="modal modal_type_add-card">
-    <form action="#" class="form form_type_card" name="AddCardForm">
-      <h3 class="form__title">New place</h3>
-      <input type="text" value="" placeholder="Title" class="form__input form__input_type_card-text" name="inputText" required>
-      <input type="url" value="" placeholder="Image link" class="form__input form__input_type_card-url" name="inputUrl" required>
-      <button class="form__save-button form__create-button" type="submit" value="Create">Create</button>
-      <button class="form__close-button" aria-label="Close button" type="reset"></button>
-    </form>
-  </div>
-
-  <!-- Image Modal Window Block -->
-  <div class="modal modal_type_image">
-    <figure class="modal__figure">
-      <button class="form__close-button modal__image_close-button" aria-label="Close button" type="reset"></button>
-      <img class="modal__image" src="" alt="">
-      <figcaption class="modal__image-title"></figcaption>
-    </figure>
-  </div>
-
-  <!-- Card template -->
-  <template class="card-template">
-    <li class="card">
-      <button class="card__delete-button" aria-label="Delete button" type="button"></button>
-      <img class="card__image" src="" alt="">
-      <div class="card__group">
-        <h2 class="card__text"></h2> 
-        <button class="card__like-button" aria-label="Like button" type="button"></button>
-      </div>
-    </li>
-  </template>
 
   <script src="./pages/index.js"></script>
 </body>
