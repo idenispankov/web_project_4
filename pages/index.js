@@ -18,11 +18,6 @@ const profileAbout = document.querySelector('.profile__paragraph');
 // Toggle Function
 function toggleModal(modal) {
   modal.classList.toggle('modal_is-open');
-
-  if (modal.classList.contains('modal_is-open')) {
-    inputName.value = profileName.textContent;
-    inputAbout.value = profileAbout.textContent;
-  }
 };
 
 // Profile Submit Handler
@@ -35,6 +30,10 @@ function profileSubmitHandler(e) {
 
 // Modal Profile Click Events
 editProfileButton.addEventListener('click', () => {
+
+  inputName.value = profileName.textContent;
+  inputAbout.value = profileAbout.textContent;
+
   toggleModal(editProfileModal);
 });
 
@@ -76,3 +75,25 @@ const initialCards = [
 
 const cardTemplate = document.querySelector('.card-template').content.querySelector('.card');
 const list = document.querySelector('.elements__list');
+
+// Create Card bu User Function
+function createCard(data) {
+  const cardElement = cardTemplate.cloneNode(true);
+
+  const cardText = cardElement.querySelector('.card__text');
+  const cardImage = cardElement.querySelector('.card__image');
+
+  cardText.textContent = data.name;
+  cardImage.src = data.link;
+
+  return cardElement;
+};
+
+function renderCard(data) {
+  list.prepend(createCard(data));
+}
+
+// Initial Cards Data
+initialCards.forEach(cardsData => {
+  renderCard(cardsData);
+});
