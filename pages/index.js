@@ -60,7 +60,7 @@ const initialCards = [
 const cardTemplate = document.querySelector('.card-template').content.querySelector('.card');
 const list = document.querySelector('.elements__list');
 
-// Create Card Function
+// Create Card
 function createCard(data) {
   const cardElement = cardTemplate.cloneNode(true);
 
@@ -71,12 +71,22 @@ function createCard(data) {
   cardImage.src = data.link;
 
   // Like Card Button
+  const cardLikeButton = cardElement.querySelector('.card__like-button');
+
   function toggleHeart(e) {
     e.target.classList.toggle('card__like-button_active');
   };
 
-  const cardLikeButton = cardElement.querySelector('.card__like-button');
   cardLikeButton.addEventListener('click', toggleHeart);
+
+  // Delete Card Button
+  const cardDeleteButton = cardElement.querySelector('.card__delete-button');
+
+  function deleteCard() {
+    list.removeChild(cardElement);
+  }
+
+  cardDeleteButton.addEventListener('click', deleteCard);
 
   return cardElement;
 };
