@@ -2,6 +2,7 @@
 @import url(./__input/form__input.css);
 @import url(./__button/form__button.css);
 @import url(./__close-button/form__close-button.css);
+@import url(./__close-button/_type-image/form__close-button_type-image.css);
 
 .form {
   width: 430px;
