@@ -70,12 +70,20 @@ function createCard(data) {
   cardText.textContent = data.name;
   cardImage.src = data.link;
 
+  // Like Card Button
+  function toggleHeart(e) {
+    e.target.classList.toggle('card__like-button_active');
+  };
+
+  const cardLikeButton = cardElement.querySelector('.card__like-button');
+  cardLikeButton.addEventListener('click', toggleHeart);
+
   return cardElement;
 };
 
 function renderCard(data) {
   list.prepend(createCard(data));
-}
+};
 
 // Initial Cards Data
 initialCards.forEach(cardsData => {
@@ -125,3 +133,5 @@ AddCardForm.addEventListener('submit', (e) => {
   renderCard({name: inputTitle.value, link: inputUrl.value});
   toggleModal(addCardModal);
 })
+
+// Like Button Function
