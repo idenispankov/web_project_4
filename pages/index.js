@@ -1,49 +1,31 @@
 // Modal Windows
 const editProfileModal = document.querySelector('.modal_type_edit-profile');
+const addCardModal = document.querySelector('.modal_type_add-card');
 
-// Modal Profile Buttons
+// Edit Profile Buttons
 const editProfileButton = document.querySelector('.profile__edit-button');
 const closeProfileButton = editProfileModal.querySelector('.form__close-button');
 
-// Modal Profile Form
-const profileForm = editProfileModal.querySelector('.form');
+// Add Card Buttons
+const addCardButton = document.querySelector('.profile__add-button');
+const closeAddCardFormButton = addCardModal.querySelector('.form__close-button');
 
-// Modal Profile Inputs
+// Edit Profile Form
+const profileForm = editProfileModal.querySelector('.form_type_profile');
+
+// Add Card form
+const AddCardForm = addCardModal.querySelector('.form_type_card')
+
+// Edit Profile Form Inputs
 const inputName = document.querySelector('.form__input_type_name');
 const inputAbout = document.querySelector('.form__input_type_about');
 
 const profileName = document.querySelector('.profile__text');
 const profileAbout = document.querySelector('.profile__paragraph');
 
-// Toggle Function
-function toggleModal(modal) {
-  modal.classList.toggle('modal_is-open');
-};
-
-// Profile Submit Handler
-function profileSubmitHandler(e) {
-  e.preventDefault();
-  profileName.textContent = inputName.value;
-  profileAbout.textContent = inputAbout.value;
-  toggleModal(editProfileModal);
-};
-
-// Modal Profile Click Events
-editProfileButton.addEventListener('click', () => {
-
-  inputName.value = profileName.textContent;
-  inputAbout.value = profileAbout.textContent;
-
-  toggleModal(editProfileModal);
-});
-
-closeProfileButton.addEventListener('click',() => {
-  toggleModal(editProfileModal);
-})
-
-profileForm.addEventListener('submit', profileSubmitHandler);
-
-//  //////////////////////////////////////////////////////////////////////////////////////////////
+// Add Card Form Inputrs
+const inputTitle = addCardModal.querySelector('.form__input_type_card-title');
+const inputUrl = addCardModal.querySelector('.form__input_type_card-url');
 
 // Initial Cards Array
 const initialCards = [
@@ -73,10 +55,12 @@ const initialCards = [
   }
 ];
 
+
+// Card Template and List Declaration
 const cardTemplate = document.querySelector('.card-template').content.querySelector('.card');
 const list = document.querySelector('.elements__list');
 
-// Create Card bu User Function
+// Create Card Function
 function createCard(data) {
   const cardElement = cardTemplate.cloneNode(true);
 
@@ -97,3 +81,47 @@ function renderCard(data) {
 initialCards.forEach(cardsData => {
   renderCard(cardsData);
 });
+
+
+// Toggle Function
+function toggleModal(modal) {
+  modal.classList.toggle('modal_is-open');
+};
+
+// Profile Submit Handler
+function profileSubmitHandler(e) {
+  e.preventDefault();
+  profileName.textContent = inputName.value;
+  profileAbout.textContent = inputAbout.value;
+  toggleModal(editProfileModal);
+};
+
+// Modal Profile Click Events
+editProfileButton.addEventListener('click', () => {
+
+  inputName.value = profileName.textContent;
+  inputAbout.value = profileAbout.textContent;
+
+  toggleModal(editProfileModal);
+});
+
+closeProfileButton.addEventListener('click',() => {
+  toggleModal(editProfileModal);
+})
+
+profileForm.addEventListener('submit', profileSubmitHandler);
+
+// Modal Add Card Click Events
+addCardButton.addEventListener('click', () => {
+  toggleModal(addCardModal);
+})
+
+closeAddCardFormButton.addEventListener('click', () => {
+  toggleModal(addCardModal);
+})
+
+AddCardForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  renderCard({name: inputTitle.value, link: inputUrl.value});
+  toggleModal(addCardModal);
+})

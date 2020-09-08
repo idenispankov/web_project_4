@@ -40,11 +40,22 @@
 
   <!-- Edit Profile Modal Window Block -->
   <div class="modal modal_type_edit-profile">
-    <form action="#" class="form" name="profileForm">
+    <form action="#" class="form form_type_profile" name="profileForm">
       <h3 class="form__title">Edit profile</h3>
       <input type="text" value="Jacques Cousteau" placeholder="Name" class="form__input form__input_type_name" name="inputName" required>
       <input type="text" value="Explorer" placeholder="About me" class="form__input form__input_type_about" name="inputAbout" required>
-      <button class="form__save-button" type="submit" value="Save">Save</button>
+      <button class="form__button form__button_type_save" type="submit" value="Save">Save</button>
+      <button class="form__close-button" aria-label="Close button" type="reset"></button>
+    </form>
+  </div>
+
+  <!-- Add Card Modal Window Block -->
+  <div class="modal modal_type_add-card">
+    <form action="#" class="form form_type_card" name="CardForm">
+      <h3 class="form__title">New Place</h3>
+      <input type="text" value="" placeholder="Title" class="form__input form__input_type_card-title" name="title" required>
+      <input type="url" value="" placeholder="Image link" class="form__input form__input_type_card-url" name="url" required>
+      <button class="form__button form__button_type_create" type="submit" value="Create">Create</button>
       <button class="form__close-button" aria-label="Close button" type="reset"></button>
     </form>
   </div>

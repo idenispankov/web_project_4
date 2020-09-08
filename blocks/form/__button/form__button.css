@@ -1,4 +1,4 @@
-.form__save-button {
+.form__button {
   width: 358px;
   height: 50.15px;
   margin: 0 auto 36.51px;
@@ -15,12 +15,12 @@
   transition: opacity 0.5s linear;
 }
 
-.form__save-button:hover {
+.form__button:hover {
   opacity: 0.8;
 }
 
 @media screen and (max-width: 375px) {
-  .form__save-button {
+  .form__button {
     width: 200px;
     height: 40px;
     font-size: 14px;
