@@ -3,6 +3,7 @@
 @import url(./__image-title/modal__image-title.css);
 
 .modal {
+  display: flex;
   position: fixed;
   top: 0;
   left: 0;
@@ -11,5 +12,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center;
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s, opacity 0.3s linear;
 }

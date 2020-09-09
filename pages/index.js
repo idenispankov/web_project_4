@@ -3,19 +3,19 @@ const editProfileModal = document.querySelector('.modal_type_edit-profile');
 const addCardModal = document.querySelector('.modal_type_add-card');
 const imageModalWindow = document.querySelector('.modal_type_image');
 
-// Edit Profile Buttons
+// Open Buttons
 const editProfileButton = document.querySelector('.profile__edit-button');
-const closeProfileButton = editProfileModal.querySelector('.form__close-button');
-
-// Add Card Buttons
 const addCardButton = document.querySelector('.profile__add-button');
-const closeAddCardFormButton = addCardModal.querySelector('.form__close-button');
 
-// Edit Profile Form
+// Submit Form Buttons
 const editProfileForm = editProfileModal.querySelector('.form_type_profile');
+const AddCardForm = addCardModal.querySelector('.form_type_card');
+const modalFigure = imageModalWindow.querySelector('.modal__figure');
 
-// Add Card form
-const AddCardForm = addCardModal.querySelector('.form_type_card')
+// Close Buttons
+const closeProfileButton = editProfileModal.querySelector('.form__close-button');
+const closeAddCardFormButton = addCardModal.querySelector('.form__close-button');
+const closeCardImageButton = modalFigure.querySelector('.form__close-button_type-image');
 
 // Edit Profile Form Inputs
 const inputName = editProfileForm.querySelector('.form__input_type_name');
@@ -27,6 +27,40 @@ const profileAbout = document.querySelector('.profile__paragraph');
 // Add Card Form Inputs
 const inputTitle = AddCardForm.querySelector('.form__input_type_card-title');
 const inputUrl = AddCardForm.querySelector('.form__input_type_card-url');
+
+// Toggle Function
+function toggleModal(modal) {
+  modal.classList.toggle('modal_is-open');
+};
+
+// Profile Submit Handler
+function profileSubmitHandler(e) {
+  e.preventDefault();
+  profileName.textContent = inputName.value;
+  profileAbout.textContent = inputAbout.value;
+  toggleModal(editProfileModal);
+};
+
+// Modal Edit Profile Click Events
+editProfileButton.addEventListener('click', () => {
+
+  inputName.value = profileName.textContent;
+  inputAbout.value = profileAbout.textContent;
+
+  toggleModal(editProfileModal);
+});
+
+closeProfileButton.addEventListener('click',() => {
+  toggleModal(editProfileModal);
+})
+
+editProfileForm.addEventListener('submit', profileSubmitHandler);
+
+// Modal Image Click Events
+closeCardImageButton.addEventListener('click', () => {
+  toggleModal(imageModalWindow);
+});
+
 
 // Initial Cards Array
 const initialCards = [
@@ -81,7 +115,7 @@ function createCard(data) {
     toggleModal(imageModalWindow);
   });
 
-  // Like Card Button
+  // Card Like Button
   const cardLikeButton = cardElement.querySelector('.card__like-button');
 
   function toggleHeart(e) {
@@ -90,7 +124,7 @@ function createCard(data) {
 
   cardLikeButton.addEventListener('click', toggleHeart);
 
-  // Delete Card Button
+  // Card Delete Button
   const cardDeleteButton = cardElement.querySelector('.card__delete-button');
 
   function deleteCard() {
@@ -111,54 +145,20 @@ initialCards.forEach(cardsData => {
   renderCard(cardsData);
 });
 
-
-// Toggle Function
-function toggleModal(modal) {
-  modal.classList.toggle('modal_is-open');
-};
-
-// Profile Submit Handler
-function profileSubmitHandler(e) {
-  e.preventDefault();
-  profileName.textContent = inputName.value;
-  profileAbout.textContent = inputAbout.value;
-  toggleModal(editProfileModal);
-};
-
-// Modal Profile Click Events
-editProfileButton.addEventListener('click', () => {
-
-  inputName.value = profileName.textContent;
-  inputAbout.value = profileAbout.textContent;
-
-  toggleModal(editProfileModal);
-});
-
-closeProfileButton.addEventListener('click',() => {
-  toggleModal(editProfileModal);
-})
-
-editProfileForm.addEventListener('submit', profileSubmitHandler);
-
 // Modal Add Card Click Events
 addCardButton.addEventListener('click', () => {
   toggleModal(addCardModal);
-})
+});
 
 closeAddCardFormButton.addEventListener('click', () => {
   toggleModal(addCardModal);
-})
+});
 
-AddCardForm.addEventListener('submit', (e) => {
+// Add Card Submit Handler
+function addCardSubmitHandler(e) {
   e.preventDefault();
   renderCard({name: inputTitle.value, link: inputUrl.value});
   toggleModal(addCardModal);
-});
+};
 
-// Close Card Image Button
-const modalFigure = imageModalWindow.querySelector('.modal__figure');
-const closeCardImageButton = modalFigure.querySelector('.form__close-button_type-image');
-
-closeCardImageButton.addEventListener('click', () => {
-  toggleModal(imageModalWindow);
-});
+AddCardForm.addEventListener('submit', addCardSubmitHandler);
