@@ -110,8 +110,8 @@ function createCard(data) {
     const modalImage = imageModalWindow.querySelector('.modal__image');
     const modalImageTitle = imageModalWindow.querySelector('.modal__image-title');
 
-    modalImage.src = data.link;
     modalImageTitle.textContent = data.name;
+    modalImage.src = data.link;
     modalImage.alt = data.name;
 
     toggleModal(imageModalWindow);
@@ -160,6 +160,8 @@ closeAddCardFormButton.addEventListener('click', () => {
 function addCardSubmitHandler(e) {
   e.preventDefault();
   renderCard({name: inputTitle.value, link: inputUrl.value});
+  inputTitle.value = inputTitle.textContent;
+  inputUrl.value = inputUrl.textContent;
   toggleModal(addCardModal);
 };
 
