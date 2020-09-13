@@ -104,6 +104,7 @@ function createCard(data) {
 
   cardText.textContent = data.name;
   cardImage.src = data.link;
+  cardImage.alt = data.name;
 
   cardImage.addEventListener('click', () => {
     const modalImage = imageModalWindow.querySelector('.modal__image');
@@ -111,6 +112,7 @@ function createCard(data) {
 
     modalImage.src = data.link;
     modalImageTitle.textContent = data.name;
+    modalImage.alt = data.name;
 
     toggleModal(imageModalWindow);
   });
