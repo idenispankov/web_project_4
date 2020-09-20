@@ -52,7 +52,7 @@ editProfileButton.addEventListener('click', () => {
 
 closeProfileButton.addEventListener('click',() => {
   toggleModal(editProfileModal);
-})
+});
 
 editProfileForm.addEventListener('submit', profileSubmitHandler);
 
