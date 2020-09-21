@@ -7,6 +7,7 @@
 * Contains profile section with edit option and pictures of  
 different places around U.S.
 * Page is responsive, created using @media quries.
+* Form validation is presented, created using JavaScript
 * Project were made using HTML, CSS and JavaScript in VScode editor.
 * File structure and css selectors were written according  
 BEM (Block__Element_Modifier) methodology.
