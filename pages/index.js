@@ -28,6 +28,7 @@ const profileAbout = document.querySelector('.profile__paragraph');
 const inputTitle = AddCardForm.querySelector('.form__input_type_card-title');
 const inputUrl = AddCardForm.querySelector('.form__input_type_card-url');
 
+
 // Toggle Function
 function toggleModal(modal) {
   modal.classList.toggle('modal_is-open');
@@ -166,3 +167,29 @@ function addCardSubmitHandler(e) {
 };
 
 AddCardForm.addEventListener('submit', addCardSubmitHandler);
+
+
+// Function To Close Modals On Click Outside of Forms
+function closeModalOutside(e) {
+  if(e.target == imageModalWindow) {
+    toggleModal(imageModalWindow);
+
+  } if (e.target == addCardModal) {
+    toggleModal(addCardModal);
+
+  } if (e.target == editProfileModal) {
+    toggleModal(editProfileModal);
+  }
+};
+
+// Function To Close Modals on Esc
+function escCloseModal(e) {
+  if (e.key === 'Escape') {
+    editProfileModal.classList.remove('modal_is-open');
+    addCardModal.classList.remove('modal_is-open');
+    imageModalWindow.classList.remove('modal_is-open');
+  }
+}
+
+window.addEventListener('click', closeModalOutside);
+window.addEventListener('keydown', escCloseModal);
