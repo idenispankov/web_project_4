@@ -150,6 +150,10 @@ initialCards.forEach(cardsData => {
 
 // Modal Add Card Click Events
 addCardButton.addEventListener('click', () => {
+
+  inputTitle.value = '';
+  inputUrl.value = '';
+
   toggleModal(addCardModal);
 });
 
