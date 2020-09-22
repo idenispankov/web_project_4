@@ -1,0 +1,12 @@
+.form__error_visible {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ff0000;
+  width: 358px;
+  padding: 0;
+  display: block;
+  margin: 0 36px 31.34px;
+  border: none;
+}

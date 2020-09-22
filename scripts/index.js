@@ -32,7 +32,7 @@ const inputUrl = addCardForm.querySelector('.form__input_type_card-url');
 // Toggle Function
 function toggleModal(modal) {
   modal.classList.toggle('modal_is-open');
-};
+}
 
 // Profile Submit Handler
 function profileSubmitHandler(e) {
