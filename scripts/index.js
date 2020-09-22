@@ -9,7 +9,7 @@ const addCardButton = document.querySelector('.profile__add-button');
 
 // Submit Form Buttons
 const editProfileForm = editProfileModal.querySelector('.form_type_profile');
-const AddCardForm = addCardModal.querySelector('.form_type_card');
+const addCardForm = addCardModal.querySelector('.form_type_card');
 const modalFigure = imageModalWindow.querySelector('.modal__figure');
 
 // Close Buttons
@@ -25,8 +25,8 @@ const profileName = document.querySelector('.profile__text');
 const profileAbout = document.querySelector('.profile__paragraph');
 
 // Add Card Form Inputs
-const inputTitle = AddCardForm.querySelector('.form__input_type_card-title');
-const inputUrl = AddCardForm.querySelector('.form__input_type_card-url');
+const inputTitle = addCardForm.querySelector('.form__input_type_card-title');
+const inputUrl = addCardForm.querySelector('.form__input_type_card-url');
 
 
 // Toggle Function
@@ -170,7 +170,7 @@ function addCardSubmitHandler(e) {
   toggleModal(addCardModal);
 };
 
-AddCardForm.addEventListener('submit', addCardSubmitHandler);
+addCardForm.addEventListener('submit', addCardSubmitHandler);
 
 
 // Function To Close Modals On Click Outside of Forms

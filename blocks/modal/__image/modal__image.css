@@ -3,7 +3,7 @@
   max-height: 540px;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 815px) {
   .modal__image {
     max-width: 75vw;
     max-height: 75vh;
