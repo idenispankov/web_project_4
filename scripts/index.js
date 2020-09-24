@@ -175,25 +175,17 @@ addCardForm.addEventListener('submit', addCardSubmitHandler);
 
 // Function To Close Modals On Click Outside of Forms
 function closeModalOutside(e) {
-  if(e.target == imageModalWindow) {
-    toggleModal(imageModalWindow);
-
-  } if (e.target == addCardModal) {
-    toggleModal(addCardModal);
-
-  } if (e.target == editProfileModal) {
-    toggleModal(editProfileModal);
-  }
+  toggleModal(e.target);
 };
 
 // Function To Close Modals on Esc
 function escCloseModal(e) {
   if (e.key === 'Escape') {
-    editProfileModal.classList.remove('modal_is-open');
-    addCardModal.classList.remove('modal_is-open');
-    imageModalWindow.classList.remove('modal_is-open');
+    editProfileModal.classList.remove('modal_is-open'); 
+    addCardModal.classList.remove('modal_is-open'); 
+    imageModalWindow.classList.remove('modal_is-open'); 
   }
 }
 
 window.addEventListener('click', closeModalOutside);
-window.addEventListener('keydown', escCloseModal);
+window.addEventListener('click', escCloseModal);
