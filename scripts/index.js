@@ -153,6 +153,9 @@ addCardButton.addEventListener('click', () => {
 
   inputTitle.value = '';
   inputUrl.value = '';
+  
+  inputTitle.classList.add('form__input_type_error');
+  inputUrl.classList.add('form__input_type_error');
 
   toggleModal(addCardModal);
 });
@@ -181,11 +184,11 @@ function closeModalOutside(e) {
 // Function To Close Modals on Esc
 function escCloseModal(e) {
   if (e.key === 'Escape') {
-    editProfileModal.classList.remove('modal_is-open'); 
-    addCardModal.classList.remove('modal_is-open'); 
-    imageModalWindow.classList.remove('modal_is-open'); 
+    const modalIsOpen = document.querySelector('.modal_is-open');
+    toggleModal(modalIsOpen);
+    console.log(e.key);
   }
 }
 
 window.addEventListener('click', closeModalOutside);
-window.addEventListener('click', escCloseModal);
+window.addEventListener('keydown', escCloseModal);
