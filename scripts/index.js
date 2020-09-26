@@ -31,8 +31,29 @@ const inputUrl = addCardForm.querySelector('.form__input_type_card-url');
 
 // Toggle Function
 function toggleModal(modal) {
+  if(!modal.classList.contains('modal_is-open')) {
+    window.addEventListener('click', closeModalOutside);
+    window.addEventListener('keydown', escCloseModal);
+  } else {
+    window.removeEventListener('click', closeModalOutside);
+    window.removeEventListener('keydown', escCloseModal);
+  }
   modal.classList.toggle('modal_is-open');
 }
+
+// Function To Close Modals On Click Outside of Forms
+function closeModalOutside(e) {
+  toggleModal(e.target);
+}
+
+// Function To Close Modals on Esc
+function escCloseModal(e) {
+  if (e.key === 'Escape') {
+    const modalIsOpen = document.querySelector('.modal_is-open');
+    toggleModal(modalIsOpen);
+    console.log(e.key);
+  }
+};
 
 // Profile Submit Handler
 function profileSubmitHandler(e) {
@@ -40,7 +61,7 @@ function profileSubmitHandler(e) {
   profileName.textContent = inputName.value;
   profileAbout.textContent = inputAbout.value;
   toggleModal(editProfileModal);
-};
+}
 
 // Modal Edit Profile Click Events
 editProfileButton.addEventListener('click', () => {
@@ -116,14 +137,14 @@ function createCard(data) {
     modalImage.alt = data.name;
 
     toggleModal(imageModalWindow);
-  });
+  })
 
   // Card Like Button
   const cardLikeButton = cardElement.querySelector('.card__like-button');
 
   function toggleHeart(e) {
     e.target.classList.toggle('card__like-button_active');
-  };
+  }
 
   cardLikeButton.addEventListener('click', toggleHeart);
 
@@ -141,7 +162,7 @@ function createCard(data) {
 
 function renderCard(data) {
   list.prepend(createCard(data));
-};
+}
 
 // Initial Cards Data
 initialCards.forEach(cardsData => {
@@ -171,24 +192,6 @@ function addCardSubmitHandler(e) {
   inputTitle.value = inputTitle.textContent;
   inputUrl.value = inputUrl.textContent;
   toggleModal(addCardModal);
-};
-
-addCardForm.addEventListener('submit', addCardSubmitHandler);
-
-
-// Function To Close Modals On Click Outside of Forms
-function closeModalOutside(e) {
-  toggleModal(e.target);
-};
-
-// Function To Close Modals on Esc
-function escCloseModal(e) {
-  if (e.key === 'Escape') {
-    const modalIsOpen = document.querySelector('.modal_is-open');
-    toggleModal(modalIsOpen);
-    console.log(e.key);
-  }
 }
 
-window.addEventListener('click', closeModalOutside);
-window.addEventListener('keydown', escCloseModal);
+addCardForm.addEventListener('submit', addCardSubmitHandler);
