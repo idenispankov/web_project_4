@@ -32,10 +32,10 @@ const inputUrl = addCardForm.querySelector('.form__input_type_card-url');
 // Toggle Function
 function toggleModal(modal) {
   if(!modal.classList.contains('modal_is-open')) {
-    window.addEventListener('click', closeModalOutside);
+    modal.addEventListener('click', closeModalOutside);
     window.addEventListener('keydown', escCloseModal);
   } else {
-    window.removeEventListener('click', closeModalOutside);
+    modal.removeEventListener('click', closeModalOutside);
     window.removeEventListener('keydown', escCloseModal);
   }
   modal.classList.toggle('modal_is-open');
