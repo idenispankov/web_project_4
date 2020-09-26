@@ -51,7 +51,6 @@ function escCloseModal(e) {
   if (e.key === 'Escape') {
     const modalIsOpen = document.querySelector('.modal_is-open');
     toggleModal(modalIsOpen);
-    console.log(e.key);
   }
 };
 
