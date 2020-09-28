@@ -42,8 +42,6 @@ function enableValidation({formSelector,  inputSelector, submitButtonSelector, .
     form.addEventListener('submit', ((e) => {
       e.preventDefault();
       toggleButtonState(inputs, button, rest);
-      form.elements['card-title'].classList.add('form__input_type_error');
-      form.elements['card-url'].classList.add('form__input_type_error');
     }))
 
     const inputs = [...form.querySelectorAll(inputSelector)];
