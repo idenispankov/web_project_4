@@ -1,3 +1,14 @@
+import FormValidator from './FormValidator.js';
+
+const defaultConfig = {
+  formSelector: ".form",
+  inputSelector: ".form__input",
+  submitButtonSelector: ".form__button",
+  inactiveButtonClass: "form__button_disabled",
+  inputErrorClass: "form__input_type_error",
+  errorClass: "form__error_visible"
+}
+
 // Modal Windows
 const editProfileModal = document.querySelector('.modal_type_edit-profile');
 const addCardModal = document.querySelector('.modal_type_add-card');
@@ -28,6 +39,13 @@ const profileAbout = document.querySelector('.profile__paragraph');
 const inputTitle = addCardForm.querySelector('.form__input_type_card-title');
 const inputUrl = addCardForm.querySelector('.form__input_type_card-url');
 
+
+// FormValidator.js class
+const editProfileValidator = new FormValidator(defaultConfig, editProfileForm);
+const addFormValidator = new FormValidator(defaultConfig, addCardForm);
+
+editProfileValidator.enableValidation();
+addFormValidator.enableValidation();
 
 // Toggle Function
 function toggleModal(modal) {
