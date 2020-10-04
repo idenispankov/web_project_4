@@ -1,5 +1,7 @@
 import FormValidator from './FormValidator.js';
 
+import Card from './Card.js';
+
 const defaultConfig = {
   formSelector: ".form",
   inputSelector: ".form__input",
@@ -131,7 +133,7 @@ const initialCards = [
 
 
 // Card Template and List Declaration
-const cardTemplate = document.querySelector('.card-template').content.querySelector('.card');
+const cardTemplate = document.querySelector('#card-template').content.querySelector('.card');
 const list = document.querySelector('.elements__list');
 
 // Create Card
@@ -145,7 +147,7 @@ function createCard(data) {
   cardImage.src = data.link;
   cardImage.alt = data.name;
 
-  cardImage.addEventListener('click', () => {
+  function imageViewHandler () {
     const modalImage = imageModalWindow.querySelector('.modal__image');
     const modalImageTitle = imageModalWindow.querySelector('.modal__image-title');
 
@@ -154,7 +156,9 @@ function createCard(data) {
     modalImage.alt = data.name;
 
     toggleModal(imageModalWindow);
-  })
+  }
+
+  cardImage.addEventListener('click', imageViewHandler);
 
   // Card Like Button
   const cardLikeButton = cardElement.querySelector('.card__like-button');
@@ -178,7 +182,8 @@ function createCard(data) {
 };
 
 function renderCard(data) {
-  list.prepend(createCard(data));
+  const card = new Card(data, '#card-template');
+  list.prepend(card.generateCard());
 }
 
 // Initial Cards Data
@@ -209,6 +214,7 @@ function addCardSubmitHandler(e) {
   inputTitle.value = inputTitle.textContent;
   inputUrl.value = inputUrl.textContent;
   toggleModal(addCardModal);
+  addCardForm.reset();
 }
 
 addCardForm.addEventListener('submit', addCardSubmitHandler);
