@@ -1,27 +1,4 @@
-// Function To Close Modals On Click Outside of Forms 
-function closeModalOutside(e) { 
-  toggleModal(e.target); 
-} 
-
-// Function To Close Modals on Esc 
-function escCloseModal(e) { 
-  if (e.key === 'Escape') { 
-    const modalIsOpen = document.querySelector('.modal_is-open'); 
-    toggleModal(modalIsOpen); 
-  } 
-}
-
-// Toggle Function 
-function toggleModal(modal) { 
-  if(!modal.classList.contains('modal_is-open')) { 
-    modal.addEventListener('click', closeModalOutside); 
-    window.addEventListener('keydown', escCloseModal); 
-  } else { 
-    modal.removeEventListener('click', closeModalOutside); 
-    window.removeEventListener('keydown', escCloseModal); 
-  } 
-  modal.classList.toggle('modal_is-open'); 
-} 
+import {toggleModal} from './utils.js';
 
 class Card {
   constructor(data, templateElementSelector) {
@@ -31,14 +8,17 @@ class Card {
     this._templateElementSelector = templateElementSelector;
   }
 
+  // Private Like Button Function
   _toggleLikeButton(e) {
     e.target.classList.toggle('card__like-button_active');
   }
 
+  // Private Delete Card Function
   _deleteCard() {
     this._card.remove();
   }
 
+  // Private Image View Function
   _imageViewHandler() {
     const imageModalWindow = document.querySelector('.modal_type_image'); 
     const modalImage = imageModalWindow.querySelector('.modal__image'); 
@@ -51,12 +31,14 @@ class Card {
     toggleModal(imageModalWindow); 
   }
 
+  // Private Event Listeners Function
   _setEventListeners() {
     this._cardElements.cardLikeButton.addEventListener('click', this._toggleLikeButton);
     this._cardElements.cardDeleteButton.addEventListener('click', this._deleteCard.bind(this));
     this._cardElements.cardImage.addEventListener('click', this._imageViewHandler.bind(this));
   }
 
+  // Private Getting Card Template Function
   _getCardTemplate() {
     const cardTemplate = document.querySelector(this._templateElementSelector)
     .content.querySelector('.card')
@@ -64,6 +46,7 @@ class Card {
         return cardTemplate;
   }
 
+  // Public Create Card Function
   createCard() {
     this._card = this._getCardTemplate();
 

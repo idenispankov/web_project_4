@@ -1,3 +1,4 @@
+import {toggleModal} from './utils.js';
 import FormValidator from './FormValidator.js';
 import Card from './Card.js';
 
@@ -60,6 +61,7 @@ const profileAbout = document.querySelector('.profile__paragraph');
 const inputTitle = addCardForm.querySelector('.form__input_type_card-title'); 
 const inputUrl = addCardForm.querySelector('.form__input_type_card-url'); 
 
+///////////////////////////////////////////////////////////////////////////
 
 // New Form Validators
 const defaultConfig = {
@@ -76,32 +78,6 @@ const addFormValidator = new FormValidator(defaultConfig, addCardForm);
 
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
- 
- 
-// Toggle Function 
-function toggleModal(modal) { 
-  if(!modal.classList.contains('modal_is-open')) { 
-    modal.addEventListener('click', closeModalOutside); 
-    window.addEventListener('keydown', escCloseModal); 
-  } else { 
-    modal.removeEventListener('click', closeModalOutside); 
-    window.removeEventListener('keydown', escCloseModal); 
-  } 
-  modal.classList.toggle('modal_is-open'); 
-} 
- 
-// Function To Close Modals On Click Outside of Forms 
-function closeModalOutside(e) { 
-  toggleModal(e.target);
-} 
- 
-// Function To Close Modals on Esc 
-function escCloseModal(e) { 
-  if (e.key === 'Escape') { 
-    const modalIsOpen = document.querySelector('.modal_is-open'); 
-    toggleModal(modalIsOpen); 
-  } 
-}
  
 // Profile Submit Handler 
 function profileSubmitHandler(e) { 
@@ -147,13 +123,13 @@ initialCards.forEach(cardsData => {
 }); 
  
 // Modal Add Card Click Events 
-addCardButton.addEventListener('click', () => { 
-
-  inputTitle.classList.add('form__input_type_error'); 
-  inputUrl.classList.add('form__input_type_error'); 
- 
-  toggleModal(addCardModal); 
+addCardButton.addEventListener('click', () => {  
+  toggleModal(addCardModal);
   addCardForm.reset();
+  inputTitle.classList.add('form__input_type_error'); 
+  inputUrl.classList.add('form__input_type_error');
+  const button = addCardForm.querySelector('.form__button_type_create');
+  button.classList.add('form__button_disabled');
 }); 
  
 closeAddCardFormButton.addEventListener('click', () => { 

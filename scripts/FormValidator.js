@@ -19,6 +19,7 @@ class FormValidator {
     errorElement.textContent = '';
   }
 
+  // Private isValid(Inputs) Function
   _isValid(inputList) {
     return inputList.every((inputElement) => {
       return inputElement.validity.valid;
@@ -48,7 +49,7 @@ class FormValidator {
     }
   }
 
-  // Inputs Event Lister
+  // Private Inputs Event Lister
   _inputEventListeners() {
     const inputList = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
     const buttonElement = this._formElement.querySelector(this._settings.submitButtonSelector);
