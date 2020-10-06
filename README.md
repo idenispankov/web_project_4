@@ -11,6 +11,7 @@ different places around U.S.
 * Project were made using HTML, CSS and JavaScript in VScode editor.
 * File structure and css selectors were written according  
 BEM (Block__Element_Modifier) methodology.
+* JavaScript files created using ES6 classes (constructor)
 
 ## 
 * I did this project from scratch using design created in [Figma](https://www.figma.com). 
