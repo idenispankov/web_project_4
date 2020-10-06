@@ -24,9 +24,9 @@ function toggleModal(modal) {
 } 
 
 class Card {
-  constructor({name, link}, templateElementSelector) {
-    this._name = name;
-    this.link = link;
+  constructor(data, templateElementSelector) {
+    this._name = data.name;
+    this._link = data.link;
     
     this._templateElementSelector = templateElementSelector;
   }
@@ -40,10 +40,11 @@ class Card {
   }
 
   _imageViewHandler() {
+    const imageModalWindow = document.querySelector('.modal_type_image'); 
     const modalImage = imageModalWindow.querySelector('.modal__image'); 
     const modalImageTitle = imageModalWindow.querySelector('.modal__image-title'); 
  
-    modalImageTitle.textContent = thiks._name; 
+    modalImageTitle.textContent = this._name; 
     modalImage.src = this._link; 
     modalImage.alt = this._name; 
  
@@ -52,18 +53,19 @@ class Card {
 
   _setEventListeners() {
     this._cardElements.cardLikeButton.addEventListener('click', this._toggleLikeButton);
-    this._cardElements.cardDeleteButton.addEventListener('click', deleteCard.bind(this));
-    this._cardElements.cardImage.addEventListener('click', this._imageViewHandler);
+    this._cardElements.cardDeleteButton.addEventListener('click', this._deleteCard.bind(this));
+    this._cardElements.cardImage.addEventListener('click', this._imageViewHandler.bind(this));
   }
 
   _getCardTemplate() {
     const cardTemplate = document.querySelector(this._templateElementSelector)
-      .content.querySelector('.card');
+    .content.querySelector('.card')
+    .cloneNode(true);
         return cardTemplate;
   }
 
   createCard() {
-    this._card = this._getCardTemplate.cloneNode(true);
+    this._card = this._getCardTemplate();
 
     const cardLikeButton = this._card.querySelector('.card__like-button');
     const cardDeleteButton = this._card.querySelector('.card__delete-button');

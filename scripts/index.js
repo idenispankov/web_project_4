@@ -1,5 +1,5 @@
 import FormValidator from './FormValidator.js';
-import Card from './Card.js'
+import Card from './Card.js';
 
 // Initial Cards Array 
 const initialCards = [ 
@@ -92,7 +92,7 @@ function toggleModal(modal) {
  
 // Function To Close Modals On Click Outside of Forms 
 function closeModalOutside(e) { 
-  toggleModal(e.target); 
+  toggleModal(e.target);
 } 
  
 // Function To Close Modals on Esc 
@@ -131,61 +131,17 @@ closeCardImageButton.addEventListener('click', () => {
   toggleModal(imageModalWindow); 
 }); 
  
- 
-// Card Template and List Declaration 
-const cardTemplate = document.querySelector('.card-template').content.querySelector('.card'); 
+// Cards List
 const list = document.querySelector('.elements__list'); 
- 
-// Create Card 
-// function createCard(data) { 
-//   const cardElement = cardTemplate.cloneNode(true); 
- 
-//   const cardText = cardElement.querySelector('.card__text'); 
-//   const cardImage = cardElement.querySelector('.card__image'); 
- 
-//   cardText.textContent = data.name; 
-//   cardImage.src = data.link; 
-//   cardImage.alt = data.name; 
- 
-//   cardImage.addEventListener('click', () => { 
-//     const modalImage = imageModalWindow.querySelector('.modal__image'); 
-//     const modalImageTitle = imageModalWindow.querySelector('.modal__image-title'); 
- 
-//     modalImageTitle.textContent = data.name; 
-//     modalImage.src = data.link; 
-//     modalImage.alt = data.name; 
- 
-//     toggleModal(imageModalWindow); 
-//   }) 
- 
-//   // Card Like Button 
-//   const cardLikeButton = cardElement.querySelector('.card__like-button'); 
- 
-//   function toggleLikeButton(e) { 
-//     e.target.classList.toggle('card__like-button_active'); 
-//   } 
- 
-//   cardLikeButton.addEventListener('click', toggleLikeButton); 
- 
-//   // Card Delete Button 
-//   const cardDeleteButton = cardElement.querySelector('.card__delete-button'); 
- 
-//   function deleteCard() { 
-//     list.removeChild(cardElement); 
-//   } 
- 
-//   cardDeleteButton.addEventListener('click', deleteCard); 
- 
-//   return cardElement; 
-// }; 
  
 // Render Card
 function renderCard(data) { 
   const card = new Card(data, '.card-template');
-  list.prepend(card.createCard); 
+  const cardElement = card.createCard();
+  list.prepend(cardElement);
 } 
  
-// Initial Cards Data 
+// // Initial Cards Data 
 initialCards.forEach(cardsData => { 
   renderCard(cardsData); 
 }); 
@@ -197,6 +153,7 @@ addCardButton.addEventListener('click', () => {
   inputUrl.classList.add('form__input_type_error'); 
  
   toggleModal(addCardModal); 
+  addCardForm.reset();
 }); 
  
 closeAddCardFormButton.addEventListener('click', () => { 
@@ -209,7 +166,8 @@ function addCardSubmitHandler(e) {
   renderCard({name: inputTitle.value, link: inputUrl.value}); 
   inputTitle.value = inputTitle.textContent; 
   inputUrl.value = inputUrl.textContent; 
-  toggleModal(addCardModal); 
+  toggleModal(addCardModal);
+  addCardForm.reset();
 } 
  
 addCardForm.addEventListener('submit', addCardSubmitHandler); 
