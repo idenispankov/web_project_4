@@ -1,4 +1,34 @@
 import FormValidator from './FormValidator.js';
+import Card from './Card.js'
+
+// Initial Cards Array 
+const initialCards = [ 
+  { 
+    name: "Yosemite Valley", 
+    link: "https://code.s3.yandex.net/web-code/yosemite.jpg" 
+  }, 
+  { 
+    name: "Lake Louise", 
+    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg" 
+  }, 
+  { 
+    name: "Bald Mountains", 
+    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg" 
+  }, 
+  { 
+    name: "Latemar", 
+    link: "https://code.s3.yandex.net/web-code/latemar.jpg" 
+  }, 
+  { 
+    name: "Vanoise National Park", 
+    link: "https://code.s3.yandex.net/web-code/vanoise.jpg" 
+  }, 
+  { 
+    name: "Lago di Braies", 
+    link: "https://code.s3.yandex.net/web-code/lago.jpg" 
+  } 
+]; 
+ 
 
 // Modal Windows 
 const editProfileModal = document.querySelector('.modal_type_edit-profile'); 
@@ -71,7 +101,7 @@ function escCloseModal(e) {
     const modalIsOpen = document.querySelector('.modal_is-open'); 
     toggleModal(modalIsOpen); 
   } 
-}; 
+}
  
 // Profile Submit Handler 
 function profileSubmitHandler(e) { 
@@ -102,84 +132,57 @@ closeCardImageButton.addEventListener('click', () => {
 }); 
  
  
-// Initial Cards Array 
-const initialCards = [ 
-  { 
-    name: "Yosemite Valley", 
-    link: "https://code.s3.yandex.net/web-code/yosemite.jpg" 
-  }, 
-  { 
-    name: "Lake Louise", 
-    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg" 
-  }, 
-  { 
-    name: "Bald Mountains", 
-    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg" 
-  }, 
-  { 
-    name: "Latemar", 
-    link: "https://code.s3.yandex.net/web-code/latemar.jpg" 
-  }, 
-  { 
-    name: "Vanoise National Park", 
-    link: "https://code.s3.yandex.net/web-code/vanoise.jpg" 
-  }, 
-  { 
-    name: "Lago di Braies", 
-    link: "https://code.s3.yandex.net/web-code/lago.jpg" 
-  } 
-]; 
- 
- 
 // Card Template and List Declaration 
 const cardTemplate = document.querySelector('.card-template').content.querySelector('.card'); 
 const list = document.querySelector('.elements__list'); 
  
 // Create Card 
-function createCard(data) { 
-  const cardElement = cardTemplate.cloneNode(true); 
+// function createCard(data) { 
+//   const cardElement = cardTemplate.cloneNode(true); 
  
-  const cardText = cardElement.querySelector('.card__text'); 
-  const cardImage = cardElement.querySelector('.card__image'); 
+//   const cardText = cardElement.querySelector('.card__text'); 
+//   const cardImage = cardElement.querySelector('.card__image'); 
  
-  cardText.textContent = data.name; 
-  cardImage.src = data.link; 
-  cardImage.alt = data.name; 
+//   cardText.textContent = data.name; 
+//   cardImage.src = data.link; 
+//   cardImage.alt = data.name; 
  
-  cardImage.addEventListener('click', () => { 
-    const modalImage = imageModalWindow.querySelector('.modal__image'); 
-    const modalImageTitle = imageModalWindow.querySelector('.modal__image-title'); 
+//   cardImage.addEventListener('click', () => { 
+//     const modalImage = imageModalWindow.querySelector('.modal__image'); 
+//     const modalImageTitle = imageModalWindow.querySelector('.modal__image-title'); 
  
-    modalImageTitle.textContent = data.name; 
-    modalImage.src = data.link; 
-    modalImage.alt = data.name; 
+//     modalImageTitle.textContent = data.name; 
+//     modalImage.src = data.link; 
+//     modalImage.alt = data.name; 
  
-    toggleModal(imageModalWindow); 
-  }) 
+//     toggleModal(imageModalWindow); 
+//   }) 
  
-  // Card Like Button 
-  const cardLikeButton = cardElement.querySelector('.card__like-button'); 
+//   // Card Like Button 
+//   const cardLikeButton = cardElement.querySelector('.card__like-button'); 
  
-  function toggleHeart(e) { 
-    e.target.classList.toggle('card__like-button_active'); 
-  } 
+//   function toggleLikeButton(e) { 
+//     e.target.classList.toggle('card__like-button_active'); 
+//   } 
  
-  cardLikeButton.addEventListener('click', toggleHeart); 
+//   cardLikeButton.addEventListener('click', toggleLikeButton); 
  
-  // Card Delete Button 
-  const cardDeleteButton = cardElement.querySelector('.card__delete-button'); 
+//   // Card Delete Button 
+//   const cardDeleteButton = cardElement.querySelector('.card__delete-button'); 
  
-  function deleteCard() { 
-    list.removeChild(cardElement); 
-  } 
+//   function deleteCard() { 
+//     list.removeChild(cardElement); 
+//   } 
  
-  cardDeleteButton.addEventListener('click', deleteCard); 
+//   cardDeleteButton.addEventListener('click', deleteCard); 
  
-  return cardElement; 
-}; 
+//   return cardElement; 
+// }; 
  
+// Render Card
 function renderCard(data) { 
-  list.prepend(createCard(data)); 
+  const card = new Card(data, '.card-template');
+  list.prepend(card.createCard); 
 } 
  
 // Initial Cards Data 
@@ -189,10 +192,6 @@ initialCards.forEach(cardsData => {
  
 // Modal Add Card Click Events 
 addCardButton.addEventListener('click', () => { 
- 
-  inputTitle.value = ''; 
-  inputUrl.value = ''; 
-   
 
   inputTitle.classList.add('form__input_type_error'); 
   inputUrl.classList.add('form__input_type_error'); 
