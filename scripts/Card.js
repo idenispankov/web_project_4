@@ -42,7 +42,7 @@ class Card {
 
   _getCardTemplate() {
     const cardTemplate = document.querySelector(this._templateElementSelector)
-      .content.querySelector('.card');
+      .content.querySelector('.card').cloneNode(true);
         return cardTemplate;
   }
 
@@ -52,7 +52,7 @@ class Card {
 
   _deleteCard() {
     const list = document.querySelector('.elements__list');
-    list.removeChild(cardElement);
+    this._card.remove();
   }
 
   _imageViewHandler() {
@@ -65,7 +65,9 @@ class Card {
     const cardImage = this._card.querySelector('.card__image');
 
     cardLikeButton.addEventListener('click', this._toggleHeart);
-    cardDeleteButton.addEventListener('click', this._deleteCard);
+    cardDeleteButton.addEventListener('click', () => {
+      this._deleteCard();
+    })
     cardImage.addEventListener('click', this._imageViewHandler);
   }
 
