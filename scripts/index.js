@@ -1,7 +1,6 @@
 import {toggleModal} from './utils.js';
 import FormValidator from './FormValidator.js';
 import Card from './Card.js';
-import Section from './Section.js';
 
 // Initial Cards Array 
 const initialCards = [ 
