@@ -1,6 +1,10 @@
-import {toggleModal} from './utils.js';
 import FormValidator from './FormValidator.js';
 import Card from './Card.js';
+import Section from './Section.js';
+import Popup from './Popup.js';
+import PopupWithImage from './PopupWithImage.js';
+import PopupWithForm from './PopupWithForm.js';
+import UserInfo from './UserInfo.js';
 
 // Initial Cards Array 
 const initialCards = [ 
@@ -33,8 +37,16 @@ const initialCards = [
 
 // Modal Windows 
 const editProfileModal = document.querySelector('.modal_type_edit-profile');
+const editPopupWithForm = new PopupWithForm(editProfileModal);
+editPopupWithForm.setEventListeners();
+
 const addCardModal = document.querySelector('.modal_type_add-card'); 
+const addCardPopupWithForm = new PopupWithForm(addCardModal);
+addCardPopupWithForm.setEventListeners();
+
 const imageModalWindow = document.querySelector('.modal_type_image'); 
+const popupWithImage = new PopupWithImage(imageModalWindow);
+popupWithImage.setEventListeners();
  
 // Open Buttons 
 const editProfileButton = document.querySelector('.profile__edit-button'); 
@@ -101,11 +113,6 @@ closeProfileButton.addEventListener('click',() => {
 }); 
  
 editProfileForm.addEventListener('submit', profileSubmitHandler); 
- 
-// Modal Image Click Events 
-closeCardImageButton.addEventListener('click', () => { 
-  toggleModal(imageModalWindow); 
-}); 
  
 // Cards List
 const list = document.querySelector('.elements__list'); 

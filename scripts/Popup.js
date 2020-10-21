@@ -5,13 +5,13 @@ export default class Popup {
   }
 
   open() {
-    this.popupSelector.classList.add('.modal_is-open');
-    window.addEventListener('keyup', this._handleEscClose);
+    this._popupSelector.classList.add('.modal_is-open');
+    document.addEventListener('keyup', this._handleEscClose);
   }
 
   close() {
-    this.popupSelector.classList.remove('.modal_is-open');
-    window.removeEventListener('keyup', this._handleEscClose);
+    this._popupSelector.classList.remove('.modal_is-open');
+    document.removeEventListener('keyup', this._handleEscClose);
   }
 
   _handleEscClose(e) {
@@ -21,13 +21,10 @@ export default class Popup {
   }
 
   setEventListeners() {
-    this._popupElement.querySelector(".form__close-button").addEventListener('click', () => {
-      this.close();
-    })
-    this._popupElement.addEventListener('click', (e) => {
-      if (e.target.classList.contains("modal_is-open")) {
-        this.close();
-      }
-    })
+    this._popupSelector.addEventListener('click', (e) => {
+        if(e.target.classList.contains('.form__close-button') || e.target.closest('form') || e.target.closest('modal__image')) {
+          this.close();
+        }
+      })
   }
 }
