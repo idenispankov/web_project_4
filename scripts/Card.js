@@ -1,11 +1,13 @@
-import {toggleModal} from './utils.js';
-
-class Card {
-  constructor(data, templateElementSelector) {
+export default class Card {
+  constructor(data, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
+
+    data.templateElementSelector ? 
+    this_.templateElementSelector = data.templateElementSelector :
+    this._templateElementSelector = '#card-template';
     
-    this._templateElementSelector = templateElementSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   // Private Like Button Function
@@ -19,16 +21,10 @@ class Card {
   }
 
   // Private Image View Function
-  _imageViewHandler() {
-    const imageModalWindow = document.querySelector('.modal_type_image'); 
-    const modalImage = imageModalWindow.querySelector('.modal__image'); 
-    const modalImageTitle = imageModalWindow.querySelector('.modal__image-title'); 
- 
-    modalImageTitle.textContent = this._name; 
-    modalImage.src = this._link; 
-    modalImage.alt = this._name; 
- 
-    toggleModal(imageModalWindow); 
+  _imageViewHandler(imageModalWindow) {
+    imageModalWindow.addEventListener('click', () => {
+      this._handleCardClick({link: this._link, name: this._name});
+    })
   }
 
   // Private Event Listeners Function
@@ -66,10 +62,8 @@ class Card {
       cardImage
     }
 
-    this._setEventListeners();
+    this._setEventListeners(cardImage);
 
     return this._card;
    }
 }
-
-export default Card;

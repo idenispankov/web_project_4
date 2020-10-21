@@ -1,10 +1,3 @@
-import FormValidator from './FormValidator.js';
-import Card from './Card.js';
-import Section from './Section.js';
-import Popup from './Popup.js';
-import PopupWithImage from './PopupWithImage.js';
-import PopupWithForm from './PopupWithForm.js';
-import UserInfo from './UserInfo.js';
 import {
   initialCards,
   defaultConfig,
@@ -28,7 +21,14 @@ import {
   inputUrl
 } from "../utils/constants.js";
 
-///////////////////////////////////////////////////////////////////////////
+import FormValidator from './FormValidator.js';
+import Card from './Card.js';
+import Section from './Section.js';
+import Popup from './Popup.js';
+import PopupWithImage from './PopupWithImage.js';
+import PopupWithForm from './PopupWithForm.js';
+import UserInfo from './UserInfo.js';
+
 
 const editFormValidator = new FormValidator(defaultConfig, editProfileForm);
 const addFormValidator = new FormValidator(defaultConfig, addCardForm);
