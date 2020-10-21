@@ -21,8 +21,11 @@ export default class Popup {
   }
 
   setEventListeners() {
-    this._popupSelector.addEventListener('click', (e) => {
-      if(e.target.classList.contains('form__close-button') || !e.target.closest('form') || !e.target.closest('modal__image')) {
+    this._popupElement.querySelector(".form__close-button").addEventListener('click', () => {
+      this.close();
+    })
+    this._popupElement.addEventListener('click', (e) => {
+      if (e.target.classList.contains("modal_is-open")) {
         this.close();
       }
     })
