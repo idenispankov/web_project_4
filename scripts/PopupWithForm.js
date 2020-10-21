@@ -20,10 +20,10 @@ export default class PopupWithForm extends Popup{
       e.preventDefault();
       this._submitHandler(this._getInputValues());
     })
-    super.setEventListeners();
+    super.setEventListeners()
   }
 
   close() {
-
+    this._form.reset();
   }
 }
