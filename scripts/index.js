@@ -5,85 +5,30 @@ import Popup from './Popup.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
 import UserInfo from './UserInfo.js';
-
-// Initial Cards Array 
-const initialCards = [ 
-  { 
-    name: "Yosemite Valley", 
-    link: "https://code.s3.yandex.net/web-code/yosemite.jpg" 
-  }, 
-  { 
-    name: "Lake Louise", 
-    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg" 
-  }, 
-  { 
-    name: "Bald Mountains", 
-    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg" 
-  }, 
-  { 
-    name: "Latemar", 
-    link: "https://code.s3.yandex.net/web-code/latemar.jpg" 
-  }, 
-  { 
-    name: "Vanoise National Park", 
-    link: "https://code.s3.yandex.net/web-code/vanoise.jpg" 
-  }, 
-  { 
-    name: "Lago di Braies", 
-    link: "https://code.s3.yandex.net/web-code/lago.jpg" 
-  } 
-]; 
- 
-
-// Modal Windows 
-const editProfileModal = document.querySelector('.modal_type_edit-profile');
-const editPopupWithForm = new PopupWithForm(editProfileModal);
-editPopupWithForm.setEventListeners();
-
-const addCardModal = document.querySelector('.modal_type_add-card'); 
-const addCardPopupWithForm = new PopupWithForm(addCardModal);
-addCardPopupWithForm.setEventListeners();
-
-const imageModalWindow = document.querySelector('.modal_type_image'); 
-const popupWithImage = new PopupWithImage(imageModalWindow);
-popupWithImage.setEventListeners();
- 
-// Open Buttons 
-const editProfileButton = document.querySelector('.profile__edit-button'); 
-const addCardButton = document.querySelector('.profile__add-button'); 
- 
-// Submit Form Buttons 
-const editProfileForm = editProfileModal.querySelector('.form_type_profile'); 
-const addCardForm = addCardModal.querySelector('.form_type_card'); 
-const modalFigure = imageModalWindow.querySelector('.modal__figure'); 
- 
-// Close Buttons 
-const closeProfileButton = editProfileModal.querySelector('.form__close-button'); 
-const closeAddCardFormButton = addCardModal.querySelector('.form__close-button'); 
-const closeCardImageButton = modalFigure.querySelector('.form__close-button_type-image'); 
- 
-// Edit Profile Form Inputs 
-const inputName = editProfileForm.querySelector('.form__input_type_name'); 
-const inputAbout = editProfileForm.querySelector('.form__input_type_about'); 
- 
-const profileName = document.querySelector('.profile__text'); 
-const profileAbout = document.querySelector('.profile__paragraph'); 
- 
-// Add Card Form Inputs 
-const inputTitle = addCardForm.querySelector('.form__input_type_card-title'); 
-const inputUrl = addCardForm.querySelector('.form__input_type_card-url'); 
+import {
+  initialCards,
+  defaultConfig,
+  cardsList,
+  editProfileModal,
+  addCardModal,
+  imageModalWindow,
+  editProfileForm,
+  addCardForm,
+  modalFigure,
+  editProfileButton,
+  addCardButton,
+  closeProfileButton,
+  closeAddCardFormButton,
+  closeCardImageButton,
+  inputName,
+  inputAbout,
+  profileName,
+  profileAbout,
+  inputTitle,
+  inputUrl
+} from "../utils/constants.js";
 
 ///////////////////////////////////////////////////////////////////////////
-
-// New Form Validators
-const defaultConfig = {
-  formSelector: ".form",
-  inputSelector: ".form__input",
-  submitButtonSelector: ".form__button",
-  inactiveButtonClass: "form__button_disabled",
-  inputErrorClass: "form__input_type_error",
-  errorClass: "form__error_visible"
-};
 
 const editFormValidator = new FormValidator(defaultConfig, editProfileForm);
 const addFormValidator = new FormValidator(defaultConfig, addCardForm);
@@ -114,14 +59,11 @@ closeProfileButton.addEventListener('click',() => {
  
 editProfileForm.addEventListener('submit', profileSubmitHandler); 
  
-// Cards List
-const list = document.querySelector('.elements__list'); 
- 
 // Render Card
 function renderCard(data) { 
   const card = new Card(data, '.card-template');
   const cardElement = card.createCard();
-  list.prepend(cardElement);
+  cardsList.prepend(cardElement);
 } 
  
 // // Initial Cards Data 
