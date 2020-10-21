@@ -1,10 +1,12 @@
-import {toggleModal} from './utils.js'; 
-import FormValidator from './FormValidator.js'; 
-import Card from './Card.js'; 
+import {toggleModal} from '../components/utils.js'; 
+import FormValidator from '../components/FormValidator.js'; 
+import Card from '../components/Card.js'; 
+import Section from '../components/Section.js';
 import {
   initialCards,
   defaultConfig,
-  cardsList,
+  // cardsList,
+  cardContainerSelector,
   editProfileModal,
   addCardModal,
   imageModalWindow,
@@ -59,17 +61,24 @@ closeCardImageButton.addEventListener('click', () => {
   toggleModal(imageModalWindow);  
 });  
   
-// Render Card 
-function renderCard(data) {  
-  const card = new Card(data, '.card-template'); 
-  const cardElement = card.createCard(); 
-  cardsList.prepend(cardElement); 
-}  
+// // Render Card 
+// function renderCard(data) {  
+//   const card = new Card(data, '.card-template'); 
+//   const cardElement = card.createCard(); 
+//   cardsList.prepend(cardElement); 
+// }  
   
+const cardsList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const card = new Card(item, '.card-template');
+    const cardElement = card.createCard();
+    cardsList.addItem(cardElement);
+  }
+}, cardContainerSelector)
+
 // // Initial Cards Data  
-initialCards.forEach(cardsData => {  
-  renderCard(cardsData);  
-});  
+cardsList.renderer();
   
 // Modal Add Card Click Events  
 addCardButton.addEventListener('click', () => {   

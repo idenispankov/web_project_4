@@ -37,7 +37,8 @@ export const defaultConfig = {
 }; 
 
 // Cards List 
-export const cardsList = document.querySelector('.elements__list');
+// export const cardsList = document.querySelector('.elements__list');
+export const cardContainerSelector = '.elements__list';
 
 // Modal Windows  
 export const editProfileModal = document.querySelector('.modal_type_edit-profile');  
