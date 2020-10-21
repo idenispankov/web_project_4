@@ -20,13 +20,11 @@ export default class Popup {
     }
   }
 
-  _handleCloseButton() {
-    if(e.target.classList.contains('form__close-button') || e.target.classList.contains('modal')) {
-      this.close();
-    }
-  }
-
   setEventListeners() {
-    document.addEventListener('click', this._handleCloseButton);
+    document.addEventListener('click', (e) => {
+      if(e.target.classList.contains('form__close-button') || e.target.classList.contains('modal')) {
+        this.close();
+      }
+    });
   }
 }
