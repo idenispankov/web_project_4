@@ -1,6 +1,6 @@
 import {toggleModal} from './utils.js'; 
  
-class Card { 
+export default class Card { 
   constructor(data, templateElementSelector) { 
     this._name = data.name; 
     this._link = data.link; 
@@ -70,6 +70,4 @@ class Card {
  
     return this._card; 
    } 
-} 
- 
-export default Card; 
+}  
