@@ -1,12 +1,33 @@
 import {toggleModal} from './utils.js'; 
+import Popup from './Popup.js';
  
 export default class Card { 
-  constructor(data, templateElementSelector) { 
+  constructor(data, handleClick) { 
     this._name = data.name; 
     this._link = data.link; 
      
-    this._templateElementSelector = templateElementSelector; 
+    data.templateElementSelector ?
+    this._templateElementSelector = data._templateElementSelector :
+    this._templateElementSelector = '#card-template';
+
+    this._handleClick = handleClick;
   } 
+
+  // Private Getting Card Template Function 
+  _getCardTemplate() { 
+    return document
+    .querySelector(this._templateElementSelector)
+    .content
+    .cloneNode(true);
+  } 
+
+  // Private Event Listeners Function 
+  _setEventListeners() { 
+    this._cardElements.cardLikeButton.addEventListener('click', this._toggleLikeButton); 
+    this._cardElements.cardDeleteButton.addEventListener('click', this._deleteCard.bind(this)); 
+    this._cardElements.cardImage.addEventListener('click', this._imageViewHandler.bind(this)); 
+  } 
+ 
  
   // Private Like Button Function 
   _toggleLikeButton(e) { 
@@ -28,22 +49,9 @@ export default class Card {
     modalImage.src = this._link;  
     modalImage.alt = this._name;  
   
-    toggleModal(imageModalWindow);  
-  } 
- 
-  // Private Event Listeners Function 
-  _setEventListeners() { 
-    this._cardElements.cardLikeButton.addEventListener('click', this._toggleLikeButton); 
-    this._cardElements.cardDeleteButton.addEventListener('click', this._deleteCard.bind(this)); 
-    this._cardElements.cardImage.addEventListener('click', this._imageViewHandler.bind(this)); 
-  } 
- 
-  // Private Getting Card Template Function 
-  _getCardTemplate() { 
-    const cardTemplate = document.querySelector(this._templateElementSelector) 
-    .content.querySelector('.card') 
-    .cloneNode(true); 
-        return cardTemplate; 
+    cardImage.addEventListener('click', (e) => {
+      this._handleClick({link: this._link, name: this._name});
+    }) 
   } 
  
   // Public Create Card Function 
