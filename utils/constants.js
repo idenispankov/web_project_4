@@ -52,7 +52,7 @@ export const addCardButton = document.querySelector('.profile__add-button');
 // Submit Form Buttons  
 export const editProfileForm = document.querySelector('.form_type_profile');  
 export const addCardForm = document.querySelector('.form_type_card');
-// export const modalFigure = imageModalWindow.querySelector('.modal__figure');
+export const modalFigure = document.querySelector('.modal__figure');
   
 // Close Buttons  
 export const closeProfileButton = document.querySelector('.form__close-button');  
@@ -60,8 +60,8 @@ export const closeAddCardFormButton = document.querySelector('.form__close-butto
 export const closeCardImageButton = document.querySelector('.form__close-button_type-image');  
   
 // Edit Profile Form Inputs  
-// export const inputName = editProfileForm.querySelector('.form__input_type_name');  
-// export const inputAbout = editProfileForm.querySelector('.form__input_type_about');  
+export const inputName = editProfileForm.querySelector('.form__input_type_name');  
+export const inputAbout = editProfileForm.querySelector('.form__input_type_about');  
   
 export const profileName = document.querySelector('.profile__text');  
 export const profileAbout = document.querySelector('.profile__paragraph');  
