@@ -41,31 +41,31 @@ export const defaultConfig = {
 export const cardContainerSelector = '.elements__list';
 
 // Modal Windows  
-export const editProfileModal = document.querySelector('.modal_type_edit-profile');  
-export const addCardModal = document.querySelector('.modal_type_add-card');  
-export const imageModalWindow = document.querySelector('.modal_type_image'); 
+// export const editProfileModal = document.querySelector('.modal_type_edit-profile');  
+// export const addCardModal = document.querySelector('.modal_type_add-card');  
+// export const imageModalWindow = document.querySelector('.modal_type_image'); 
 
 // Open Buttons  
 export const editProfileButton = document.querySelector('.profile__edit-button');  
 export const addCardButton = document.querySelector('.profile__add-button');  
   
 // Submit Form Buttons  
-export const editProfileForm = editProfileModal.querySelector('.form_type_profile');  
-export const addCardForm = addCardModal.querySelector('.form_type_card');
-export const modalFigure = imageModalWindow.querySelector('.modal__figure');
+export const editProfileForm = document.querySelector('.form_type_profile');  
+export const addCardForm = document.querySelector('.form_type_card');
+// export const modalFigure = imageModalWindow.querySelector('.modal__figure');
   
 // Close Buttons  
-export const closeProfileButton = editProfileModal.querySelector('.form__close-button');  
-export const closeAddCardFormButton = addCardModal.querySelector('.form__close-button');  
-export const closeCardImageButton = modalFigure.querySelector('.form__close-button_type-image');  
+export const closeProfileButton = document.querySelector('.form__close-button');  
+export const closeAddCardFormButton = document.querySelector('.form__close-button');  
+export const closeCardImageButton = document.querySelector('.form__close-button_type-image');  
   
 // Edit Profile Form Inputs  
-export const inputName = editProfileForm.querySelector('.form__input_type_name');  
-export const inputAbout = editProfileForm.querySelector('.form__input_type_about');  
+// export const inputName = editProfileForm.querySelector('.form__input_type_name');  
+// export const inputAbout = editProfileForm.querySelector('.form__input_type_about');  
   
 export const profileName = document.querySelector('.profile__text');  
 export const profileAbout = document.querySelector('.profile__paragraph');  
   
 // Add Card Form Inputs  
-export const inputTitle = addCardForm.querySelector('.form__input_type_card-title');  
-export const inputUrl = addCardForm.querySelector('.form__input_type_card-url');  
+// export const inputTitle = addCardForm.querySelector('.form__input_type_card-title');  
+// export const inputUrl = addCardForm.querySelector('.form__input_type_card-url');  
