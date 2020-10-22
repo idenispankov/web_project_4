@@ -2,7 +2,7 @@ import {toggleModal} from './utils.js';
 import Popup from './Popup.js';
  
 export default class Card { 
-  constructor(data, handleClick) { 
+  constructor(data, handleCardClick) { 
     this._name = data.name; 
     this._link = data.link; 
      
@@ -10,7 +10,7 @@ export default class Card {
     this._templateElementSelector = data._templateElementSelector :
     this._templateElementSelector = '#card-template';
 
-    this._handleClick = handleClick;
+    this._handleClick = handleCardClick;
   } 
 
   // Private Getting Card Template Function 
@@ -49,9 +49,9 @@ export default class Card {
     modalImage.src = this._link;  
     modalImage.alt = this._name;  
   
-    cardImage.addEventListener('click', (e) => {
-      this._handleClick({link: this._link, name: this._name});
-    }) 
+    modalImage.addEventListener('click', () => {
+      this._handleCardClick({link: this._link, name: this._name});
+    })
   } 
  
   // Public Create Card Function 

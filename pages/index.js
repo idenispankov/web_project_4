@@ -2,6 +2,9 @@ import {toggleModal} from '../components/utils.js';
 import FormValidator from '../components/FormValidator.js'; 
 import Card from '../components/Card.js'; 
 import Section from '../components/Section.js';
+import UserInfo from '../components/UserInfo.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
 import {
   initialCards,
   defaultConfig,
@@ -9,7 +12,7 @@ import {
   cardContainerSelector,
   editProfileModal,
   addCardModal,
-  imageModalWindow,
+  // imageModalWindow,
   editProfileButton,
   addCardButton,
   editProfileForm,
@@ -32,6 +35,16 @@ const addFormValidator = new FormValidator(defaultConfig, addCardForm);
  
 editFormValidator.enableValidation(); 
 addFormValidator.enableValidation(); 
+
+// User Info
+const userInfo = new UserInfo({nameSelector: '.profile__text', aboutSelector: '.profile__paragraph'});
+
+// Image Modal Open
+// const openImageModal = (data) => {
+//   imageModalWindow.open(data);
+// }
+
+// const imageModalPopup = new PopupWithImage();
   
 // Profile Submit Handler  
 function profileSubmitHandler(e) {  
@@ -56,7 +69,7 @@ closeProfileButton.addEventListener('click',() => {
   
 editProfileForm.addEventListener('submit', profileSubmitHandler);  
   
-// Modal Image Click Events  
+// // Modal Image Click Events  
 closeCardImageButton.addEventListener('click', () => {  
   toggleModal(imageModalWindow);  
 });  
@@ -82,16 +95,11 @@ cardsList.renderer();
   
 // Modal Add Card Click Events  
 addCardButton.addEventListener('click', () => {   
-  toggleModal(addCardModal); 
-  addCardForm.reset(); 
-  inputTitle.classList.add('form__input_type_error');  
-  inputUrl.classList.add('form__input_type_error'); 
-  const button = addCardForm.querySelector('.form__button_type_create'); 
-  button.classList.add('form__button_disabled'); 
+  addCardModal.open();
 });  
   
 closeAddCardFormButton.addEventListener('click', () => {  
-  toggleModal(addCardModal);  
+  addCardModal.close();
 });  
   
 // Add Card Submit Handler  
