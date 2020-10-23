@@ -1,4 +1,3 @@
-import {toggleModal} from './utils.js'; 
 import Popup from './Popup.js';
  
 export default class Card { 
@@ -36,7 +35,7 @@ export default class Card {
  
   // Private Delete Card Function 
   _deleteCard() { 
-    this._card.remove(); 
+    this._card.remove();
   } 
  
   // Private Image View Function 
