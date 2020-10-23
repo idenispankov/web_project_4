@@ -45,16 +45,10 @@ addCardButton.addEventListener('click', () => {
   addCardModal.open();
 });
 
+// Image Modal
 const imageModal = new PopupWithImage('.modal_type_image');
 imageModal.setEventListeners();
 
-
-
-  
-// // Modal Image Click Events  
-// closeCardImageButton.addEventListener('click', () => {  
-//   toggleModal(imageModalWindow);  
-// });  
   
 // Render Card 
 // function renderCard(data) {  
@@ -74,15 +68,6 @@ const cardsList = new Section({
 
 // // Initial Cards Data  
 cardsList.renderer();
-  
-// Modal Add Card Click Events  
-// addCardButton.addEventListener('click', () => {   
-//   addCardModal.open();
-// });  
-  
-// closeAddCardFormButton.addEventListener('click', () => {  
-//   addCardModal.close();
-// });  
   
 // Add Card Submit Handler  
 // function addCardSubmitHandler(e) {  
