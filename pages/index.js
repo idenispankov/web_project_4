@@ -54,11 +54,11 @@ imageModal.setEventListeners();
 
   
 // Render Card 
-// function renderCard(data) {  
-//   const card = new Card(data, '.card-template'); 
-//   const cardElement = card.createCard(); 
-//   cardsList.prepend(cardElement); 
-// }  
+function renderCard(data) {  
+  const card = new Card(data, '.card-template'); 
+  const cardElement = card.createCard(); 
+  cardsList.addItem(cardElement); 
+}  
   
 const cardsList = new Section({
   items: initialCards,
@@ -75,10 +75,8 @@ cardsList.renderer();
 // Add Card Submit Handler  
 function addCardSubmitHandler(e) {  
   e.preventDefault();  
-  renderCard({name: inputTitle.value, link: inputUrl.value});  
-  inputTitle.value = inputTitle.textContent;  
-  inputUrl.value = inputUrl.textContent;  
-  toggleModal(addCardModal); 
+  renderCard({name: this._name, link: this._link});  
+  addCardModal.close();
   addCardForm.reset(); 
 }  
   
