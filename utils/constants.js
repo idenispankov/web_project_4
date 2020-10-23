@@ -50,9 +50,6 @@ export const addCardForm = document.querySelector('.form_type_card');
 // Submit Form Buttons
 export const submitEditProfileButton = editProfileForm;  
 export const submitAddCardButton = addCardForm;
-// export const modalFigure = document.querySelector('.modal__figure');
-  
-// Close Buttons  
-// export const closeEditProfileButton = document.querySelector('.form__close-button');  
-// export const closeAddCardFormButton = document.querySelector('.form__close-button');  
-// export const closeCardImageButton = document.querySelector('.form__close-button_type-image');  
+
+export const imageFormSelector = '.modal_type_image';
+export const cardWithImage = document.querySelectorAll('.card__image');

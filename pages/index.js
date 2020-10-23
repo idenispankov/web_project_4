@@ -14,7 +14,9 @@ import {
   submitEditProfileButton,
   addCardButton,
   addCardForm,
-  submitAddCardButton
+  submitAddCardButton,
+  imageFormSelector,
+  cardWithImage
 } from '../utils/constants.js'; 
  
 /////////////////////////////////////////////////////////////////////////// 
@@ -22,9 +24,11 @@ import {
 // User Info
 const userInfo = new UserInfo({nameSelector: '.profile__text', aboutSelector: '.profile__paragraph'});
 
-// Profile Submit Handler  
+// Edit Profile Submit Handler  
 function profileSubmitHandler(e) {  
   e.preventDefault();   
+  const initialUserInfo = userInfo.getUserInfo();
+
   editProfileModal.close();  
 }  
 
@@ -48,14 +52,24 @@ addCardButton.addEventListener('click', () => {
   submitAddCardButton.addEventListener('submit', addCardSubmitHandler);
 });
 
+
 // Image Modal
 const imageModal = new PopupWithImage('.modal_type_image');
 imageModal.setEventListeners();
 
+/////
+function handleCardClick(data) {
+  imageModal.open(data);
+  console.log('123');
+}
+
+///// 
+
+
   
 // Render Card 
 function renderCard(data) {  
-  const card = new Card(data, '.card-template'); 
+  const card = new Card(data, '.card-template', handleCardClick); 
   const cardElement = card.createCard(); 
   cardsList.addItem(cardElement); 
 }  
@@ -63,7 +77,7 @@ function renderCard(data) {
 const cardsList = new Section({
   items: initialCards,
   renderer: (data) => {
-    const card = new Card(data, '.card-template');
+    const card = new Card(data, '.card-template', handleCardClick);
     const cardElement = card.createCard();
     cardsList.addItem(cardElement);
   }
