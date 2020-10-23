@@ -43,9 +43,13 @@ export const cardContainerSelector = '.elements__list';
 export const editProfileButton = document.querySelector('.profile__edit-button');  
 export const addCardButton = document.querySelector('.profile__add-button');  
   
-// Submit Form Buttons  
-// export const editProfileForm = document.querySelector('.form_type_profile');  
-// export const addCardForm = document.querySelector('.form_type_card');
+// Forms
+export const editProfileForm = document.querySelector('.form_type_profile');
+export const addCardForm = document.querySelector('.form_type_card');
+
+// Submit Form Buttons
+export const submitEditProfileButton = editProfileForm;  
+export const submitAddCardButton = addCardForm;
 // export const modalFigure = document.querySelector('.modal__figure');
   
 // Close Buttons  
