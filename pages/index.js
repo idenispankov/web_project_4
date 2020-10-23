@@ -62,8 +62,8 @@ function renderCard(data) {
   
 const cardsList = new Section({
   items: initialCards,
-  renderer: (item) => {
-    const card = new Card(item, '.card-template');
+  renderer: (data) => {
+    const card = new Card(data, '.card-template');
     const cardElement = card.createCard();
     cardsList.addItem(cardElement);
   }
@@ -80,7 +80,7 @@ function addCardSubmitHandler(e) {
   addCardForm.reset(); 
 }  
   
-// addCardForm.addEventListener('submit', addCardSubmitHandler);  
+addCardForm.addEventListener('submit', addCardSubmitHandler);  
 
 // Form Validation
 const editFormValidator = new FormValidator(defaultConfig, editProfileForm); 

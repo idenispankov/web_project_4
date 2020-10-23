@@ -1,15 +1,11 @@
-import Popup from './Popup.js';
- 
 export default class Card { 
-  constructor(data, handleCardClick) { 
+  constructor(data, templateElementSelector,  handleCardClick) { 
     this._name = data.name; 
     this._link = data.link; 
      
-    data.templateElementSelector ?
-    this._templateElementSelector = data._templateElementSelector :
-    this._templateElementSelector = '#card-template';
+    this._templateElementSelector = templateElementSelector;
 
-    this._handleClick = handleCardClick;
+    this._handleCardClick = handleCardClick;
   } 
 
   // Private Getting Card Template Function 
@@ -35,9 +31,9 @@ export default class Card {
  
   // Private Delete Card Function 
   _deleteCard() { 
-    this._card.remove();
+    document.querySelector('.card').remove();
   } 
- 
+
   // Private Image View Function 
   _imageViewHandler() { 
     const imageModalWindow = document.querySelector('.modal_type_image');  
@@ -72,7 +68,6 @@ export default class Card {
       cardDeleteButton, 
       cardImage 
     } 
- 
     this._setEventListeners(); 
  
     return this._card; 
