@@ -45,9 +45,11 @@ const userInfo = new UserInfo({nameSelector: '.profile__text', aboutSelector: '.
 
 
 // Edit Profile Modal
-const editProfileModal = new PopupWithForm('.modal_type_edit-profile', () => {
-  profileSubmitHandler();
-});
+const editProfileModal = new PopupWithForm('.modal_type_edit-profile', (data) => {
+  const newUserInfo = userInfo.setUserInfo(data);
+  editProfileModal.close();
+})
+
 editProfileModal.setEventListeners();
 
 ;// Initial User Info Open Edit Profile Form
@@ -61,15 +63,6 @@ editProfileButton.addEventListener('click', () => {
 
   editProfileModal.open();
 });
-
-// Edit Profile Submit Handler  
-function profileSubmitHandler(e) {  
-  e.preventDefault();   
-  editProfileModal.close();
-}  
-
-
-submitEditProfileButton.addEventListener('submit', profileSubmitHandler);
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -85,19 +78,20 @@ submitEditProfileButton.addEventListener('submit', profileSubmitHandler);
 // }); 
 
 
-const addCardModal = new PopupWithForm('.modal_type_add-card', (data) => {
-  const card = new Card(data, '.card-template', handleCardClick);
-  const cardElement = card.createCard(); 
-  cardsList.addItem(cardElement); 
-
-  addCardModal.close();
-});
-addCardModal.setEventListeners();
+const addCardModal = new PopupWithForm('.modal_type_add-card', addCardSubmitHandler)
+;addCardModal.setEventListeners();
 
 addCardButton.addEventListener('click', () => {
   addCardForm.reset();
   addCardModal.open();
 }); 
+
+function addCardSubmitHandler(data) {
+  const card = new Card(data, '.card-template', handleCardClick);
+  const cardElement = card.createCard(); 
+  cardsList.addItem(cardElement); 
+  addCardModal.close();
+}
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -136,3 +130,9 @@ const addFormValidator = new FormValidator(defaultConfig, addCardForm);
  
 editFormValidator.enableValidation(); 
 addFormValidator.enableValidation(); 
+
+// const card = new Card(data, '.card-template', handleCardClick);
+//   const cardElement = card.createCard(); 
+//   cardsList.addItem(cardElement); 
+
+//   addCardModal.close();
