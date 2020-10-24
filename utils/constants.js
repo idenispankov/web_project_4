@@ -41,11 +41,17 @@ export const cardContainerSelector = '.elements__list';
 
 // Open Buttons  
 export const editProfileButton = document.querySelector('.profile__edit-button');  
-export const addCardButton = document.querySelector('.profile__add-button');  
+export const addCardButton = document.querySelector('.profile__add-button'); 
+
+// Image Modal
+export const imageModalWindow = document.querySelector('.modal_type_image');  
+export const modalImage = imageModalWindow.querySelector('.modal__image');  
+export const modalImageTitle = imageModalWindow.querySelector('.modal__image-title');
   
 // Forms
 export const editProfileForm = document.querySelector('.form_type_profile');
 export const editProfileInputs = {};
+
 editProfileInputs.name = editProfileForm.querySelector('.form__input_type_name');
 editProfileInputs.about = editProfileForm.querySelector('.form__input_type_about');
 
@@ -54,11 +60,3 @@ export const addCardForm = document.querySelector('.form_type_card');
 // Submit Form Buttons
 export const submitEditProfileButton = editProfileForm;  
 export const submitAddCardButton = addCardForm;
-
-export const imageFormSelector = '.modal_type_image';
-export const cardWithImage = document.querySelectorAll('.card__image');
-
-// Image Modal
-export const imageModalWindow = document.querySelector('.modal_type_image');  
-export const modalImage = imageModalWindow.querySelector('.modal__image');  
-export const modalImageTitle = imageModalWindow.querySelector('.modal__image-title');

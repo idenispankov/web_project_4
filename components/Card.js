@@ -33,17 +33,6 @@ export default class Card {
   _deleteCard() { 
     document.querySelector('.card').remove();
   } 
-
-  // // Private Image View Function 
-  // _handleCardClick() { 
-  //   const imageModalWindow = document.querySelector('.modal_type_image');  
-  //   const modalImage = imageModalWindow.querySelector('.modal__image');  
-  //   const modalImageTitle = imageModalWindow.querySelector('.modal__image-title');  
-  
-  //   modalImageTitle.textContent = this._name;  
-  //   modalImage.src = this._link;  
-  //   modalImage.alt = this._name;
-  // } 
  
   // Public Create Card Function 
   createCard() { 
