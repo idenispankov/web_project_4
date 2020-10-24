@@ -41,14 +41,11 @@ function handleCardClick() {
 const userInfo = new UserInfo({nameSelector: '.profile__text', aboutSelector: '.profile__paragraph'});
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 // Edit Profile Modal
 const editProfileModal = new PopupWithForm('.modal_type_edit-profile', (data) => {
-  const newUserInfo = userInfo.setUserInfo(data);
+  userInfo.setUserInfo({name: data.inputName, about: data.inputAbout});
   editProfileModal.close();
-})
+});
 
 editProfileModal.setEventListeners();
 
@@ -65,19 +62,7 @@ editProfileButton.addEventListener('click', () => {
 });
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-// Add Card Modal
-// const addCardModal = new PopupWithForm('.modal_type_add-card');
-// addCardModal.setEventListeners();
-
-// addCardButton.addEventListener('click', () => {
-//   addCardForm.reset();
-//   addCardModal.open();
-// }); 
-
-
+// Add Card Modal 
 const addCardModal = new PopupWithForm('.modal_type_add-card', addCardSubmitHandler)
 ;addCardModal.setEventListeners();
 
@@ -87,14 +72,11 @@ addCardButton.addEventListener('click', () => {
 }); 
 
 function addCardSubmitHandler(data) {
-  const card = new Card({name: data.title, link: data.url},  '.card-template', handleCardClick);
+  const card = new Card({name: data.title, link: data.url}, '.card-template', handleCardClick);
   const cardElement = card.createCard(); 
   cardsList.addItem(cardElement); 
   addCardModal.close();
 }
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   
 // Render Card 
@@ -113,26 +95,9 @@ const cardsList = new Section({
 // // Initial Cards Data  
 cardsList.renderer();
   
-// Add Card Submit Handler  
-// function addCardSubmitHandler(e) {  
-//   e.preventDefault();
-//   renderCard({name: this._name, link: this._link}); 
-//   addCardModal.close();
-//   addCardForm.reset();
-// }  
-  
-// submitAddCardButton.addEventListener('submit', () => {
-//   addCardSubmitHandler();  
-// })
 // Form Validation
 const editFormValidator = new FormValidator(defaultConfig, editProfileForm); 
 const addFormValidator = new FormValidator(defaultConfig, addCardForm); 
  
 editFormValidator.enableValidation(); 
 addFormValidator.enableValidation(); 
-
-// const card = new Card(data, '.card-template', handleCardClick);
-//   const cardElement = card.createCard(); 
-//   cardsList.addItem(cardElement); 
-
-//   addCardModal.close();
