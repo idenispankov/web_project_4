@@ -14,9 +14,9 @@ import {
   submitEditProfileButton,
   addCardButton,
   addCardForm,
-  submitAddCardButton,
-  imageFormSelector,
-  cardWithImage
+  editProfileInputs,
+  modalImage,
+  modalImageTitle
 } from '../utils/constants.js'; 
  
 /////////////////////////////////////////////////////////////////////////// 
@@ -27,29 +27,38 @@ const userInfo = new UserInfo({nameSelector: '.profile__text', aboutSelector: '.
 // Edit Profile Submit Handler  
 function profileSubmitHandler(e) {  
   e.preventDefault();   
-  const initialUserInfo = userInfo.getUserInfo();
-
-  editProfileModal.close();  
+  editProfileModal.close();
+  
 }  
 
 // Edit Profile Modal
-const editProfileModal = new PopupWithForm('.modal_type_edit-profile');
-editProfileModal.setEventListeners();
-
-editProfileButton.addEventListener('click', () => {
-  editProfileModal.open();
-
-  submitEditProfileButton.addEventListener('submit', profileSubmitHandler);
+const editProfileModal = new PopupWithForm('.modal_type_edit-profile', () => {
+  editProfileModal.close();
 });
+
+// Initial User Info Open Edit Profile Form
+editProfileButton.addEventListener('click', () => {
+  const initialUserInfo = userInfo.getUserInfo();
+
+  Object.keys(editProfileInputs).forEach((input) => {
+    editProfileInputs[input].value = initialUserInfo[input];
+    editFormValidator._checkInputValidity(editProfileInputs[input]);
+  });
+
+  editProfileModal.open();
+});
+
+editProfileModal.setEventListeners();
+submitEditProfileButton.addEventListener('submit', profileSubmitHandler);
+
 
 // Add Card Modal
 const addCardModal = new PopupWithForm('.modal_type_add-card');
 addCardModal.setEventListeners();
 
 addCardButton.addEventListener('click', () => {
+  addCardForm.reset();
   addCardModal.open();
-
-  submitAddCardButton.addEventListener('submit', addCardSubmitHandler);
 });
 
 
@@ -58,9 +67,12 @@ const imageModal = new PopupWithImage('.modal_type_image');
 imageModal.setEventListeners();
 
 /////
-function handleCardClick(data) {
-  imageModal.open(data);
-  console.log('123');
+function handleCardClick() {
+  imageModal.open({name: this._name, link: this._link});
+  
+    modalImageTitle.textContent = this._name;  
+    modalImage.src = this._link;  
+    modalImage.alt = this._name;
 }
 
 ///// 
@@ -89,9 +101,9 @@ cardsList.renderer();
 // Add Card Submit Handler  
 function addCardSubmitHandler(e) {  
   e.preventDefault();  
-  renderCard({name: this._name, link: this._link});  
+  renderCard({name: this._name, link: this._link}); 
   addCardModal.close();
-  addCardForm.reset(); 
+  addCardForm.reset();
 }  
   
 addCardForm.addEventListener('submit', addCardSubmitHandler);  
