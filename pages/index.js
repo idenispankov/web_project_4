@@ -87,7 +87,7 @@ addCardButton.addEventListener('click', () => {
 }); 
 
 function addCardSubmitHandler(data) {
-  const card = new Card(data, '.card-template', handleCardClick);
+  const card = new Card({name: data.title, link: data.url},  '.card-template', handleCardClick);
   const cardElement = card.createCard(); 
   cardsList.addItem(cardElement); 
   addCardModal.close();
