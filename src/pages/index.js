@@ -10,9 +10,7 @@ import {
   initialCards,
   defaultConfig,
   cardContainerSelector,
-  editProfileButton,
   editProfileForm,
-  addCardButton,
   addCardForm,
   editProfileInputs,
   modalImage,
@@ -46,6 +44,7 @@ const editProfileModal = new PopupWithForm('.modal_type_edit-profile', (data) =>
 editProfileModal.setEventListeners();
 
 ;// Initial User Info Open Edit Profile Form
+const editProfileButton = document.querySelector('.profile__edit-button');
 editProfileButton.addEventListener('click', () => {
   const initialUserInfo = userInfo.getUserInfo();
 
@@ -62,6 +61,7 @@ editProfileButton.addEventListener('click', () => {
 const addCardModal = new PopupWithForm('.modal_type_add-card', addCardSubmitHandler);
 addCardModal.setEventListeners();
 
+const addCardButton = document.querySelector('.profile__add-button'); 
 addCardButton.addEventListener('click', () => {
   addCardForm.reset();
   addCardModal.open();

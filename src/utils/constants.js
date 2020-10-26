@@ -39,10 +39,6 @@ export const defaultConfig = {
 // Cards List 
 export const cardContainerSelector = '.elements__list';
 
-// Open Buttons  
-export const editProfileButton = document.querySelector('.profile__edit-button');  
-export const addCardButton = document.querySelector('.profile__add-button'); 
-
 // Image Modal
 export const imageModalWindow = document.querySelector('.modal_type_image');  
 export const modalImage = imageModalWindow.querySelector('.modal__image');  
