@@ -27,7 +27,7 @@ class FormValidator {
   }
 
   // Private Check Inputs Validity Function
-  _checkInputValidity(inputElement) {
+  checkInputValidity(inputElement) {
     if(inputElement.validity.valid) {
       this._hideErrorMessage(inputElement);
     }else {
@@ -56,7 +56,7 @@ class FormValidator {
 
     inputList.forEach(inputElement => {
       inputElement.addEventListener('input', () => {
-        this._checkInputValidity(inputElement);
+        this.checkInputValidity(inputElement);
         this._toggleButtonState(inputList, buttonElement,  this._settings.inactiveButtonClass);
       });
     });

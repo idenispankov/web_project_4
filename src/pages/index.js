@@ -43,14 +43,14 @@ const editProfileModal = new PopupWithForm('.modal_type_edit-profile', (data) =>
 
 editProfileModal.setEventListeners();
 
-;// Initial User Info Open Edit Profile Form
+// Initial User Info Open Edit Profile Form
 const editProfileButton = document.querySelector('.profile__edit-button');
 editProfileButton.addEventListener('click', () => {
   const initialUserInfo = userInfo.getUserInfo();
 
   Object.keys(editProfileInputs).forEach((input) => {
     editProfileInputs[input].value = initialUserInfo[input];
-    editFormValidator._checkInputValidity(editProfileInputs[input]);
+    editFormValidator.checkInputValidity(editProfileInputs[input]);
   });
 
   editProfileModal.open();
