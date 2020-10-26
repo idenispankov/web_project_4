@@ -64,13 +64,12 @@ addCardModal.setEventListeners();
 const addCardButton = document.querySelector('.profile__add-button'); 
 addCardButton.addEventListener('click', () => {
   addCardForm.reset();
+  
   addCardModal.open();
 }); 
 
 function addCardSubmitHandler(data) {
-  const card = new Card({name: data.title, link: data.url}, '.card-template', handleCardClick);
-  const cardElement = card.createCard(); 
-  cardsList.addItem(cardElement); 
+  renderCard({name: data.title, link: data.url}, '.card-template', handleCardClick);
   addCardModal.close();
 }
 
