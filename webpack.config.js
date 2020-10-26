@@ -17,23 +17,15 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: "css-loader",
-            options: {
-            importLoaders: 1
-            }
-          },
-          "postcss-loader"
-        ],
+        loader: [MiniCssExtractPlugin.loader,
+        {loader: "css-loader", options: {importLoaders: 1} }, "postcss-loader"]
       },
       {
         test: /\.html$/,
         loader: "html-loader",
       },
       {
-        test: /\.(png|svg|jpg|gif|woff2)$/,
+        test: /\.(png|svg|jpg|gif|woff2|woff)$/,
         loader: "file-loader",
       },
     ]
