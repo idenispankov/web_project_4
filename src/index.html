@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Around The U.S.</title>
 </head>
 <body class="page">
@@ -74,7 +73,7 @@
   <div class="modal modal_type_image">
     <figure class="modal__figure">
       <button class="form__close-button form__close-button_type-image" aria-label="Close button" type="button"></button>
-      <img class="modal__image" src="" alt="">
+      <img class="modal__image">
       <figcaption class="modal__image-title"></figcaption>
     </figure>
   </div>
@@ -83,16 +82,12 @@
   <template id="card-template" class="card-template">
     <li class="card">
       <button class="card__delete-button" aria-label="Delete button" type="button"></button>
-      <img class="card__image" src="" alt="">
+      <img class="card__image">
       <div class="card__group">
         <h2 class="card__text"></h2> 
         <button class="card__like-button" aria-label="Like button" type="button"></button>
       </div>
   </li>
   </template>
-
-  <script type="module" src="./pages/index.js"></script>
-  <script type="module" src="./components/FormValidator.js"></script>
-  <script type="module" src="./components/Card.js"></script>
 </body>
 </html>

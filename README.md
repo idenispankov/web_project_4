@@ -12,6 +12,7 @@ different places around U.S.
 * File structure and css selectors were written according  
 BEM (Block__Element_Modifier) methodology.
 * JavaScript files created using ES6 classes (constructor)
+* Also build project using webpack
 
 ## 
 * I did this project from scratch using design created in [Figma](https://www.figma.com). 
@@ -22,5 +23,4 @@ during my study of Web Development Course.
 
 ## Plans to update project:
 
-1. Planning extend functionality of the page using JavaScript.
-2. Keep maintain and clean up a code.
+1. Keep maintain and clean up a code.
