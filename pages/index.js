@@ -10,16 +10,12 @@ import {
   cardContainerSelector,
   editProfileButton,
   editProfileForm,
-  submitEditProfileButton,
-  submitAddCardButton,
   addCardButton,
   addCardForm,
   editProfileInputs,
   modalImage,
   modalImageTitle
-} from '../utils/constants.js'; 
- 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+} from '../utils/constants.js';
 
 
 // Image Modal
@@ -33,8 +29,6 @@ function handleCardClick() {
     modalImage.src = this._link;  
     modalImage.alt = this._name;
 }
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 // User Info
@@ -63,8 +57,8 @@ editProfileButton.addEventListener('click', () => {
 
 
 // Add Card Modal 
-const addCardModal = new PopupWithForm('.modal_type_add-card', addCardSubmitHandler)
-;addCardModal.setEventListeners();
+const addCardModal = new PopupWithForm('.modal_type_add-card', addCardSubmitHandler);
+addCardModal.setEventListeners();
 
 addCardButton.addEventListener('click', () => {
   addCardForm.reset();

@@ -19,7 +19,7 @@ export default class Card {
   // Private Event Listeners Function 
   _setEventListeners() { 
     this._cardElements.cardLikeButton.addEventListener('click', this._toggleLikeButton.bind(this)); 
-    this._cardElements.cardDeleteButton.addEventListener('click', this._deleteCard.bind(this)); 
+    this._cardElements.cardDeleteButton.addEventListener('click', this._deleteCard); 
     this._cardElements.cardImage.addEventListener('click', (data) => {
       this._handleCardClick({name: data.title, link: data.link});
     }); 
@@ -32,8 +32,8 @@ export default class Card {
   } 
  
   // Private Delete Card Function 
-  _deleteCard() { 
-    document.querySelector('.card').remove();
+  _deleteCard(e) { 
+    e.target.parentNode.remove();
   } 
  
   // Public Create Card Function 
