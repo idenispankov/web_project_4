@@ -58,10 +58,10 @@
     <form action="#" class="form form_type_card" name="CardForm" novalidate>
       <h3 class="form__title">New Place</h3>
 
-      <input id="card-title" type="text" placeholder="Title" class="form__input form__input_type_card-title form__input_type_error" name="title" minlength="2" maxlength="30" required>
+      <input id="card-title" type="text" placeholder="Title" class="form__input form__input_type_card-title" name="title" minlength="1" maxlength="30" required>
       <span id="card-title-error" class="form__error"></span>
 
-      <input id="card-url" type="url" placeholder="Image link" class="form__input form__input_type_card-url form__input_type_error" name="url" required>
+      <input id="card-url" type="url" placeholder="Image link" class="form__input form__input_type_card-url" name="url" required>
       <span id="card-url-error" class="form__error"></span>
 
       <button disabled class="form__button form__button_type_create form__button_disabled" type="submit">Create</button>

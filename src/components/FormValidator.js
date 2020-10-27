@@ -35,6 +35,12 @@ class FormValidator {
     }
   }
 
+  disableSubmitCardButton() {
+    const buttonElement = this._formElement.querySelector(this._settings.submitButtonSelector);
+    buttonElement.disabled = true;
+    buttonElement.classList.add(this._settings.inactiveButtonClass);
+  }
+
   // Private Toggle Button State Function
   _toggleButtonState() {
     const inputList = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
@@ -46,6 +52,7 @@ class FormValidator {
       }else {
         buttonElement.disabled = true;
         buttonElement.classList.add(this._settings.inactiveButtonClass);
+        this.disableSubmitCardButton();
     }
   }
 
@@ -68,7 +75,6 @@ class FormValidator {
     this._formElement.addEventListener('submit', (e) => {
       e.preventDefault();
     });
-
     this._inputEventListeners();
   }
 }

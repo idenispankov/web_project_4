@@ -64,14 +64,8 @@ addCardModal.setEventListeners();
 const addCardButton = document.querySelector('.profile__add-button'); 
 addCardButton.addEventListener('click', () => {
   addCardForm.reset();
-  const saveCardButton = document.querySelector('.form__button_type_create');
-  saveCardButton.classList.add('form__button_disabled');
-  saveCardButton.disabled = true;
-  const addCardInputs = document.querySelectorAll('.form__input');
-  Array.from(addCardInputs).forEach((input) => {
-    input.classList.add('form__input_type_error');
-  })
   addCardModal.open();
+  addFormValidator.disableSubmitCardButton();
 }); 
 
 function addCardSubmitHandler(data) {
