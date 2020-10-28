@@ -35,7 +35,7 @@ class FormValidator {
     }
   }
 
-  disableSubmitCardButton() {
+  disableSubmitButton() {
     const buttonElement = this._formElement.querySelector(this._settings.submitButtonSelector);
     buttonElement.disabled = true;
     buttonElement.classList.add(this._settings.inactiveButtonClass);
@@ -50,9 +50,7 @@ class FormValidator {
         buttonElement.disabled = false;
         buttonElement.classList.remove(this._settings.inactiveButtonClass);
       }else {
-        buttonElement.disabled = true;
-        buttonElement.classList.add(this._settings.inactiveButtonClass);
-        this.disableSubmitCardButton();
+        this.disableSubmitButton();
     }
   }
 
