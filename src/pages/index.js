@@ -6,6 +6,7 @@ import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import Api from '../components/Api.js';
 import {
   initialCards,
   defaultConfig,
@@ -16,6 +17,35 @@ import {
   modalImage,
   modalImageTitle
 } from '../utils/constants.js';
+
+// Api
+const api = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/group-6",
+  headers: {
+    authorization: " 7de1d63b-0ba0-4390-89a7-2fe6bdf9eada",
+    "Content-Type": "application/json"
+  }
+});
+
+// Api Initial Card List
+api.getCardList()
+.then(res => {
+  // Render Card 
+function renderCard(data) {  
+  const card = new Card(data, '.card-template', handleCardClick); 
+  const cardElement = card.createCard(); 
+  cardsList.addItem(cardElement); 
+}  
+  
+// Cards List
+const cardsList = new Section({
+  items: res,
+  renderer: renderCard,
+}, cardContainerSelector)
+
+// // Initial Cards Data  
+cardsList.renderer();
+})
 
 
 // Image Modal
@@ -74,21 +104,21 @@ function addCardSubmitHandler(data) {
 }
 
   
-// Render Card 
-function renderCard(data) {  
-  const card = new Card(data, '.card-template', handleCardClick); 
-  const cardElement = card.createCard(); 
-  cardsList.addItem(cardElement); 
-}  
+// // Render Card 
+// function renderCard(data) {  
+//   const card = new Card(data, '.card-template', handleCardClick); 
+//   const cardElement = card.createCard(); 
+//   cardsList.addItem(cardElement); 
+// }  
   
-// Cards List
-const cardsList = new Section({
-  items: initialCards,
-  renderer: renderCard,
-}, cardContainerSelector)
+// // Cards List
+// const cardsList = new Section({
+//   items: initialCards,
+//   renderer: renderCard,
+// }, cardContainerSelector)
 
-// // Initial Cards Data  
-cardsList.renderer();
+// // // Initial Cards Data  
+// cardsList.renderer();
   
 // Form Validation
 const editFormValidator = new FormValidator(defaultConfig, editProfileForm); 
