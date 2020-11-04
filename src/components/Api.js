@@ -21,7 +21,25 @@ getUserInfo() {
     .then(res => res.ok ? res.json() : Promise.reject('Error!' + res.statusText))
     .catch(err => console.log(err))
   }
+
+  // PATCH https://around.nomoreparties.co/v1/groupId/users/me
+setUserInfo({name, about}) {
+  return fetch(this._baseUrl + '/users/me', {
+    headers: this._headers,
+    method: "PATCH",
+    body: JSON.stringify({
+      name: name,
+      about: about
+    })
+  })
+    .then(res => res.ok ? res.json() : Promise.reject('Error!' + res.statusText))
+    .catch(err => console.log(err))
+  }
+
 }
+
+// // PATCH https://around.nomoreparties.co/v1/groupId/users/me/avatar
+// setUserAvatar({avatar}) {}
 
 // // POST https://around.nomoreparties.co/v1/groupId/cards
 // addCardForm({name, link}) {}
@@ -33,9 +51,3 @@ getUserInfo() {
 
 // // DELETE https://around.nomoreparties.co/v1/groupId/cards/likes/cardId
 // changeLikeCardStatus(cardId, like) {}
-
-// // PATCH https://around.nomoreparties.co/v1/groupId/users/me
-// setUserInfo({name, about}) {}
-
-// // PATCH https://around.nomoreparties.co/v1/groupId/users/me/avatar
-// setUserAvatar({avatar}) {}

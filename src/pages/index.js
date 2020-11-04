@@ -27,33 +27,6 @@ const api = new Api({
   }
 });
 
-// Api Initial Card List
-
-api.getCardList()
-.then(res => {
-  const cardsList = new Section({
-    items: res,
-    renderer: renderCard,
-  }, cardContainerSelector)  
-  
-  // Render Card 
-  function renderCard(data) {  
-    const card = new Card({data, handleCardClick}, '.card-template'); 
-    const cardElement = card.createCard(); 
-    cardsList.addItem(cardElement); 
-  }  
-  
-  // Initial Cards Data  
-  cardsList.renderer();
-})
-
-const userInfo = new UserInfo({nameSelector: '.profile__text', aboutSelector: '.profile__paragraph'})
-
-api.getUserInfo()
-.then((res) => {
-  userInfo.setUserInfo({name: res.name, about: res.about})
-})
-
 // Image Modal
 const imageModal = new PopupWithImage('.modal_type_image');
 imageModal.setEventListeners();
@@ -67,9 +40,39 @@ function handleCardClick() {
 }
 
 
+// Api Initial Card List
+api.getCardList()
+.then(res => {
+  console.log(res)
+  const cardsList = new Section({
+    items: res,
+    renderer: renderCard,
+  }, cardContainerSelector)  
+  
+  function renderCard(data) {  
+    const card = new Card({data, handleCardClick}, '.card-template'); 
+    const cardElement = card.createCard(); 
+    cardsList.addItem(cardElement); 
+  }   
+  cardsList.renderer();
+})
+
+const userInfo = new UserInfo({nameSelector: '.profile__text', aboutSelector: '.profile__paragraph'})
+
+api.getUserInfo()
+.then((res) => {
+  console.log(res)
+  userInfo.setUserInfo({name: res.name, about: res.about})
+})
+
+// api.setUserInfo({name, about})
+// .then(res => {
+//   console.log(res)
+// })
+
 // Edit Profile Modal
 const editProfileModal = new PopupWithForm('.modal_type_edit-profile', (data) => {
-  userInfo.setUserInfo({name: data.inputName, about: data.inputAbout});
+  userInfo.setUserInfo({name: data.inputName, about: data.inputAbout})
   editProfileModal.close();
 });
 
@@ -105,6 +108,7 @@ function addCardSubmitHandler(data) {
   addCardModal.close();
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////
 // Initial Cards List
 const cardsList = new Section({
   items: initialCards,
@@ -120,7 +124,8 @@ function renderCard(data) {
 
 // Initial Cards Data  
 cardsList.renderer();
-  
+/////////////////////////////////////////////////////////////////////////////////////////////
+
 // Form Validation
 const editFormValidator = new FormValidator(defaultConfig, editProfileForm); 
 const addFormValidator = new FormValidator(defaultConfig, addCardForm); 
