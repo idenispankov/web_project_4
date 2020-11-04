@@ -57,6 +57,7 @@ api.getCardList()
   cardsList.renderer();
 })
 
+// Profile Info
 const userInfo = new UserInfo({nameSelector: '.profile__text', aboutSelector: '.profile__paragraph'})
 
 api.getUserInfo()
@@ -94,19 +95,30 @@ editProfileButton.addEventListener('click', () => {
 
 // Add Card Modal 
 const addCardModal = new PopupWithForm('.modal_type_add-card', addCardSubmitHandler);
-addCardModal.setEventListeners();
 
-const addCardButton = document.querySelector('.profile__add-button'); 
-addCardButton.addEventListener('click', () => {
+api.addCardForm({name, link})
+.then((res) => {
+  const addCardButton = document.querySelector('.profile__add-button'); 
+  addCardButton.addEventListener('click', () => {
   addCardForm.reset();
   addCardModal.open();
   addFormValidator.disableSubmitButton();
 }); 
+})
+
+// const addCardButton = document.querySelector('.profile__add-button'); 
+// addCardButton.addEventListener('click', () => {
+//   addCardForm.reset();
+//   addCardModal.open();
+//   addFormValidator.disableSubmitButton();
+// }); 
 
 function addCardSubmitHandler(data) {
   renderCard({name: data.title, link: data.url}, '.card-template', handleCardClick);
   addCardModal.close();
 }
+
+addCardModal.setEventListeners();
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 // Initial Cards List
