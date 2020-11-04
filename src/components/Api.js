@@ -5,20 +5,24 @@ export default class Api {
   }
 
 // GET https://around.nomoreparties.co/v1/groupId/cards
-
 getCardList() {
   return fetch(this._baseUrl + '/cards', {
     headers: this._headers
   })
     .then(res => res.ok ? res.json() : Promise.reject('Error!' + res.statusText))
     .catch(err => console.log(err))
+  }
+
+  // GET https://around.nomoreparties.co/v1/groupId/users/me
+getUserInfo() {
+  return fetch(this._baseUrl + '/users/me', {
+    headers: this._headers
+  })
+    .then(res => res.ok ? res.json() : Promise.reject('Error!' + res.statusText))
+    .catch(err => console.log(err))
 }
 
-  
 }
-
-// // GET https://around.nomoreparties.co/v1/groupId/users/me
-// getUserInfo() {}
 
 // getAppInfo() {}
 

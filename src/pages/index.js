@@ -22,30 +22,46 @@ import {
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-6",
   headers: {
-    authorization: " 7de1d63b-0ba0-4390-89a7-2fe6bdf9eada",
+    authorization: "7de1d63b-0ba0-4390-89a7-2fe6bdf9eada",
     "Content-Type": "application/json"
   }
 });
 
 // Api Initial Card List
-api.getCardList()
-.then(res => {
-  // Render Card 
-function renderCard(data) {  
-  const card = new Card(data, '.card-template', handleCardClick); 
-  const cardElement = card.createCard(); 
-  cardsList.addItem(cardElement); 
-}  
+// api.getCardList()
+// .then(res => {
+//   console.log(res)
+//   const cardsList = new Section({
+//     items: res,
+//     renderer: renderCard,
+//   }, cardContainerSelector)  
   
-// Cards List
-const cardsList = new Section({
-  items: res,
-  renderer: renderCard,
-}, cardContainerSelector)
+//   // Render Card 
+//   function renderCard(data) {  
+//     const card = new Card({data, handleCardClick}, '.card-template'); 
+//     const cardElement = card.createCard(); 
+//     cardsList.addItem(cardElement); 
+//   }  
+  
+//   // Cards Data  
+//   cardsList.renderer();
+// });
 
-// // Initial Cards Data  
-cardsList.renderer();
+
+// User Info
+const userInfo = new UserInfo({nameSelector: '.profile__text', aboutSelector: '.profile__paragraph'});
+
+api.getUserInfo()
+.then(res => {
+  console.log(res);
+
+  userInfo.setUserInfo({nameSelector: name, aboutSelector: about})
 })
+
+// setUserInfo(data) {
+//   this._nameElement.textContent = data.name;
+//   this._aboutElement.textContent = data.about;
+// };
 
 
 // Image Modal
@@ -59,10 +75,6 @@ function handleCardClick() {
     modalImage.src = this._link;  
     modalImage.alt = this._name;
 }
-
-
-// User Info
-const userInfo = new UserInfo({nameSelector: '.profile__text', aboutSelector: '.profile__paragraph'});
 
 
 // Edit Profile Modal
@@ -103,21 +115,20 @@ function addCardSubmitHandler(data) {
   addCardModal.close();
 }
 
-  
-// // Render Card 
-// function renderCard(data) {  
-//   const card = new Card(data, '.card-template', handleCardClick); 
-//   const cardElement = card.createCard(); 
-//   cardsList.addItem(cardElement); 
-// }  
-  
-// // Cards List
+// Initial Cards List
 // const cardsList = new Section({
 //   items: initialCards,
 //   renderer: renderCard,
-// }, cardContainerSelector)
+// }, cardContainerSelector)  
 
-// // // Initial Cards Data  
+// // Render Card 
+// function renderCard(data) {  
+//   const card = new Card({data, handleCardClick}, '.card-template'); 
+//   const cardElement = card.createCard(); 
+//   cardsList.addItem(cardElement); 
+// }  
+
+// // Initial Cards Data  
 // cardsList.renderer();
   
 // Form Validation
