@@ -20,11 +20,8 @@ getUserInfo() {
   })
     .then(res => res.ok ? res.json() : Promise.reject('Error!' + res.statusText))
     .catch(err => console.log(err))
+  }
 }
-
-}
-
-// getAppInfo() {}
 
 // // POST https://around.nomoreparties.co/v1/groupId/cards
 // addCardForm({name, link}) {}

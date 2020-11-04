@@ -28,41 +28,31 @@ const api = new Api({
 });
 
 // Api Initial Card List
-// api.getCardList()
-// .then(res => {
-//   console.log(res)
-//   const cardsList = new Section({
-//     items: res,
-//     renderer: renderCard,
-//   }, cardContainerSelector)  
-  
-//   // Render Card 
-//   function renderCard(data) {  
-//     const card = new Card({data, handleCardClick}, '.card-template'); 
-//     const cardElement = card.createCard(); 
-//     cardsList.addItem(cardElement); 
-//   }  
-  
-//   // Cards Data  
-//   cardsList.renderer();
-// });
 
-
-// User Info
-const userInfo = new UserInfo({nameSelector: '.profile__text', aboutSelector: '.profile__paragraph'});
-
-api.getUserInfo()
+api.getCardList()
 .then(res => {
-  console.log(res);
-
-  userInfo.setUserInfo({nameSelector: name, aboutSelector: about})
+  const cardsList = new Section({
+    items: res,
+    renderer: renderCard,
+  }, cardContainerSelector)  
+  
+  // Render Card 
+  function renderCard(data) {  
+    const card = new Card({data, handleCardClick}, '.card-template'); 
+    const cardElement = card.createCard(); 
+    cardsList.addItem(cardElement); 
+  }  
+  
+  // Initial Cards Data  
+  cardsList.renderer();
 })
 
-// setUserInfo(data) {
-//   this._nameElement.textContent = data.name;
-//   this._aboutElement.textContent = data.about;
-// };
+const userInfo = new UserInfo({nameSelector: '.profile__text', aboutSelector: '.profile__paragraph'})
 
+api.getUserInfo()
+.then((res) => {
+  userInfo.setUserInfo({name: res.name, about: res.about})
+})
 
 // Image Modal
 const imageModal = new PopupWithImage('.modal_type_image');
@@ -116,20 +106,20 @@ function addCardSubmitHandler(data) {
 }
 
 // Initial Cards List
-// const cardsList = new Section({
-//   items: initialCards,
-//   renderer: renderCard,
-// }, cardContainerSelector)  
+const cardsList = new Section({
+  items: initialCards,
+  renderer: renderCard,
+}, cardContainerSelector)  
 
-// // Render Card 
-// function renderCard(data) {  
-//   const card = new Card({data, handleCardClick}, '.card-template'); 
-//   const cardElement = card.createCard(); 
-//   cardsList.addItem(cardElement); 
-// }  
+// Render Card 
+function renderCard(data) {  
+  const card = new Card({data, handleCardClick}, '.card-template'); 
+  const cardElement = card.createCard(); 
+  cardsList.addItem(cardElement); 
+}  
 
-// // Initial Cards Data  
-// cardsList.renderer();
+// Initial Cards Data  
+cardsList.renderer();
   
 // Form Validation
 const editFormValidator = new FormValidator(defaultConfig, editProfileForm); 

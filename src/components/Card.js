@@ -1,7 +1,8 @@
 export default class Card { 
-  constructor({data, handleCardClick}, templateElementSelector) { 
+  constructor({data, handleCardClick}, templateElementSelector, userId) { 
     this._name = data.name; 
-    this._link = data.link; 
+    this._link = data.link;
+    this._id = userId;
      
     this._templateElementSelector = templateElementSelector;
 
