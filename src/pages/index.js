@@ -27,20 +27,17 @@ const api = new Api({
   }
 });
 
-// Image Modal
-const imageModal = new PopupWithImage('.modal_type_image');
-imageModal.setEventListeners();
+// 1. Loading User Information from the Server
+const profileUserInfo = new UserInfo({nameSelector: '.profile__text', aboutSelector: '.profile__paragraph'})
 
-function handleCardClick() {
-  imageModal.open({name: this._name, link: this._link});
-  
-    modalImageTitle.textContent = this._name;  
-    modalImage.src = this._link;  
-    modalImage.alt = this._name;
-}
+api.getUserInfo()
+.then((res) => {
+  console.log(res)
+  profileUserInfo.setUserInfo({name: res.name, about: res.about})
+})
 
 
-// Api Initial Card List
+// 2. Loading Cards from the Server
 api.getCardList()
 .then(res => {
   console.log(res)
@@ -57,32 +54,18 @@ api.getCardList()
   cardsList.renderer();
 })
 
-// Profile Info
-const userInfo = new UserInfo({nameSelector: '.profile__text', aboutSelector: '.profile__paragraph'})
+// 3. Editing the Profile
+const editProfileModal = new PopupWithForm('.modal_type_edit-profile', editProfileSubmitHandler)
 
-api.getUserInfo()
-.then((res) => {
-  console.log(res)
-  userInfo.setUserInfo({name: res.name, about: res.about})
-})
-
-// api.setUserInfo({name, about})
-// .then(res => {
-//   console.log(res)
-// })
-
-// Edit Profile Modal
-const editProfileModal = new PopupWithForm('.modal_type_edit-profile', (data) => {
-  userInfo.setUserInfo({name: data.inputName, about: data.inputAbout})
-  editProfileModal.close();
-});
-
-editProfileModal.setEventListeners();
+function editProfileSubmitHandler(data) {
+  profileUserInfo.setUserInfo({name: data.inputName, about: data.inputAbout})
+  editProfileModal.close()
+}
 
 // Initial User Info Open Edit Profile Form
 const editProfileButton = document.querySelector('.profile__edit-button');
 editProfileButton.addEventListener('click', () => {
-  const initialUserInfo = userInfo.getUserInfo();
+  const initialUserInfo = profileUserInfo.getUserInfo();
 
   Object.keys(editProfileInputs).forEach((input) => {
     editProfileInputs[input].value = initialUserInfo[input];
@@ -92,29 +75,24 @@ editProfileButton.addEventListener('click', () => {
   editProfileModal.open();
 });
 
+editProfileModal.setEventListeners();
 
+// 4. Adding a New Card
 // Add Card Modal 
 const addCardModal = new PopupWithForm('.modal_type_add-card', addCardSubmitHandler);
 
-api.addCardForm({name, link})
-.then((res) => {
-  const addCardButton = document.querySelector('.profile__add-button'); 
-  addCardButton.addEventListener('click', () => {
+const addCardButton = document.querySelector('.profile__add-button'); 
+addCardButton.addEventListener('click', () => {
   addCardForm.reset();
   addCardModal.open();
   addFormValidator.disableSubmitButton();
 }); 
-})
-
-// const addCardButton = document.querySelector('.profile__add-button'); 
-// addCardButton.addEventListener('click', () => {
-//   addCardForm.reset();
-//   addCardModal.open();
-//   addFormValidator.disableSubmitButton();
-// }); 
 
 function addCardSubmitHandler(data) {
-  renderCard({name: data.title, link: data.url}, '.card-template', handleCardClick);
+  api.addCard(data)
+  .then(res => {
+    renderCard(res);
+  })
   addCardModal.close();
 }
 
@@ -137,6 +115,18 @@ function renderCard(data) {
 // Initial Cards Data  
 cardsList.renderer();
 /////////////////////////////////////////////////////////////////////////////////////////////
+
+// Image Modal
+const imageModal = new PopupWithImage('.modal_type_image');
+imageModal.setEventListeners();
+
+function handleCardClick() {
+  imageModal.open({name: this._name, link: this._link});
+  
+    modalImageTitle.textContent = this._name;  
+    modalImage.src = this._link;  
+    modalImage.alt = this._name;
+}
 
 // Form Validation
 const editFormValidator = new FormValidator(defaultConfig, editProfileForm); 

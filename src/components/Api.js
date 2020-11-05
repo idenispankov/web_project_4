@@ -28,33 +28,22 @@ setUserInfo({name, about}) {
     headers: this._headers,
     method: "PATCH",
     body: JSON.stringify({
-      name: name,
-      about: about
+      name,
+      about
     })
   })
     .then(res => res.ok ? res.json() : Promise.reject('Error!' + res.statusText))
     .catch(err => console.log(err))
   }
-  // PATCH https://around.nomoreparties.co/v1/groupId/users/me/avatar
-setUserAvatar({avatar}) {
-  return fetch(this._baseUrl + '/users/me', {
-    headers: this._headers,
-    method: "PATCH",
-    body: JSON.stringify({
-      avatar: avatar
-    })
-  })
-    .then(res => res.ok ? res.json() : Promise.reject('Error!' + res.statusText))
-    .catch(err => console.log(err))
-}
+
 // POST https://around.nomoreparties.co/v1/groupId/cards
-addCardForm({name, link}) {
-  return fetch(this._baseUrl + '/users/me', {
+addCard({name, link}) {
+  return fetch(this._baseUrl + '/cards', {
     headers: this._headers,
     method: "POST",
     body: JSON.stringify({
-      title: name,
-      url: link
+      name,
+      link
     })
   })
     .then(res => res.ok ? res.json() : Promise.reject('Error!' + res.statusText))
@@ -62,10 +51,3 @@ addCardForm({name, link}) {
 }
 
 }
-// // DELETE https://around.nomoreparties.co/v1/groupId/cards/cardId
-// removeCard(cardId) {}
-
-// // PUT https://around.nomoreparties.co/v1/groupId/cards/likes/cardId
-
-// // DELETE https://around.nomoreparties.co/v1/groupId/cards/likes/cardId
-// changeLikeCardStatus(cardId, like) {}
