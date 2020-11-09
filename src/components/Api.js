@@ -37,13 +37,13 @@ setUserInfo({name, about}) {
   }
 
 // POST https://around.nomoreparties.co/v1/groupId/cards
-addCard({name, link}) {
+addCard({title, url}) {
   return fetch(this._baseUrl + '/cards', {
     headers: this._headers,
     method: "POST",
     body: JSON.stringify({
-      name,
-      link
+      name: title,
+      link: url
     })
   })
     .then(res => res.ok ? res.json() : Promise.reject('Error!' + res.statusText))
