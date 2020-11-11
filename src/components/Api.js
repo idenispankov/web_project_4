@@ -23,13 +23,13 @@ getUserInfo() {
   }
 
   // PATCH https://around.nomoreparties.co/v1/groupId/users/me
-setUserInfo({name, about}) {
+setUserInfo(data) {
   return fetch(this._baseUrl + '/users/me', {
     headers: this._headers,
     method: "PATCH",
     body: JSON.stringify({
-      name,
-      about
+      name: data.name,
+      about: data.about
     })
   })
     .then(res => res.ok ? res.json() : Promise.reject('Error!' + res.statusText))
@@ -48,6 +48,15 @@ addCard({title, url}) {
   })
     .then(res => res.ok ? res.json() : Promise.reject('Error!' + res.statusText))
     .catch(err => console.log(err))
+}
+
+deleteCard(cardId) {
+  return fetch(this.baseUrl + '/cards' + cardId, {
+    method: "DELETE",
+    headers: this._headers
+  })
+  .then(res => res.ok ? res.json() : Promise.reject('Error!' + res.statusText))
+  .catch(err => console.log(err))
 }
 
 }

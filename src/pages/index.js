@@ -58,8 +58,15 @@ api.getCardList()
 const editProfileModal = new PopupWithForm('.modal_type_edit-profile', editProfileSubmitHandler)
 
 function editProfileSubmitHandler(data) {
-  profileUserInfo.setUserInfo({name: data.inputName, about: data.inputAbout})
+  api.setUserInfo(data)
+  .then((data) => {
+    profileUserInfo.setUserInfo({name: data.inputName, about: data.inputAbout})
+  })
+  .then((res) => {
+    profileUserInfo.setUserInfo(data.inputName = res.name, data.inputAbout =  res.about)
+  })
   editProfileModal.close()
+  console.log(data)
 }
 
 // Initial User Info Open Edit Profile Form
