@@ -1,0 +1,13 @@
+.card__like-button-count {
+  margin: 0;
+  padding: 0;
+  display: block;
+  font-size: 13px;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 16px;
+  min-width: 9px;
+  color: #000;
+  text-align: center;
+}

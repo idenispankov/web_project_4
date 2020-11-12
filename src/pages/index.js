@@ -50,6 +50,7 @@ api.getCardList()
     cardsList.addItem(cardElement); 
   }   
   cardsList.renderer();
+  console.log(res)
 })
 
 // 3. Editing the Profile
@@ -99,24 +100,23 @@ function addCardSubmitHandler(data) {
 
 addCardModal.setEventListeners();
 
+const deleteCardModal = new PopupWithForm('.modal_type_delete-card', (data) => {
 
-const deleteCardModal = new PopupWithForm('.modal_type_delete-card', deleteCardSubmitHandler);
+});
 
-const deleteCardButton = document.querySelectorAll('.card__delete-button');
-deleteCardButton.addEventListener('click', () => {
-
-  deleteCardModal.open();
-})
-
-function deleteCardSubmitHandler(data) {
+function deleteButtonSubmitHandler(cardId, data) {
   api.deleteCard(cardId)
   .then((res) => {
-    this.card.remove();
-    deleteCardModal.close();
+    card.remove();
   })
 }
 
-deleteCardModal.setEventListeners();
+function deleteButtonClickHandler(cardId) {
+  deleteCardModal.open();
+}
+const deleteCardButton = document.addEventListener('click', deleteButtonClickHandler)
+
+deleteCardModal.setEventListeners()
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 // Initial Cards List

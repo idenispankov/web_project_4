@@ -1,13 +1,15 @@
 export default class Card { 
-  constructor({data, handleCardClick, handleDeleteClick}, templateElementSelector) { 
+  constructor({data, handleCardClick, handleDeleteClick, handleLikeClick}, templateElementSelector) { 
     this._name = data.name; 
     this._link = data.link;
-    this._id = data.userId;
+    this._id = data.id;
+    this._owner = data.owner;
      
     this._templateElementSelector = templateElementSelector;
 
     this._handleCardClick = handleCardClick;
     this._handleDeleteClick = handleDeleteClick;
+    this._handleLikeClick = handleLikeClick;
   } 
 
   // Private Getting Card Template Function 
@@ -39,19 +41,24 @@ export default class Card {
     e.target.classList.toggle('card__like-button_active'); 
   } 
  
-  // Private Delete Card Function 
-  _deleteCard(e) { 
-    e.target.parentNode.remove();
-  } 
- 
   // Public Create Card Function 
-  createCard() { 
+  createCard(owner) { 
     this._card = this._getCardTemplate(); 
  
     const cardLikeButton = this._card.querySelector('.card__like-button'); 
-    const cardDeleteButton = this._card.querySelector('.card__delete-button'); 
+
+    const cardDeleteButton = this._card.querySelector('.card__delete-button');
+    // if(this._owner === owner) {
+    //   cardDeleteButton.data = this._id;
+    // } else {
+    //   cardDeleteButton.remove()
+    // }
+    if(this._owner === owner) cardDeleteButton.data = this._id;
+    else cardDeleteButton.remove();
+
     const cardImage = this._card.querySelector('.card__image'); 
- 
+
+    cardImage.id = this._id;
     cardImage.src = this._link; 
     cardImage.alt = this._name; 
  
@@ -67,4 +74,9 @@ export default class Card {
  
     return this._card; 
    } 
+
+    // Private Delete Card Function 
+  _deleteCard(e) { 
+    e.target.parentNode.remove();
+  } 
 }  

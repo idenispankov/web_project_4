@@ -1,3 +1,6 @@
+@import url('./-container/card__like-button-container.css');
+@import url('./-count/card__like-button-count.css');
+
 .card__like-button {
   display: inline-block;
   box-sizing: border-box;
