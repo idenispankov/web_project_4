@@ -50,6 +50,7 @@ addCard({title, url}) {
     .catch(err => console.log(err))
 }
 
+// DELETE https://around.nomoreparties.co/v1/groupId/cards
 deleteCard(cardId) {
   return fetch(this.baseUrl + '/cards' + cardId, {
     method: "DELETE",

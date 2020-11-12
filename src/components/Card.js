@@ -1,5 +1,5 @@
 export default class Card { 
-  constructor({data, handleCardClick}, templateElementSelector) { 
+  constructor({data, handleCardClick, handleDeleteClick}, templateElementSelector) { 
     this._name = data.name; 
     this._link = data.link;
     this._id = data.userId;
@@ -7,6 +7,7 @@ export default class Card {
     this._templateElementSelector = templateElementSelector;
 
     this._handleCardClick = handleCardClick;
+    this._handleDeleteClick = handleDeleteClick;
   } 
 
   // Private Getting Card Template Function 
@@ -20,7 +21,13 @@ export default class Card {
   // Private Event Listeners Function 
   _setEventListeners() { 
     this._cardElements.cardLikeButton.addEventListener('click', this._toggleLikeButton.bind(this)); 
-    this._cardElements.cardDeleteButton.addEventListener('click', this._deleteCard); 
+
+    
+    this._cardElements.cardDeleteButton.addEventListener('click', () => {
+      this._handleDeleteClick();
+    }); 
+
+
     this._cardElements.cardImage.addEventListener('click', (data) => {
       this._handleCardClick({name: data.title, link: data.link});
     }); 

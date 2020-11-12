@@ -99,6 +99,25 @@ function addCardSubmitHandler(data) {
 
 addCardModal.setEventListeners();
 
+
+const deleteCardModal = new PopupWithForm('.modal_type_delete-card', deleteCardSubmitHandler);
+
+const deleteCardButton = document.querySelectorAll('.card__delete-button');
+deleteCardButton.addEventListener('click', () => {
+
+  deleteCardModal.open();
+})
+
+function deleteCardSubmitHandler(data) {
+  api.deleteCard(cardId)
+  .then((res) => {
+    this.card.remove();
+    deleteCardModal.close();
+  })
+}
+
+deleteCardModal.setEventListeners();
+
 /////////////////////////////////////////////////////////////////////////////////////////////
 // Initial Cards List
 const cardsList = new Section({
