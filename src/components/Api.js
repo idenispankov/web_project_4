@@ -28,8 +28,8 @@ setUserInfo(data) {
     headers: this._headers,
     method: "PATCH",
     body: JSON.stringify({
-      name: data.name,
-      about: data.about
+      name: data.inputName,
+      about: data.inputAbout
     })
   })
     .then(res => res.ok ? res.json() : Promise.reject('Error!' + res.statusText))

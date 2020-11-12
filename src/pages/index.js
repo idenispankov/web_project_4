@@ -32,7 +32,6 @@ const profileUserInfo = new UserInfo({nameSelector: '.profile__text', aboutSelec
 
 api.getUserInfo()
 .then((res) => {
-  console.log(res)
   profileUserInfo.setUserInfo({name: res.name, about: res.about})
 })
 
@@ -40,7 +39,6 @@ api.getUserInfo()
 // 2. Loading Cards from the Server
 api.getCardList()
 .then(res => {
-  console.log(res)
   const cardsList = new Section({
     items: res,
     renderer: renderCard,
@@ -59,14 +57,10 @@ const editProfileModal = new PopupWithForm('.modal_type_edit-profile', editProfi
 
 function editProfileSubmitHandler(data) {
   api.setUserInfo(data)
-  .then((data) => {
-    profileUserInfo.setUserInfo({name: data.inputName, about: data.inputAbout})
-  })
   .then((res) => {
-    profileUserInfo.setUserInfo(data.inputName = res.name, data.inputAbout =  res.about)
+    profileUserInfo.setUserInfo({name: res.name, about: res.about})
   })
   editProfileModal.close()
-  console.log(data)
 }
 
 // Initial User Info Open Edit Profile Form
