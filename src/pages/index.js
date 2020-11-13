@@ -27,30 +27,33 @@ const api = new Api({
   }
 });
 
+let userId = null;
+
 // 1. Loading User Information from the Server
 const profileUserInfo = new UserInfo({nameSelector: '.profile__text', aboutSelector: '.profile__paragraph'})
 
 api.getUserInfo()
 .then((res) => {
   profileUserInfo.setUserInfo({name: res.name, about: res.about})
+  userId = res._id;
+  console.log('userID', userId)
 })
 
 
 // 2. Loading Cards from the Server
 api.getCardList()
-.then(res => {
+.then(userCards => {
   const cardsList = new Section({
-    items: res,
-    renderer: renderCard,
+    items: userCards,
+    renderer: (data) =>  {
+      const card = new Card({data, handleCardClick, handleDeleteClick, handleLikeClick}, '.card-template'); 
+      const cardElement = card.createCard(userId);
+      cardsList.addItem(cardElement); 
+    },
   }, cardContainerSelector)  
-  
-  function renderCard(data) {  
-    const card = new Card({data, handleCardClick}, '.card-template'); 
-    const cardElement = card.createCard(); 
-    cardsList.addItem(cardElement); 
-  }   
+
   cardsList.renderer();
-  console.log(res)
+  console.log(userCards)
 })
 
 // 3. Editing the Profile
@@ -80,7 +83,6 @@ editProfileButton.addEventListener('click', () => {
 editProfileModal.setEventListeners();
 
 // 4. Adding a New Card
-// Add Card Modal 
 const addCardModal = new PopupWithForm('.modal_type_add-card', addCardSubmitHandler);
 
 const addCardButton = document.querySelector('.profile__add-button'); 
@@ -90,33 +92,44 @@ addCardButton.addEventListener('click', () => {
   addFormValidator.disableSubmitButton();
 }); 
 
+addCardModal.setEventListeners();
+
+
+const deleteModalWindow = new PopupWithForm('.modal_type_delete-card', handleSubmitDelete);
+
+// CallBacks 
+
+// SUBMIT ADD CARD
 function addCardSubmitHandler(data) {
   api.addCard(data)
-  .then(res => {
+    .then(res => {
     renderCard(res);
   })
   addCardModal.close();
 }
 
-addCardModal.setEventListeners();
-
-const deleteCardModal = new PopupWithForm('.modal_type_delete-card', (data) => {
-
-});
-
-function deleteButtonSubmitHandler(cardId, data) {
-  api.deleteCard(cardId)
-  .then((res) => {
-    card.remove();
-  })
+// DELETE
+function handleDeleteClick() {
+  deleteModalWindow.open();
+    console.log('handleDeleteClick Called!!!')
 }
 
-function deleteButtonClickHandler(cardId) {
-  deleteCardModal.open();
+// SUBMIT DELETE
+function handleSubmitDelete(data) {
+  api.deleteCard(data.id)
+    .then((e) => {
+      e.target.parentNode.remove();
+    })
+    deleteModalWindow.close();
+  console.log('handleDeleteSubmit Called!!!')
 }
-const deleteCardButton = document.addEventListener('click', deleteButtonClickHandler)
 
-deleteCardModal.setEventListeners()
+// LIKE STATE
+function handleLikeClick() {
+  console.log('HandleLikeClick')
+}
+
+deleteModalWindow.setEventListeners();
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 // Initial Cards List
@@ -125,11 +138,11 @@ const cardsList = new Section({
   renderer: renderCard,
 }, cardContainerSelector)  
 
-// Render Card 
+// Render Card Initial
 function renderCard(data) {  
-  const card = new Card({data, handleCardClick}, '.card-template'); 
+  const card = new Card({data, handleCardClick, handleDeleteClick, handleLikeClick}, '.card-template'); 
   const cardElement = card.createCard(); 
-  cardsList.addItem(cardElement); 
+  cardsList.addItem(cardElement);
 }  
 
 // Initial Cards Data  

@@ -60,13 +60,4 @@ deleteCard(cardId) {
   .catch(err => console.log(err))
 }
 
-cardLikeAdd(cardId) {
-  return fetch(this.baseUrl + '/cards/likes' + cardId, {
-    method: "PUT",
-    headers: this._headers
-  })
-  .then(res => res.ok ? res.json() : Promise.reject('Error!' + res.statusText))
-  .catch(err => console.log(err))
-}
-
 }
