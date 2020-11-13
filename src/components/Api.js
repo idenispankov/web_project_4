@@ -50,9 +50,9 @@ addCard({title, url}) {
     .catch(err => console.log(err))
 }
 
-// DELETE https://around.nomoreparties.co/v1/groupId/cards
+// DELETE https://around.nomoreparties.co/v1/groupId/cards/cardId
 deleteCard(cardId) {
-  return fetch(this.baseUrl + '/cards' + cardId, {
+  return fetch(this.baseUrl + '/cards/' + cardId, {
     method: "DELETE",
     headers: this._headers
   })
@@ -60,4 +60,24 @@ deleteCard(cardId) {
   .catch(err => console.log(err))
 }
 
+// PUT https://around.nomoreparties.co/v1/groupId/cards/likes/cardId
+cardLikeAdd(cardId) {
+  return fetch(this.baseUrl + '/cards/likes/' + cardId, {
+    method: "PUT",
+    headers: this._headers
+  })
+  .then(res => res.ok ? res.json() : Promise.reject('Error!' + res.statusText))
+  .catch(err => console.log(err))
+}
+
+// DELETE https://around.nomoreparties.co/v1/groupId/cards/likes/cardId
+cardLikeRemove(cardId) {
+  return fetch(this.baseUrl + '/cards/likes/' + cardId, {
+    method: "DELETE",
+    headers: this._headers
+  })
+  .then(res => res.ok ? res.json() : Promise.reject('Error!' + res.statusText))
+  .catch(err => console.log(err))
+}
+  
 }

@@ -33,37 +33,37 @@ let userId = null;
 const profileUserInfo = new UserInfo({nameSelector: '.profile__text', aboutSelector: '.profile__paragraph'})
 
 api.getUserInfo()
-.then((res) => {
-  profileUserInfo.setUserInfo({name: res.name, about: res.about})
-  userId = res._id;
-  console.log('userID', userId)
-})
+  .then((res) => {
+    profileUserInfo.setUserInfo({name: res.name, about: res.about})
+    userId = res._id;
+    console.log('userID - displayed as - ', userId)
+  })
 
 
 // 2. Loading Cards from the Server
 api.getCardList()
-.then(userCards => {
-  const cardsList = new Section({
-    items: userCards,
-    renderer: (data) =>  {
-      const card = new Card({data, handleCardClick, handleDeleteClick, handleLikeClick}, '.card-template'); 
-      const cardElement = card.createCard(userId);
-      cardsList.addItem(cardElement); 
-    },
-  }, cardContainerSelector)  
+  .then(userCards => {
+    const cardsList = new Section({
+      items: userCards,
+      renderer: (data) =>  {
+        const card = new Card({data, handleCardClick, handleDeleteClick, handleLikeClick}, '.card-template'); 
+        const cardElement = card.createCard(userId);
+        cardsList.addItem(cardElement);
+      },
+    }, cardContainerSelector)  
 
-  cardsList.renderer();
-  console.log(userCards)
-})
+    cardsList.renderer();
+    console.log(userCards)
+  })
 
 // 3. Editing the Profile
 const editProfileModal = new PopupWithForm('.modal_type_edit-profile', editProfileSubmitHandler)
 
 function editProfileSubmitHandler(data) {
   api.setUserInfo(data)
-  .then((res) => {
-    profileUserInfo.setUserInfo({name: res.name, about: res.about})
-  })
+    .then((res) => {
+      profileUserInfo.setUserInfo({name: res.name, about: res.about})
+    })
   editProfileModal.close()
 }
 
@@ -86,6 +86,7 @@ editProfileModal.setEventListeners();
 const addCardModal = new PopupWithForm('.modal_type_add-card', addCardSubmitHandler);
 
 const addCardButton = document.querySelector('.profile__add-button'); 
+
 addCardButton.addEventListener('click', () => {
   addCardForm.reset();
   addCardModal.open();
@@ -97,7 +98,8 @@ addCardModal.setEventListeners();
 
 const deleteModalWindow = new PopupWithForm('.modal_type_delete-card', handleSubmitDelete);
 
-// CallBacks 
+
+// CALLBACKS
 
 // SUBMIT ADD CARD
 function addCardSubmitHandler(data) {
@@ -111,14 +113,13 @@ function addCardSubmitHandler(data) {
 // DELETE
 function handleDeleteClick() {
   deleteModalWindow.open();
-    console.log('handleDeleteClick Called!!!')
 }
 
-// SUBMIT DELETE
-function handleSubmitDelete(data) {
-  api.deleteCard(data.id)
-    .then((e) => {
-      e.target.parentNode.remove();
+// HANDLE SUBMIT DELETE
+function handleSubmitDelete(card) {
+  api.deleteCard(userId)
+    .then((userId) => {
+      document.getElementById(userId).parentNode.remove();
     })
     deleteModalWindow.close();
   console.log('handleDeleteSubmit Called!!!')
@@ -133,20 +134,20 @@ deleteModalWindow.setEventListeners();
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 // Initial Cards List
-const cardsList = new Section({
-  items: initialCards,
-  renderer: renderCard,
-}, cardContainerSelector)  
+// const cardsList = new Section({
+//   items: initialCards,
+//   renderer: renderCard,
+// }, cardContainerSelector)  
 
-// Render Card Initial
-function renderCard(data) {  
-  const card = new Card({data, handleCardClick, handleDeleteClick, handleLikeClick}, '.card-template'); 
-  const cardElement = card.createCard(); 
-  cardsList.addItem(cardElement);
-}  
+// // Render Card Initial
+// function renderCard(data) {  
+//   const card = new Card({data, handleCardClick, handleDeleteClick, handleLikeClick}, '.card-template'); 
+//   const cardElement = card.createCard(); 
+//   cardsList.addItem(cardElement);
+// }
 
-// Initial Cards Data  
-cardsList.renderer();
+// // Initial Cards Data  
+// cardsList.renderer();
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 // Image Modal

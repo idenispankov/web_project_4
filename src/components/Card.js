@@ -4,6 +4,7 @@ export default class Card {
     this._link = data.link;
     this._id = data.id;
     this._owner = data.owner;
+    this._likes = data.likes;
     
      
     this._templateElementSelector = templateElementSelector;
@@ -23,13 +24,13 @@ export default class Card {
 
   // Private Event Listeners Function 
   _setEventListeners() { 
-    this._cardElements.cardLikeButton.addEventListener('click', () => {
-      this._handleLikeClick();
+    this._cardElements.cardLikeButton.addEventListener('click', (e) => {
+      this._toggleLikeButton(e);
     }); 
 
     
     this._cardElements.cardDeleteButton.addEventListener('click', (e) => {
-      this._handleDeleteClick(e.target.data);
+      this._handleDeleteClick(this);
     }); 
 
 
@@ -45,13 +46,16 @@ export default class Card {
   } 
  
   // Public Create Card Function 
-  createCard(owner) { 
+  createCard(currentUserId) { 
     this._card = this._getCardTemplate(); 
  
     const cardLikeButton = this._card.querySelector('.card__like-button'); 
 
     const cardDeleteButton = this._card.querySelector('.card__delete-button');
-    // if(this._owner = owner) cardDeleteButton.data = this._id
+    if(this._owner === currentUserId) {
+      cardDeleteButton.remove();
+    }
+    // if(this._owner === currentUserId) cardDeleteButton.data = this._id;
     // else cardDeleteButton.remove();
 
     const cardImage = this._card.querySelector('.card__image'); 
