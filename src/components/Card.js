@@ -1,5 +1,5 @@
 export default class Card { 
-  constructor({data, handleCardClick, handleDeleteClick, handleLikeClick}, templateElementSelector) { 
+  constructor({data}, handleCardClick, handleDeleteClick, handleLikeClick, templateElementSelector) { 
     this._name = data.name; 
     this._link = data.link;
     this._id = data.id;
@@ -25,12 +25,12 @@ export default class Card {
   // Private Event Listeners Function 
   _setEventListeners() { 
     this._cardElements.cardLikeButton.addEventListener('click', (e) => {
-      this._toggleLikeButton(e);
+      this._handleLikeClick(e);
     }); 
 
     
     this._cardElements.cardDeleteButton.addEventListener('click', (e) => {
-      this._handleDeleteClick(this);
+      this._handleDeleteClick(e);
     }); 
 
 

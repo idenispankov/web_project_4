@@ -39,24 +39,7 @@ api.getUserInfo()
     console.log('userID - displayed as - ', userId)
   })
 
-
-// 2. Loading Cards from the Server
-api.getCardList()
-  .then(userCards => {
-    const cardsList = new Section({
-      items: userCards,
-      renderer: (data) =>  {
-        const card = new Card({data, handleCardClick, handleDeleteClick, handleLikeClick}, '.card-template'); 
-        const cardElement = card.createCard(userId);
-        cardsList.addItem(cardElement);
-      },
-    }, cardContainerSelector)  
-
-    cardsList.renderer();
-    console.log(userCards)
-  })
-
-// 3. Editing the Profile
+  // 2. Editing the Profile
 const editProfileModal = new PopupWithForm('.modal_type_edit-profile', editProfileSubmitHandler)
 
 function editProfileSubmitHandler(data) {
@@ -81,6 +64,30 @@ editProfileButton.addEventListener('click', () => {
 });
 
 editProfileModal.setEventListeners();
+
+
+// 3. Loading Cards from the Server
+api.getCardList()
+  .then(userCards => {
+    const cardsList = new Section({
+      items: userCards,
+      renderer: (data) =>  {
+        const card = new Card({data}, handleCardClick, handleDeleteClick, handleLikeClick, '.card-template'); 
+        const cardElement = card.createCard(userId);
+        cardsList.addItem(cardElement);
+      },
+    }, cardContainerSelector)  
+
+    cardsList.renderer();
+    console.log(userCards)
+  })
+
+  // Render Card Initial
+function renderCard(data) {  
+  const card = new Card({data}, handleCardClick, handleDeleteClick, handleLikeClick, '.card-template'); 
+  const cardElement = card.createCard(); 
+  cardsList.addItem(cardElement);
+}
 
 // 4. Adding a New Card
 const addCardModal = new PopupWithForm('.modal_type_add-card', addCardSubmitHandler);
@@ -116,39 +123,29 @@ function handleDeleteClick() {
 }
 
 // HANDLE SUBMIT DELETE
-function handleSubmitDelete(card) {
+function handleSubmitDelete(userId) {
   api.deleteCard(userId)
-    .then((userId) => {
-      document.getElementById(userId).parentNode.remove();
+    .then((e) => {
+      e.target.parentNode.remove()
     })
     deleteModalWindow.close();
   console.log('handleDeleteSubmit Called!!!')
 }
 
 // LIKE STATE
-function handleLikeClick() {
+function handleLikeClick(e) {
+  e.target.classList.toggle('card__like-button_active'); 
+  const cardId = e.target.data
+  api.addLike(cardId, liked)
+    .then((res) => {
+      console.log(res)
+      e.target.classList.toggle('card__like-button_active'); 
+      e.target.querySelector('.card__like-count').textContent = res.likes.length
+    })
   console.log('HandleLikeClick')
 }
 
 deleteModalWindow.setEventListeners();
-
-/////////////////////////////////////////////////////////////////////////////////////////////
-// Initial Cards List
-// const cardsList = new Section({
-//   items: initialCards,
-//   renderer: renderCard,
-// }, cardContainerSelector)  
-
-// // Render Card Initial
-// function renderCard(data) {  
-//   const card = new Card({data, handleCardClick, handleDeleteClick, handleLikeClick}, '.card-template'); 
-//   const cardElement = card.createCard(); 
-//   cardsList.addItem(cardElement);
-// }
-
-// // Initial Cards Data  
-// cardsList.renderer();
-/////////////////////////////////////////////////////////////////////////////////////////////
 
 // Image Modal
 const imageModal = new PopupWithImage('.modal_type_image');
