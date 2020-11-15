@@ -17,6 +17,23 @@ export default class PopupWithForm extends Popup {
     return this._formValues;
   }
 
+  // open(cardId) {
+  //   if(!'modal_type_delete-card')
+  //   super.open()
+  //   else{
+  //     this.cardId = cardId;
+  //   }
+  // }
+
+  deleteSetEventListener(cardId) {
+    this._popupItem.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if ('modal_type_delete-card')
+      this.handleSubmit(cardId)
+    });
+    super.setEventListeners();
+  }
+
   setEventListeners() {
     this._popupItem.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -25,3 +42,7 @@ export default class PopupWithForm extends Popup {
     super.setEventListeners();
   }
 }
+
+
+// if ('modal_type_delete-card')
+//       this.handleSubmit(cardId)

@@ -68,5 +68,14 @@ addLike(cardId) {
   .then(res => res.ok ? res.json() : Promise.reject('Error!' + res.statusText))
   .catch(err => console.log(err))
 }
+
+deleteLike(cardId) {
+  return fetch(this.baseUrl + '/cards/likes/' + cardId, {
+    method: "DELETE",
+    headers: this._headers
+  })
+  .then(res => res.ok ? res.json() : Promise.reject('Error!' + res.statusText))
+  .catch(err => console.log(err))
+}
   
 }

@@ -118,8 +118,9 @@ function addCardSubmitHandler(data) {
 }
 
 // DELETE
-function handleDeleteClick() {
-  deleteModalWindow.open();
+function handleDeleteClick(cardId) {
+  console.log('trash bit clicked!!!')
+  deleteModalWindow.open(cardId);
 }
 
 // HANDLE SUBMIT DELETE

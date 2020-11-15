@@ -28,3 +28,10 @@
     margin-bottom: 36px;
   }
 }
+
+.profile__avatar-edit {
+  width: 120px;
+  height: 120px;
+  margin: 0;
+  padding: 0;
+}
