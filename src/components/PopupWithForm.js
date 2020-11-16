@@ -29,7 +29,7 @@ export default class PopupWithForm extends Popup {
     this._popupItem.addEventListener('submit', (e) => {
       e.preventDefault();
       if(this._popupItem.classList.contains('modal_type_delete-card')) {
-        this._handleSubmit(this.cardId);
+        this._handleSubmit(this.cardId, e.target.parentNode);
       } else {
         this._handleSubmit(this._getInputsValue());
       }

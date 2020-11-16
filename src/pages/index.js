@@ -90,10 +90,7 @@ function renderCard(data) {
       const cardElement = card.createCard(userId);
       cardsList.addItem(cardElement);
     },
-  }, cardContainerSelector)  
-  const card = new Card({data}, handleCardClick, handleDeleteClick, handleLikeClick, '.card-template'); 
-  const cardElement = card.createCard(); 
-  cardsList.addItem(cardElement);
+  }, cardContainerSelector) 
 }
 
 // 4. Adding a New Card
@@ -131,11 +128,12 @@ function handleDeleteClick(cardId) {
 }
 
 // HANDLE SUBMIT DELETE
-function handleSubmitDelete(userId) {
+function handleSubmitDelete(userId, cardId) {
   api.deleteCard(userId)
     .then((data) => {
       console.log('DATA is - ', data)
-      data.parentNode.remove()
+      cardId.remove();
+      console.log(cardId)
     })
     deleteModalWindow.close();
   console.log('handleDeleteSubmit Called!!!')

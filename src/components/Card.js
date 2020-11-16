@@ -29,7 +29,7 @@ export default class Card {
     }); 
 
     
-    this._cardElements.cardDeleteButton.addEventListener('click', () => {
+    this._cardElements.cardDeleteButton.addEventListener('click', (e) => {
       this._handleDeleteClick(this._id, this.card);
     }); 
 
@@ -52,7 +52,7 @@ export default class Card {
     const cardLikeButton = this._card.querySelector('.card__like-button'); 
 
     const cardDeleteButton = this._card.querySelector('.card__delete-button');
-    if(this._owner === currentUserId) {
+    if(!this._owner === currentUserId) {
       cardDeleteButton.remove();
     }
     // if(this._owner === currentUserId) cardDeleteButton.data = this._id;
