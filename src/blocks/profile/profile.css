@@ -30,8 +30,19 @@
 }
 
 .profile__avatar-edit {
-  width: 120px;
+  min-width: 120px;
   height: 120px;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(100,0,0,0.8);
+}
+
+.avatar__button-edit {
+  width: 26px;
+  height: 26px;
   margin: 0;
   padding: 0;
 }

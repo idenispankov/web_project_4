@@ -84,6 +84,13 @@ api.getCardList()
 
   // Render Card Initial
 function renderCard(data) {  
+  const cardsList = new Section({
+    renderer: (data) =>  {
+      const card = new Card({data}, handleCardClick, handleDeleteClick, handleLikeClick, '.card-template'); 
+      const cardElement = card.createCard(userId);
+      cardsList.addItem(cardElement);
+    },
+  }, cardContainerSelector)  
   const card = new Card({data}, handleCardClick, handleDeleteClick, handleLikeClick, '.card-template'); 
   const cardElement = card.createCard(); 
   cardsList.addItem(cardElement);
@@ -119,15 +126,16 @@ function addCardSubmitHandler(data) {
 
 // DELETE
 function handleDeleteClick(cardId) {
-  console.log('trash bit clicked!!!')
+  console.log('trash bit clicked!!!', cardId)
   deleteModalWindow.open(cardId);
 }
 
 // HANDLE SUBMIT DELETE
 function handleSubmitDelete(userId) {
   api.deleteCard(userId)
-    .then((e) => {
-      e.target.parentNode.remove()
+    .then((data) => {
+      console.log('DATA is - ', data)
+      data.parentNode.remove()
     })
     deleteModalWindow.close();
   console.log('handleDeleteSubmit Called!!!')
@@ -137,6 +145,7 @@ function handleSubmitDelete(userId) {
 function handleLikeClick(e) {
   e.target.classList.toggle('card__like-button_active'); 
   const cardId = e.target.data
+  const liked = e.target.data
   api.addLike(cardId, liked)
     .then((res) => {
       console.log(res)

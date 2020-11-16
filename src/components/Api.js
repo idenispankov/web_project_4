@@ -9,8 +9,14 @@ getCardList() {
   return fetch(this._baseUrl + '/cards', {
     headers: this._headers
   })
-    .then(res => res.ok ? res.json() : Promise.reject('Error!' + res.statusText))
-    .catch(err => console.log(err))
+    .then((res) => {
+      if(res.ok) {
+        return res.json()
+      } else {
+        return Promise.reject('Error!' + res.statusText)
+      }
+    })
+    .catch(err => console.log(err));
   }
 
   // GET https://around.nomoreparties.co/v1/groupId/users/me
@@ -18,9 +24,15 @@ getUserInfo() {
   return fetch(this._baseUrl + '/users/me', {
     headers: this._headers
   })
-    .then(res => res.ok ? res.json() : Promise.reject('Error!' + res.statusText))
-    .catch(err => console.log(err))
-  }
+  .then((res) => {
+    if(res.ok) {
+      return res.json()
+    } else {
+      return Promise.reject('Error!' + res.statusText)
+    }
+  })
+  .catch(err => console.log(err));
+}
 
   // PATCH https://around.nomoreparties.co/v1/groupId/users/me
 setUserInfo(data) {
@@ -32,9 +44,15 @@ setUserInfo(data) {
       about: data.inputAbout
     })
   })
-    .then(res => res.ok ? res.json() : Promise.reject('Error!' + res.statusText))
-    .catch(err => console.log(err))
-  }
+  .then((res) => {
+    if(res.ok) {
+      return res.json()
+    } else {
+      return Promise.reject('Error!' + res.statusText)
+    }
+  })
+  .catch(err => console.log(err));
+}
 
 // POST https://around.nomoreparties.co/v1/groupId/cards
 addCard({title, url}) {
@@ -46,36 +64,30 @@ addCard({title, url}) {
       link: url
     })
   })
-    .then(res => res.ok ? res.json() : Promise.reject('Error!' + res.statusText))
-    .catch(err => console.log(err))
+  .then((res) => {
+    if(res.ok) {
+      return res.json()
+    } else {
+      return Promise.reject('Error!' + res.statusText)
+    }
+  })
+  .catch(err => console.log(err));
 }
 
 // DELETE https://around.nomoreparties.co/v1/groupId/cards/cardId
 deleteCard(cardId) {
-  return fetch(this.baseUrl + '/cards/' + cardId, {
+  return fetch(this._baseUrl + '/cards/' + cardId, {
     method: "DELETE",
     headers: this._headers
   })
-  .then(res => res.ok ? res.json() : Promise.reject('Error!' + res.statusText))
-  .catch(err => console.log(err))
-}
-
-addLike(cardId) {
-  return fetch(this.baseUrl + '/cards/likes/' + cardId, {
-    method: "PUT",
-    headers: this._headers
+  .then((res) => {
+    if(res.ok) {
+      return res.json()
+    } else {
+      return Promise.reject('Error!' + res.statusText)
+    }
   })
-  .then(res => res.ok ? res.json() : Promise.reject('Error!' + res.statusText))
-  .catch(err => console.log(err))
-}
-
-deleteLike(cardId) {
-  return fetch(this.baseUrl + '/cards/likes/' + cardId, {
-    method: "DELETE",
-    headers: this._headers
-  })
-  .then(res => res.ok ? res.json() : Promise.reject('Error!' + res.statusText))
-  .catch(err => console.log(err))
+  .catch(err => console.log(err));
 }
   
 }
