@@ -15,7 +15,8 @@ import {
   addCardForm,
   editProfileInputs,
   modalImage,
-  modalImageTitle
+  modalImageTitle,
+  avatarForm
 } from '../utils/constants.js';
 
 // Api
@@ -30,7 +31,7 @@ const api = new Api({
 let userId = null;
 
 // 1. Loading User Information from the Server
-const profileUserInfo = new UserInfo({nameSelector: '.profile__text', aboutSelector: '.profile__paragraph'})
+const profileUserInfo = new UserInfo({nameSelector: '.profile__text', aboutSelector: '.profile__paragraph', avatarSelector: '.profile__avatar'})
 
 api.getUserInfo()
   .then((res) => {
@@ -83,11 +84,11 @@ api.getCardList()
   })
 
   // Render Card Initial
-function renderCard(data) {  
+function renderCard() {  
   const cardsList = new Section({
     renderer: (data) =>  {
       const card = new Card({data}, handleCardClick, handleDeleteClick, handleLikeClick, '.card-template'); 
-      const cardElement = card.createCard(userId);
+      const cardElement = card.createCard(data, userId);
       cardsList.addItem(cardElement);
     },
   }, cardContainerSelector) 
@@ -107,9 +108,6 @@ addCardButton.addEventListener('click', () => {
 addCardModal.setEventListeners();
 
 
-const deleteModalWindow = new PopupWithForm('.modal_type_delete-card', handleSubmitDelete);
-
-
 // CALLBACKS
 
 // SUBMIT ADD CARD
@@ -127,13 +125,14 @@ function handleDeleteClick(cardId) {
   deleteModalWindow.open(cardId);
 }
 
+const deleteModalWindow = new PopupWithForm('.modal_type_delete-card', handleSubmitDelete);
+
 // HANDLE SUBMIT DELETE
 function handleSubmitDelete(userId, cardId) {
   api.deleteCard(userId)
     .then((data) => {
       console.log('DATA is - ', data)
-      cardId.remove();
-      console.log(cardId)
+      cardId.removeCard();
     })
     deleteModalWindow.close();
   console.log('handleDeleteSubmit Called!!!')
@@ -142,14 +141,14 @@ function handleSubmitDelete(userId, cardId) {
 // LIKE STATE
 function handleLikeClick(e) {
   e.target.classList.toggle('card__like-button_active'); 
-  const cardId = e.target.data
-  const liked = e.target.data
-  api.addLike(cardId, liked)
-    .then((res) => {
-      console.log(res)
-      e.target.classList.toggle('card__like-button_active'); 
-      e.target.querySelector('.card__like-count').textContent = res.likes.length
-    })
+  // const cardId = e.target.data
+  // const liked = e.target.data
+  // api.addLike(cardId, liked)
+  //   .then((res) => {
+  //     console.log(res)
+  //     e.target.classList.toggle('card__like-button_active'); 
+  //     e.target.querySelector('.card__like-count').textContent = res.likes.length
+  //   })
   console.log('HandleLikeClick')
 }
 
@@ -167,9 +166,32 @@ function handleCardClick() {
     modalImage.alt = this._name;
 }
 
+const editAvatarModal = new PopupWithForm('.modal_type_avatar', editAvatarSubmitHandler);
+
+function editAvatarSubmitHandler(avatar) {
+  const avatarImage = document.querySelector('.profile__avatar');
+  const avatarInput = document.querySelector('.form__input_type_avatar');
+  api.setUserAvatar(avatar)
+    .then((data) => {
+      avatarImage.src = avatarInput.src;
+      console.log(avatarImage, avatarInput.textContent)
+      console.log(data)
+    })
+  editAvatarModal.close()
+}
+
+const editAvatarButton = document.querySelector('.profile__avatar-edit');
+editAvatarButton.addEventListener('click', () => {
+  editAvatarModal.open();
+})
+
+editAvatarModal.setEventListeners();
+
 // Form Validation
 const editFormValidator = new FormValidator(defaultConfig, editProfileForm); 
 const addFormValidator = new FormValidator(defaultConfig, addCardForm); 
+const avatarFormValidator = new FormValidator(defaultConfig, avatarForm);
  
 editFormValidator.enableValidation(); 
 addFormValidator.enableValidation(); 
+avatarFormValidator.enableValidation();

@@ -4,6 +4,7 @@
 @import url(./__edit-button/profile__edit-button.css);
 @import url(./__paragraph/profile__paragraph.css);
 @import url(./__add-button/profile__add-button.css);
+@import url(./__avatar-edit/profile__avatar-edit.css);
 
 .profile {
   max-width: 882px;
@@ -27,22 +28,4 @@
     flex-direction: column;
     margin-bottom: 36px;
   }
-}
-
-.profile__avatar-edit {
-  min-width: 120px;
-  height: 120px;
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
-  border: none;
-  border-radius: 50%;
-  background-color: rgba(100,0,0,0.8);
-}
-
-.avatar__button-edit {
-  width: 26px;
-  height: 26px;
-  margin: 0;
-  padding: 0;
 }

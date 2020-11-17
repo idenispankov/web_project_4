@@ -14,8 +14,9 @@
     <main>
       <!-- Profile Block -->
       <section class="profile">
-        <button class="profile__avatar-edit"> <img class="avatar__button-edit" src="./images/edit_icon.svg" alt="edit"></button>
+        <button class="profile__avatar-edit">
         <img class="profile__avatar" src="./images/profile__avatar.jpg" alt="Avatar">
+      </button>
         <div class="profile__info">
           <h1 class="profile__text"></h1>
           <button class="profile__edit-button" aria-label="Edit button" type="button"></button>
@@ -48,6 +49,19 @@
 
       <input id="profile-about" type="text" placeholder="About me" class="form__input form__input_type_about" name="inputAbout" minlength="2" maxlength="200" required>
       <span id="profile-about-error" class="form__error"></span>
+
+      <button class="form__button form__button_type_save" type="submit">Save</button>
+      <button class="form__close-button" aria-label="Close button" type="button"></button>
+    </form>
+  </div>
+
+  <!-- Avatar Modal -->
+  <div class="modal modal_type_avatar">
+    <form action="#" class="form form_type_avatar" name="avatar" novalidate>
+      <h3 class="form__title">Change Profile Picture</h3>
+
+      <input id="profile-name" type="url" class="form__input form__input_type_avatar" name="avatar" aria-label="Image Link" placeholder="Image Link" required>
+      <span id="profile-name-error" class="form__error"></span>
 
       <button class="form__button form__button_type_save" type="submit">Save</button>
       <button class="form__close-button" aria-label="Close button" type="button"></button>

@@ -47,6 +47,7 @@ export const modalImageTitle = imageModalWindow.querySelector('.modal__image-tit
 // Forms
 export const editProfileForm = document.querySelector('.form_type_profile');
 export const editProfileInputs = {};
+export const avatarForm = document.querySelector('.form_type_avatar');
 
 editProfileInputs.name = editProfileForm.querySelector('.form__input_type_name');
 editProfileInputs.about = editProfileForm.querySelector('.form__input_type_about');
