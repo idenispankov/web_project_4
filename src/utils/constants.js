@@ -52,3 +52,5 @@ editProfileInputs.name = editProfileForm.querySelector('.form__input_type_name')
 editProfileInputs.about = editProfileForm.querySelector('.form__input_type_about'); 
  
 export const addCardForm = document.querySelector('.form_type_card'); 
+export const avatarModal = document.querySelector('.modal_type_avatar');
+export const avatarForm = document.querySelector('.form_type_avatar');

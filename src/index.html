@@ -15,7 +15,7 @@
       <!-- Profile Block -->
       <section class="profile">
         <button class="profile__avatar-edit">
-        <img class="profile__avatar" src="./images/profile__avatar.jpg" alt="Avatar">
+        <img class="profile__avatar" src="#" alt="Avatar">
       </button>
         <div class="profile__info">
           <h1 class="profile__text">Denis Pankov</h1>
@@ -60,11 +60,11 @@
     <form action="#" class="form form_type_avatar" name="avatar" novalidate>
       <h3 class="form__title">Change Profile Picture</h3>
 
-      <input id="profile-name" type="url" class="form__input form__input_type_avatar" name="avatar" aria-label="Image Link" placeholder="Image Link" required>
-      <span id="profile-name-error" class="form__error"></span>
+      <input id="avatar-url" type="url" class="form__input form__input_type_avatar" name="avatarUrl" aria-label="Image Link" placeholder="Image Link" required>
+      <span id="avatar-url-error" class="form__error"></span>
 
-      <button class="form__button form__button_type_save" type="submit">Save</button>
-      <button class="form__close-button" aria-label="Close button" type="button"></button>
+      <button disabled class="form__button form__button_type_save form__button_disabled" type="submit">Save</button>
+      <button class="form__close-button" aria-label="Close button" type="reset"></button>
     </form>
   </div>
 

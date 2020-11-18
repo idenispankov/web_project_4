@@ -17,11 +17,23 @@ export default class PopupWithForm extends Popup {
     return this._formValues; 
   } 
  
-  setEventListeners() { 
-    this._popupItem.addEventListener('submit', (e) => { 
-      e.preventDefault(); 
-      this._handleSubmit(this._getInputsValue()); 
-    }); 
-    super.setEventListeners(); 
-  } 
-} 
+  open(cardId) {
+    if(this._popupItem.classList.contains('modal_type_delete-card')) {
+      this.cardId = cardId;
+    }
+    super.open();
+  }
+
+
+  setEventListeners() {
+    this._popupItem.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if(this._popupItem.classList.contains('modal_type_delete-card')) {
+        this._handleSubmit(this.cardId, e.target.parentNode);
+      } else {
+        this._handleSubmit(this._getInputsValue());
+      }
+    });
+    super.setEventListeners();
+  }
+}

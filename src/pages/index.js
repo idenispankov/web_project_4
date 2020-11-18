@@ -6,6 +6,7 @@ import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js'; 
 import PopupWithImage from '../components/PopupWithImage.js'; 
 import PopupWithForm from '../components/PopupWithForm.js'; 
+import Api from '../components/Api.js';
 import { 
   initialCards, 
   defaultConfig, 
@@ -14,8 +15,26 @@ import {
   addCardForm, 
   editProfileInputs, 
   modalImage, 
-  modalImageTitle 
+  modalImageTitle,
+  // avatarModal,
+  avatarForm
 } from '../utils/constants.js'; 
+
+const api = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/group-6",
+  headers: {
+    authorization: "7de1d63b-0ba0-4390-89a7-2fe6bdf9eada",
+    "Content-Type": "application/json"
+  }
+});
+
+// User Info 
+let userId = null;
+const userInfo = new UserInfo({
+  nameSelector: '.profile__text',
+  aboutSelector: '.profile__paragraph',
+  avatarSelector: '.profile__avatar'
+}); 
  
  
 // Image Modal 
@@ -30,18 +49,45 @@ function handleCardClick() {
     modalImage.alt = this._name; 
 } 
  
- 
-// User Info 
-const userInfo = new UserInfo({nameSelector: '.profile__text', aboutSelector: '.profile__paragraph'}); 
- 
+// Loading User Information from the Server
+api.getUserInfo()
+  .then((res) => {
+    userInfo.setUserInfo({name: res.name, about: res.about})
+    userInfo.setUserAvatar(res.avatar)
+    userId = res._id;
+  })
  
 // Edit Profile Modal 
 const editProfileModal = new PopupWithForm('.modal_type_edit-profile', (data) => { 
-  userInfo.setUserInfo({name: data.inputName, about: data.inputAbout}); 
-  editProfileModal.close(); 
+  api.setUserInfo(data)
+    .then((res) => {
+      userInfo.setUserInfo({name: res.name, about: res.about})
+      editProfileModal.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }); 
+
+// Avatar Modal
+const avatarModal = new PopupWithForm('.modal_type_avatar', (data) => {
+  api.setUserAvatar(data)
+    .then((res) => {
+      userInfo.setUserAvatar({avatar: res.avatar})
+      avatarModal.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+})
+
+const editAvatarButton = document.querySelector('.profile__avatar-edit');
+editAvatarButton.addEventListener('click', () => {
+  avatarModal.open()
+})
  
 editProfileModal.setEventListeners(); 
+avatarModal.setEventListeners();
  
 // Initial User Info Open Edit Profile Form 
 const editProfileButton = document.querySelector('.profile__edit-button'); 
@@ -93,6 +139,8 @@ cardsList.renderer();
 // Form Validation 
 const editFormValidator = new FormValidator(defaultConfig, editProfileForm);  
 const addFormValidator = new FormValidator(defaultConfig, addCardForm);  
+const avatarFormValidator = new FormValidator(defaultConfig, avatarForm);
   
 editFormValidator.enableValidation();  
 addFormValidator.enableValidation();  
+avatarFormValidator.enableValidation();
