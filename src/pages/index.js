@@ -119,8 +119,8 @@ api.getCardList()
   })
   .catch(err => console.log(err));
 
-function handleDeleteClick(cardId) {
-  deleteModal.open(cardId)
+function handleDeleteClick(cardId, card) {
+  deleteModal.open(cardId, card)
 }
 
 function handleLikeClick(e) {
@@ -136,10 +136,9 @@ function handleLikeClick(e) {
 }
 
 const deleteModal = new PopupWithForm('.modal_type_delete-card', (cardId, card) => {
-  api.deleteCard(cardId, card)
-    .then((card) => {
-      console.log(card)
-      card.removeCard();
+  api.deleteCard(cardId)
+    .then(() => {
+      card.remove();
       deleteModal.close();
     })
     .catch(err => console.log(err))

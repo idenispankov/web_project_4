@@ -25,12 +25,12 @@ export default class Card {
   // Private Event Listeners Function 
   _setEventListeners() { 
     this._cardElements.cardLikeButton.addEventListener('click', (e) => {
-      this._handleLikeClick(this._id, this.cardElement);
+      this._handleLikeClick(this._id, e.target.parentNode);
     }); 
 
     
     this._cardElements.cardDeleteButton.addEventListener('click', (e) => {
-      this._handleDeleteClick(this._id, this.cardElement);
+      this._handleDeleteClick(this._id, e.target.parentNode);
     }); 
 
 
