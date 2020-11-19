@@ -17,9 +17,10 @@ export default class PopupWithForm extends Popup {
     return this._formValues; 
   } 
  
-  open(cardId) {
+  open(cardId, card) {
     if(this._popupItem.classList.contains('modal_type_delete-card')) {
       this.cardId = cardId;
+      this.card = card;
     }
     super.open();
   }
@@ -29,7 +30,7 @@ export default class PopupWithForm extends Popup {
     this._popupItem.addEventListener('submit', (e) => {
       e.preventDefault();
       if(this._popupItem.classList.contains('modal_type_delete-card')) {
-        this._handleSubmit(this.cardId, e.target.parentNode);
+        this._handleSubmit(this.cardId, this.card);
       } else {
         this._handleSubmit(this._getInputsValue());
       }

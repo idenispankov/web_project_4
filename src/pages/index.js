@@ -62,6 +62,7 @@ const avatarModal = new PopupWithForm('.modal_type_avatar', (data) => {
   api.setUserAvatar(data)
     .then((res) => {
       userInfo.setUserAvatar({avatar: res.avatar})
+      console.log(res.avatar)
       avatarModal.close();
     })
     .catch(err => console.log(err));
@@ -159,10 +160,11 @@ addCardModal.close();
 
 addCardModal.setEventListeners();
 
-const deleteModal = new PopupWithForm('.modal_type_delete-card', (cardId) => {
-  api.deleteCard(cardId)
-    .then((cardId) => {
-      console.log(cardId)
+const deleteModal = new PopupWithForm('.modal_type_delete-card', (cardId, card) => {
+  api.deleteCard(cardId, card)
+    .then((card) => {
+      console.log(card)
+      card.remove();
       deleteModal.close();
     })
     .catch(err => console.log(err))
