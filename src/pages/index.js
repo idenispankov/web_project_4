@@ -52,6 +52,7 @@ const editProfileModal = new PopupWithForm('.modal_type_edit-profile', (data) =>
   api.setUserInfo(data)
     .then((res) => {
       userInfo.setUserInfo({name: res.name, about: res.about})
+      editProfileModal.saving();
       editProfileModal.close();
     })
     .catch(err => console.log(err));
@@ -60,9 +61,11 @@ const editProfileModal = new PopupWithForm('.modal_type_edit-profile', (data) =>
 // Avatar Modal
 const avatarModal = new PopupWithForm('.modal_type_avatar', (data) => {
   api.setUserAvatar(data)
-    .then((res) => {
-      userInfo.setUserAvatar({avatar: res.avatar})
-      console.log(res.avatar)
+    .then((data) => {
+      userInfo.setUserAvatar({avatar: data.avatar})
+      const avatarImage = document.querySelector('.profile__avatar');
+      avatarImage.src = data.avatar.src;
+      avatarModal.saving();
       avatarModal.close();
     })
     .catch(err => console.log(err));
@@ -127,10 +130,22 @@ function handleLikeClick(e) {
   api.cardLikesCount(cardId, liked)
     .then((res) => {
       e.target.classList.toggle('card__like-button_active');
-      console.log(res)
+      console.log(e)
     })
     .catch(err => console.log(err))
 }
+
+const deleteModal = new PopupWithForm('.modal_type_delete-card', (cardId, card) => {
+  api.deleteCard(cardId, card)
+    .then((card) => {
+      console.log(card)
+      card.removeCard();
+      deleteModal.close();
+    })
+    .catch(err => console.log(err))
+})
+
+deleteModal.setEventListeners();
 
 function handleCardClick() { 
   imageModal.open({name: this._name, link: this._link}); 
@@ -159,18 +174,6 @@ addCardButton.addEventListener('click', () => {
 addCardModal.close();
 
 addCardModal.setEventListeners();
-
-const deleteModal = new PopupWithForm('.modal_type_delete-card', (cardId, card) => {
-  api.deleteCard(cardId, card)
-    .then((card) => {
-      console.log(card)
-      card.remove();
-      deleteModal.close();
-    })
-    .catch(err => console.log(err))
-})
-
-deleteModal.setEventListeners();
 
 // Image Modal 
 const imageModal = new PopupWithImage('.modal_type_image'); 

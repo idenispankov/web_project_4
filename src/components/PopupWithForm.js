@@ -6,6 +6,8 @@ export default class PopupWithForm extends Popup {
  
     this._handleSubmit = handleSubmit; 
     this._inputs = this._popupItem.querySelectorAll('.form__input'); 
+    this._submit = this._popupItem.querySelectorAll('.form__button_type_save');
+    this._submitText = this._submit.textContent;
   } 
  
   _getInputsValue() { 
@@ -23,6 +25,17 @@ export default class PopupWithForm extends Popup {
       this.card = card;
     }
     super.open();
+  }
+
+  close() {
+    super.close();
+    setTimeout(() => {
+      this._submitText = this._submit.textContent;
+    }, 200)
+  }
+
+  saving() {
+    this._submit.textContent = 'Saving...';
   }
 
 

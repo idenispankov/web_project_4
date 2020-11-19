@@ -35,7 +35,6 @@ setUserInfo(data) {
       return Promise.reject('Error!' + res.statusText)
     }
   })
-  .catch(err => console.log(err));
 }
 
 // PATCH https://around.nomoreparties.co/v1/groupId/users/me/avatar
@@ -44,13 +43,15 @@ setUserAvatar(data) {
     method: "PATCH",
     headers: this._headers,
     body: JSON.stringify({
-      avatar: data.avatarUrl
+      avatar: data.inputAvatar
     })
-  }).then(res => {
+  })
+  .then((res) => {
     if (res.ok) {
       return res.json();
-    } 
-    return Promise.reject(`Error: ${res.status}`);
+    } else {
+      return Promise.reject('Error!' + res.statusText)
+    }
   }); 
 }
 
@@ -88,7 +89,7 @@ addCard({title, url}) {
 }
 
 // DELETE https://around.nomoreparties.co/v1/groupId/cards/cardId
-deleteCard(cardId) {
+deleteCard(cardId, card) {
   return fetch(this._baseUrl + '/cards/' + cardId, {
     method: "DELETE",
     headers: this._headers
@@ -104,11 +105,8 @@ deleteCard(cardId) {
 
 // DELETE https://around.nomoreparties.co/v1/groupId/cards/likes
 cardLikesCount(cardId, liked) {
-  let method= 'DELETE';
-  if(liked) method= 'PUT';
-
-  return fetch(this._baseUrl + '/cards/likes', {
-    method: method,
+  return fetch(this._baseUrl + '/cards/likes/' + cardId, {
+    method: "PUT",
     headers: this._headers
   }).then(res => {
     if (res.ok) {

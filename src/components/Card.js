@@ -25,7 +25,7 @@ export default class Card {
   // Private Event Listeners Function 
   _setEventListeners() { 
     this._cardElements.cardLikeButton.addEventListener('click', (e) => {
-      this._handleLikeClick(e);
+      this._handleLikeClick(this._id, this.cardElement);
     }); 
 
     
@@ -54,9 +54,9 @@ export default class Card {
 
     const cardDeleteButton = this._card.querySelector('.card__delete-button');
 
-    if(this._owner._id !== currentUserId) {
-      cardDeleteButton.remove();
-    }
+    // if(this._owner._id !== currentUserId) {
+    //   cardDeleteButton.remove();
+    // }
 
     const cardImage = this._card.querySelector('.card__image'); 
 
