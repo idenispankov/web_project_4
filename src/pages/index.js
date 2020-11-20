@@ -123,14 +123,14 @@ function handleDeleteClick(cardId, card) {
   deleteModal.open(cardId, card)
 }
 
-function handleLikeClick(e) {
-  const cardId = e.target.data;
-  const liked = e.target.classList.contains('card__like-button_active');
+function handleLikeClick(cardId, card) {
+  // const cardId = e.target.data;
+  // const liked = e.target.classList.contains('card__like-button_active');
 
-  api.cardLikesCount(cardId, liked)
+  api.cardLikesCount(cardId, card)
     .then((res) => {
-      e.target.classList.toggle('card__like-button_active');
-      console.log(e)
+      console.log('card', res)
+      card.classList.toggle('card__like-button_active');
     })
     .catch(err => console.log(err))
 }
@@ -157,8 +157,8 @@ function handleCardClick() {
 const addCardModal = new PopupWithForm('.modal_type_add-card', (data) => {
   api.addCard(data)
     .then((res) => {
-      renderCard(res);
       console.log(res)
+      renderCard(res);
       addCardModal.close();
     })
     .catch(err => console.log(err))
