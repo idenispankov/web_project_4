@@ -46,17 +46,16 @@ export default class Card {
   } 
  
   // Public Create Card Function 
-  createCard(currentUserId) { 
+  createCard(data, currentUserId) { 
     this._card = this._getCardTemplate(); 
     this._cardElement = this._card.querySelector('.card');
  
     const cardLikeButton = this._card.querySelector('.card__like-button'); 
-
     const cardDeleteButton = this._card.querySelector('.card__delete-button');
 
-    // if(this._owner._id !== currentUserId) {
-    //   cardDeleteButton.remove();
-    // }
+    if(this._owner._id !== currentUserId) {
+      cardDeleteButton.remove();
+    }
 
     const cardImage = this._card.querySelector('.card__image'); 
 

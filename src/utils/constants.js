@@ -42,7 +42,7 @@ export const cardContainerSelector = '.elements__list';
 // Image Modal 
 export const imageModalWindow = document.querySelector('.modal_type_image');   
 export const modalImage = imageModalWindow.querySelector('.modal__image');   
-export const modalImageTitle = imageModalWindow.querySelector('.modal__image-title'); 
+export const modalImageTitle = imageModalWindow.querySelector('.modal__image-title');
    
 // Forms 
 export const editProfileForm = document.querySelector('.form_type_profile'); 

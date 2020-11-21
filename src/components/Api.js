@@ -104,17 +104,17 @@ deleteCard(cardId, card) {
   })
 }
 
-// DELETE https://around.nomoreparties.co/v1/groupId/cards/likes
-cardLikesCount(cardId, liked) {
-  return fetch(this._baseUrl + '/cards/likes/' + cardId, {
-    method: "PUT",
-    headers: this._headers
-  }).then(res => {
-    if (res.ok) {
-      return res.json();
-    } 
-    return Promise.reject(`Error: ${res.status}`);
-  }); 
-}
+// // DELETE https://around.nomoreparties.co/v1/groupId/cards/likes
+// cardLikesCount(cardId, liked) {
+//   return fetch(this._baseUrl + '/cards/likes/' + cardId, {
+//     method: "PUT",
+//     headers: this._headers
+//   }).then(res => {
+//     if (res.ok) {
+//       return res.json();
+//     } 
+//     return Promise.reject(`Error: ${res.status}`);
+//   }); 
+// }
 
 }
