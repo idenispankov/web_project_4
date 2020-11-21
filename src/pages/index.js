@@ -26,35 +26,8 @@ const api = new Api({
   }
 });
 
-// Consts need transfer to utils later
-// MODALS AND FORMS
-// const editProfileModal = document.querySelector('.modal_type_edit-profile');
 const editProfileForm = document.querySelector('.form_type_profile');
-
-// const editAvatarModal = document.querySelector('.modal_type_avatar');
 const editAvatarForm = document.querySelector('.form_type_avatar');
-
-// const addCardModal = document.querySelector('.modal_type_add-card');
-// const addCardForm = document.querySelector('.form_type_card');
-
-// const deleteCardModal = document.querySelector('.modal_type_delete-card');
-const deleteCardForm = document.querySelector('.form_type_card-delete');
-
-
-// BUTTONS & DOMS
-// const editProfileButton = document.querySelector('.profile__edit-button');
-// const addCardButton = document.querySelector('.profile__add-button');
-// const editAvatarButton = document.querySelector('.profile__avatar-edit');
-
-
-const profileName = document.querySelector('.profile__text');
-const profileAbout = document.querySelector('.profile__paragraph');
-// const avatarImage = document.querySelector('.profile__avatar');
-
-const profileFormInputName = document.querySelector('.form__input_type_name');
-const profileFormInputAbout = document.querySelector('.form__input_type_about');
-
-///////////////////////////////////////////////////////////////////////////////////////
 
 // User Info 
 let userId = null;
@@ -132,12 +105,8 @@ function handleCardClick() {
     modalImage.alt = this._name; 
 }
 
-// function handleDeleteClick() {
-  
-// }
-
-function handleLikeClick() {
-  
+function handleDeleteClick(cardId, card) {
+  deleteModal.open(cardId, card)
 }
 
 // Remder Cards List
@@ -192,11 +161,6 @@ function renderCard(data) {
   }, cardContainerSelector) 
 }
 
-
-function handleDeleteClick(cardId, card) {
-  deleteModal.open(cardId, card)
-}
-
 const deleteModal = new PopupWithForm('.modal_type_delete-card', (cardId, card) => {
   api.deleteCard(cardId)
     .then(() => {
@@ -208,17 +172,11 @@ const deleteModal = new PopupWithForm('.modal_type_delete-card', (cardId, card) 
 
 deleteModal.setEventListeners();
 
-// function handleLikeClick(cardId, card) {
-//   // const cardId = e.target.data;
-//   // const liked = e.target.classList.contains('card__like-button_active');
 
-//   api.cardLikesCount(cardId, card)
-//     .then((res) => {
-//       console.log('card', res)
-//       card.classList.toggle('card__like-button_active');
-//     })
-//     .catch(err => console.log(err))
-// }
+
+function handleLikeClick(cardId, card) {
+   
+}
 
 // Form Validation 
 const editFormValidator = new FormValidator(defaultConfig, editProfileForm);  
