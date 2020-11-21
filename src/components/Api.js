@@ -18,14 +18,28 @@ getUserInfo() {
   })
 }
 
+// GET https://around.nomoreparties.co/v1/groupId/cards
+getCardList() {
+  return fetch(this._baseUrl + '/cards', {
+    headers: this._headers
+  })
+    .then((res) => {
+      if(res.ok) {
+        return res.json()
+      } else {
+        return Promise.reject('Error!' + res.statusText)
+      }
+    })
+  }
+
   // PATCH https://around.nomoreparties.co/v1/groupId/users/me
 setUserInfo(data) {
   return fetch(this._baseUrl + '/users/me', {
     headers: this._headers,
     method: "PATCH",
     body: JSON.stringify({
-      name: data.inputName,
-      about: data.inputAbout
+      name: data.nameInput,
+      about: data.aboutInput
     })
   })
   .then((res) => {
@@ -36,6 +50,7 @@ setUserInfo(data) {
     }
   })
 }
+
 
 // PATCH https://around.nomoreparties.co/v1/groupId/users/me/avatar
 setUserAvatar(data) {
@@ -54,20 +69,6 @@ setUserAvatar(data) {
     }
   }); 
 }
-
-// GET https://around.nomoreparties.co/v1/groupId/cards
-getCardList() {
-  return fetch(this._baseUrl + '/cards', {
-    headers: this._headers
-  })
-    .then((res) => {
-      if(res.ok) {
-        return res.json()
-      } else {
-        return Promise.reject('Error!' + res.statusText)
-      }
-    })
-  }
 
 // POST https://around.nomoreparties.co/v1/groupId/cards
 addCard({title, url}) {

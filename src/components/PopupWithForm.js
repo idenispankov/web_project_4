@@ -27,17 +27,6 @@ export default class PopupWithForm extends Popup {
     super.open();
   }
 
-  close() {
-    super.close();
-    setTimeout(() => {
-      this._submitText = this._submit.textContent;
-    }, 200)
-  }
-
-  saving() {
-    this._submit.textContent = 'Saving...';
-  }
-
 
   setEventListeners() {
     this._popupItem.addEventListener('submit', (e) => {
