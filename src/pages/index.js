@@ -41,8 +41,8 @@ const userInfo = new UserInfo({
 api.getUserInfo()
   .then((res) => {
     userId = res._id;
-    userInfo.setUserInfo({name: res.name, about: res.about})
     userInfo.setUserAvatar(res.avatar)
+    userInfo.setUserInfo({name: res.name, about: res.about})
   })
   .catch(err => console.log(err));
 
@@ -132,7 +132,7 @@ const addCardModal = new PopupWithForm('.modal_type_add-card', (card) => {
   api.addCard(card)
   .then((card) => {
     console.log(card)
-    cardsList.addItem(card.createCard(data, userId))
+    
     addCardModal.close()
   })
   .catch(err => console.log(err))
@@ -148,16 +148,12 @@ addCardButton.addEventListener('click', () => {
 addCardModal.setEventListeners();
 
 
-// Function Render Card
-function renderCard(data) {  
   const cardsList = new Section({
     renderer: () =>  {
       const card = new Card({data}, handleCardClick, handleDeleteClick, handleLikeClick, '.card-template'); 
       cardsList.addItem(card.createCard(data, userId));
     },
   }, cardContainerSelector) 
-  cardsList.renderer()
-}
 
 
 const deleteModal = new PopupWithForm('.modal_type_delete-card', (cardId, card) => {
