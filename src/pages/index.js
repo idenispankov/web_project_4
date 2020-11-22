@@ -128,17 +128,15 @@ imageModal.setEventListeners();
 
 
 // Add Card Modal (Needs improvement on render card on page UI)
-const addCardModal = new PopupWithForm('.modal_type_add-card', addCardSubmitHandler);
-
-function addCardSubmitHandler(data) {
-  api.addCard(data)
-    .then((data) => {
-      console.log('DATA 3', data)
-      renderCard(data)
-      addCardModal.close();
-    })
-    .catch(err => console.log(err))
-}
+const addCardModal = new PopupWithForm('.modal_type_add-card', (card) => {
+  api.addCard(card)
+  .then((card) => {
+    console.log(card)
+    cardsList.addItem(card.createCard(data, userId))
+    addCardModal.close()
+  })
+  .catch(err => console.log(err))
+});
 
 const addCardButton = document.querySelector('.profile__add-button');
 addCardButton.addEventListener('click', () => {
@@ -158,6 +156,7 @@ function renderCard(data) {
       cardsList.addItem(card.createCard(data, userId));
     },
   }, cardContainerSelector) 
+  cardsList.renderer()
 }
 
 
@@ -189,8 +188,8 @@ function handleLikeClick(cardId, like) {
           })
           .catch(err => console.log(err))
       }
-    console.log(like)
-    console.log(cardId)
+    console.log('LIKE', like)
+    console.log('CARDID', cardId)
 }
 
 // Form Validation 
