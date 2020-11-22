@@ -114,7 +114,7 @@ api.getCardList()
     const cardsList = new Section({
       items: userCards,
       renderer: (data) => {
-        const card = new Card({data}, {handleCardClick, handleDeleteClick, handleLikeClick}, '.card-template')
+        const card = new Card({data}, handleCardClick, handleDeleteClick, handleLikeClick, '.card-template')
         cardsList.addItem(card.createCard(data, userId))
       }
     }, cardContainerSelector)
@@ -174,8 +174,23 @@ deleteModal.setEventListeners();
 
 
 
-function handleLikeClick(cardId, card) {
-   
+function handleLikeClick(cardId, like) {
+      if(like.classList.contains('card__like-button_active')) {
+        api.removeLike(cardId)
+          .then((res) => {
+            console.log('REMOVE', res)
+            like.classList.remove('card__like-button_active')
+          })
+      } else {
+        api.addLike(cardId, like)
+          .then((res) => {
+            console.log('ADD', res)
+            like.classList.add('card__like-button_active')
+          })
+          .catch(err => console.log(err))
+      }
+    console.log(like)
+    console.log(cardId)
 }
 
 // Form Validation 
