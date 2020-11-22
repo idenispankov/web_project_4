@@ -10,12 +10,10 @@ import Api from '../components/Api.js';
 import { 
   defaultConfig, 
   cardContainerSelector,
-  // editProfileForm, 
   addCardForm, 
-  // editProfileInputs
   modalImage, 
-  modalImageTitle
-  // avatarForm
+  modalImageTitle,
+  editProfileInputs
 } from '../utils/constants.js'; 
 
 const api = new Api({
@@ -29,6 +27,16 @@ const api = new Api({
 const editProfileForm = document.querySelector('.form_type_profile');
 const editAvatarForm = document.querySelector('.form_type_avatar');
 
+// Function Render Card
+// function renderCard(data) {  
+//   const cardsList = new Section({
+//     renderer: () =>  {
+//       const card = new Card({data}, handleCardClick, handleDeleteClick, handleLikeClick, '.card-template'); 
+//       cardsList.addItem(card.createCard(data, userId));
+//     },
+//   }, cardContainerSelector) 
+// }
+
 // User Info 
 let userId = null;
 
@@ -38,17 +46,67 @@ const userInfo = new UserInfo({
   avatarSelector: '.profile__avatar'
 }); 
 
+api.getAppInfo()
+  .then(([userData, cardsListData]) => {
+    userId = userData._id;
+    userInfo.setUserInfo({name: userData.name, about: userData.about})
+    userInfo.setUserAvatar(userData.avatar)
+
+    const cardsList = new Section({
+      items: cardsListData,
+      renderer: (data) => {
+        const card = new Card({data}, {
+          handleCardClick,
+          handleDeleteClick,
+          handleLikeClick
+        },
+        '.card-template'); 
+        cardsList.addItem(card.createCard(data, userId));
+      }
+    }, cardContainerSelector)
+    cardsList.renderer()
+    
+    const addCardModal = new PopupWithForm('.modal_type_add-card', (data) => {
+      api.addCard(data)
+        .then((data) => {
+          console.log('DATA 3', data)
+          cardsList.renderer(data)
+          addCardModal.close();
+        })
+        .catch(err => console.log(err))
+    });
+    cardsList.renderer()
+
+//     function addCardSubmitHandler(data) {
+//       api.addCard(data)
+//         .then((data) => {
+//           console.log('DATA 3', data)
+//           cardsList.addItem(card.createCard(data, userId))
+//           addCardModal.close();
+//         })
+//         .catch(err => console.log(err))
+// }
+const addCardButton = document.querySelector('.profile__add-button');
+addCardButton.addEventListener('click', () => {
+  addCardForm.reset();
+  addCardModal.open()
+  addFormValidator.disableSubmitButton();
+})
+
+addCardModal.setEventListeners();
+})
+
 // Loading User Information from the Server
-api.getUserInfo()
-  .then((res) => {
-    userId = res._id;
-    userInfo.setUserInfo({name: res.name, about: res.about})
-    userInfo.setUserAvatar(res.avatar)
-  })
-  .catch(err => console.log(err));
+// api.getUserInfo()
+//   .then((res) => {
+//     userId = res._id;
+//     userInfo.setUserInfo({name: res.name, about: res.about})
+//     userInfo.setUserAvatar(res.avatar)
+//   })
+//   .catch(err => console.log(err));
 
 
-  // Profile Modal
+//   Profile Modal
   const editProfileModal = new PopupWithForm('.modal_type_edit-profile', editProfileSubmitHandler)
 
   function editProfileSubmitHandler(data) {
@@ -109,19 +167,20 @@ function handleDeleteClick(cardId, card) {
   deleteModal.open(cardId, card)
 }
 
-// Remder Cards List
-api.getCardList()
-  .then(userCards => {
-    const cardsList = new Section({
-      items: userCards,
-      renderer: (data) => {
-        const card = new Card({data}, handleCardClick, handleDeleteClick, handleLikeClick, '.card-template')
-        cardsList.addItem(card.createCard(data, userId))
-      }
-    }, cardContainerSelector)
-    cardsList.renderer();
-  })
-  .catch(err => console.log(err));
+// const cardsList = new Section({
+//   items: userCards,
+//   renderer: (data) => {
+//     const card = new Card({data}, handleCardClick, handleDeleteClick, handleLikeClick, '.card-template')
+//     cardsList.addItem(card.createCard(data, userId))
+//   }
+// }, cardContainerSelector)
+
+// // Remder Cards List
+// api.getCardList()
+//   .then(userCards => {
+//     cardsList.renderer();
+//   })
+//   .catch(err => console.log(err));
 
   // Image Modal 
 const imageModal = new PopupWithImage('.modal_type_image'); 
@@ -129,37 +188,26 @@ imageModal.setEventListeners();
 
 
 // Add Card Modal (Needs improvement on render card on page UI)
-const addCardModal = new PopupWithForm('.modal_type_add-card', addCardSubmitHandler);
+// const addCardModal = new PopupWithForm('.modal_type_add-card', addCardSubmitHandler);
 
-function addCardSubmitHandler(data) {
-  api.addCard(data)
-    .then((data) => {
-      console.log('DATA 3', data)
-      renderCard(data)
-      addCardModal.close();
-    })
-    .catch(err => console.log(err))
-}
+// function addCardSubmitHandler(data) {
+//   api.addCard(data)
+//     .then((data) => {
+//       console.log('DATA 3', data)
+//       renderCard(data)
+//       addCardModal.close();
+//     })
+//     .catch(err => console.log(err))
+// }
 
-const addCardButton = document.querySelector('.profile__add-button');
-addCardButton.addEventListener('click', () => {
-  addCardForm.reset();
-  addCardModal.open()
-  addFormValidator.disableSubmitButton();
-})
+// const addCardButton = document.querySelector('.profile__add-button');
+// addCardButton.addEventListener('click', () => {
+//   addCardForm.reset();
+//   addCardModal.open()
+//   addFormValidator.disableSubmitButton();
+// })
 
-addCardModal.setEventListeners();
-
-
-// Function Render Card
-function renderCard(data) {  
-  const cardsList = new Section({
-    renderer: () =>  {
-      const card = new Card({data}, handleCardClick, handleDeleteClick, handleLikeClick, '.card-template'); 
-      cardsList.addItem(card.createCard(data, userId));
-    },
-  }, cardContainerSelector) 
-}
+// addCardModal.setEventListeners();
 
 const deleteModal = new PopupWithForm('.modal_type_delete-card', (cardId, card) => {
   api.deleteCard(cardId)
