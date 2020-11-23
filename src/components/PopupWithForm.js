@@ -1,43 +1,40 @@
 import Popup from './Popup.js'; 
  
 export default class PopupWithForm extends Popup { 
-  constructor(popupSelector, handleSubmit) { 
+  constructor({popupSelector, handleSubmit}) { 
     super(popupSelector); 
+
+    const formContainer = this._popupItem.querySelector('.form')
+    this._container = formContainer;
  
     this._handleSubmit = handleSubmit; 
-    this._inputs = this._popupItem.querySelectorAll('.form__input'); 
-    this._submit = this._popupItem.querySelectorAll('.form__button_type_save');
-    this._submitText = this._submit.textContent;
   } 
+
  
   _getInputsValue() { 
-    this._inputsValue = Array.from(this._inputs); 
-    this._formValues = {}; 
-    this._inputsValue.forEach((input) => { 
-      this._formValues[input.name] = input.value; 
-    }); 
-    return this._formValues; 
-  } 
- 
-  open(cardId, card) {
-    if(this._popupItem.classList.contains('modal_type_delete-card')) {
-      this.cardId = cardId;
-      this.card = card;
-    }
-    super.open();
+    this._inputList = this._popupItem.querySelectorAll('.form__input');
+    this._inputValues = {};
+    this._inputList.forEach((input) => (this._inputValues[input.name] = input.value));
+
+    return this._inputValues;
   }
 
 
   setEventListeners() {
-    this._popupItem.addEventListener('submit', (e) => {
+    this._container.addEventListener('submit', (e) => {
       e.preventDefault();
-      if(this._popupItem.classList.contains('modal_type_delete-card')) {
-        this._handleSubmit(this.cardId, this.card);
-      } else {
-        this._handleSubmit(this._getInputsValue());
-      }
-    });
+      this._handleSubmit(this._getInputsValue());
+    })
     super.setEventListeners();
+  }
+
+  close() {
+    this._container.reset();
+    super.close();
+  }
+
+  setSubmit(action) {
+    this._handleSubmit = action;
   }
 
 }
