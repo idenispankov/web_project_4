@@ -4,22 +4,8 @@ export default class Api {
     this._headers = headers;
   }
 
-  getAppInfo() {
-    return Promise.all([this.getUserInfo(), this.getCardList()])
-  }
-
-// GET https://around.nomoreparties.co/v1/groupId/users/me
-getUserInfo() {
-  return fetch(this._baseUrl + '/users/me', {
-    headers: this._headers
-  })
-  .then((res) => {
-    if(res.ok) {
-      return res.json()
-    } else {
-      return Promise.reject('Error!' + res.statusText)
-    }
-  })
+getAppInfo() {
+  return Promise.all([this.getUserInfo(), this.getCardList()]);
 }
 
 // GET https://around.nomoreparties.co/v1/groupId/cards
@@ -36,14 +22,28 @@ getCardList() {
     })
   }
 
-  // PATCH https://around.nomoreparties.co/v1/groupId/users/me
-setUserInfo(data) {
+// GET https://around.nomoreparties.co/v1/groupId/users/me
+getUserInfo() {
+  return fetch(this._baseUrl + '/users/me', {
+    headers: this._headers
+  })
+  .then((res) => {
+    if(res.ok) {
+      return res.json()
+    } else {
+      return Promise.reject('Error!' + res.statusText)
+    }
+  })
+}
+
+// PATCH https://around.nomoreparties.co/v1/groupId/users/me
+setUserInfo({name, about}) {
   return fetch(this._baseUrl + '/users/me', {
     headers: this._headers,
     method: "PATCH",
     body: JSON.stringify({
-      name: data.nameInput,
-      about: data.aboutInput
+      name,
+      about
     })
   })
   .then((res) => {
@@ -57,12 +57,12 @@ setUserInfo(data) {
 
 
 // PATCH https://around.nomoreparties.co/v1/groupId/users/me/avatar
-setUserAvatar(data) {
+setUserAvatar({avatar}) {
   return fetch(this._baseUrl + '/users/me/avatar', {
     method: "PATCH",
     headers: this._headers,
     body: JSON.stringify({
-      avatar: data.inputAvatar
+      avatar
     })
   })
   .then((res) => {
@@ -108,34 +108,34 @@ deleteCard(cardId) {
   })
 }
 
-// PUT https://around.nomoreparties.co/v1/groupId/cards/likes/cardId
-  addLike(cardId, liked) {
-    return fetch(this._baseUrl + "/cards/likes/" + cardId, {
-      method: "PUT",
-      headers: this._headers
-    })
-    .then((res) => {
-      if(res.ok) {
-        return res.json()
-      } else {
-        return Promise.reject('Error!' + res.statusText)
-      }
-    })
-  }
+// // PUT https://around.nomoreparties.co/v1/groupId/cards/likes/cardId
+//   addLike(cardId) {
+//     return fetch(this._baseUrl + "/cards/likes/" + cardId, {
+//       method: "PUT",
+//       headers: this._headers
+//     })
+//     .then((res) => {
+//       if(res.ok) {
+//         return res.json()
+//       } else {
+//         return Promise.reject('Error!' + res.statusText)
+//       }
+//     })
+//   }
 
-  removeLike(cardId, liked) {
-    return fetch(this._baseUrl + "/cards/likes/" + cardId, {
-      method: "DELETE",
-      headers: this._headers
-    })
-    .then((res) => {
-      if(res.ok) {
-        return res.json()
-      } else {
-        return Promise.reject('Error!' + res.statusText)
-      }
-    })
-  }
+//   removeLike(cardId) {
+//     return fetch(this._baseUrl + "/cards/likes/" + cardId, {
+//       method: "DELETE",
+//       headers: this._headers
+//     })
+//     .then((res) => {
+//       if(res.ok) {
+//         return res.json()
+//       } else {
+//         return Promise.reject('Error!' + res.statusText)
+//       }
+//     })
+//   }
 
 
 }

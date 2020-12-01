@@ -26,14 +26,246 @@ const api = new Api({
   }
 });
 
-// // User Info 
-// let userId = null;
+// MODALS
+const editProfileModal = document.querySelector('.modal_type_edit-profile');
+const addCardModal = document.querySelector('.modal_type_add-card');
+const editAvatarModal = document.querySelector('.modal_type_avatar');
+const deleteCardModal = document.querySelector('.modal_type_delete-card');
+const imageModal = document.querySelector('.modal_type_image');
 
-// const userInfo = new UserInfo({
-//   nameSelector: '.profile__text',
-//   aboutSelector: '.profile__paragraph',
-//   avatarSelector: '.profile__avatar'
-// }); 
+// FORMS
+const editProfileForm = editProfileModal.querySelector('.form');
+const addCardForm = addCardModal.querySelector('.form');
+const editAvatarForm = editAvatarModal.querySelector('.form');
+
+// VALIDATORS
+const editFormValidator = new FormValidator(defaultConfig, editProfileForm);  
+const addCardFormValidator = new FormValidator(defaultConfig, addCardForm);  
+const editAvatarFormValidator = new FormValidator(defaultConfig, editAvatarForm);
+  
+editFormValidator.enableValidation();  
+addCardFormValidator.enableValidation();  
+editAvatarFormValidator.enableValidation();
+
+// BUTTONS and DOM
+const editProfileButton = document.querySelector('.profile__edit-button');
+const addCardButton = document.querySelector('.profile__add-button');
+const editAvatarButton = document.querySelector('.profile__avatar-edit');
+
+const profileName = document.querySelector('.profile__text');
+const profileAbout = document.querySelector('.profile__paragraph');
+
+const profileInputName = document.querySelector('.form__input_type_name');
+const profileInputAbout = document.querySelector('.form__input_type_about');
+const profileAvatar = document.querySelector('.profile__avatar');
+
+const cardTemplateSelector = '.card-template';
+const cardGrid = document.querySelector('.elements__list');
+
+
+//  HANDLE LOADING FROM SERVER
+function handleLoading(isLoading, modal, textInput) {
+  if(isLoading) {
+    modal.querySelector('.form__button').textContent = textInput;
+  } else {
+    modal.querySelector('.form__button').textContent = textInput;
+  }
+}
+
+// USER INFO
+const userInfo = new UserInfo(profileName, profileAbout, profileAvatar);
+
+  // Image Modal 
+const imagePopup = new PopupWithImage(imageModal); 
+imagePopup.setEventListeners();
+
+
+// EDIT PROFILE POPUP
+const editProfilePopup = new PopupWithForm({
+  popupSelector: editProfileModal,
+  handleSubmit: (data) => {
+    handleLoading(true, editProfileModal, 'Saving...')
+      api.setUserInfo({
+        name: data.nameInput,
+        about: data.aboutInput,
+        avatar: profileAvatar.src
+      })
+        .then(() => {
+          userInfo.setUserInfo(profileInputName.value, profileInputAbout.value, profileAvatar.src)
+          handleLoading(false, editProfileModal, 'Save')
+          editProfilePopup.close();
+        })
+        .catch(err => console.log(err))
+  }
+})
+
+editProfileButton.addEventListener('click', () => {
+  const currentUserInfo = userInfo.getUserInfo();
+  profileInputName.value = currentUserInfo.name;
+  profileInputAbout.value = currentUserInfo.about;
+  editProfilePopup.open();
+})
+
+editProfilePopup.setEventListeners();
+
+
+// EDIT AVATAR POPUP
+const editAvatarPopup = new PopupWithForm({
+  popupSelector: editAvatarModal,
+  handleSubmit: (data) => {
+    handleLoading(true, editAvatarModal, 'Saving...')
+      api.setUserAvatar({
+        avatar: data.avatar
+      })
+        .then((res) => {
+          profileAvatar.src = res.avatar;
+          handleLoading(false, editAvatarModal, 'Save');
+          editAvatarPopup.close();
+        })
+  }
+})
+
+editAvatarButton.addEventListener('click', () => {
+  editAvatarPopup.open()
+  editAvatarFormValidator.disableSubmitButton();
+})
+
+editAvatarPopup.setEventListeners();
+
+const deleteCardPopup = new PopupWithForm({
+  popupSelector: deleteCardModal
+});
+
+deleteCardPopup.setEventListeners();
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+
+api.getAppInfo()
+  .then(([userData, cardListData]) => {
+    const userIdInfo = userData._id;
+    userInfo.setUserInfo(userData.name, userData.about)
+    profileAvatar.src = userData.avatar;
+
+    const cardsList = new Section({
+      data: cardListData,
+      renderer: addNewCards
+    }, cardGrid)
+
+    cardsList.renderItems();
+
+
+    const addCardPopup = new PopupWithForm({
+      popupSelector: addCardModal,
+      handleSubmit: (data) => {
+        handleLoading(true, addCardModal, 'Saving...')
+          api.addCard(data)
+            .then((res) => {
+              addNewCards(res);
+              handleLoading(false, addCardModal, 'Save')
+              addCardPopup.close()
+              addCardFormValidator.disableSubmitButton();
+            })
+            .catch(err => console.log(err))
+      }
+    })
+
+    addCardButton.addEventListener('click', () => {
+      addCardFormValidator.disableSubmitButton();
+      addCardPopup.open();
+    });
+
+    addCardPopup.setEventListeners();
+
+
+    function addNewCards(data) {
+      const newCards = new Card({
+        data,
+        handleCardClick: () => {
+          imagePopup.open(data);
+        },
+        handleDeleteClick: () => {
+          
+        },
+        handleLikeClick: () => {
+
+        },
+      }, cardTemplateSelector, userIdInfo);
+      cardsList.addItem(newCards.createCard())
+    }
+
+    })
+
+
+    // ADD CARD POPUP
+    // const addCardPopup = new PopupWithForm({
+    //   popupSelector: addCardModal,
+    //   handleSubmit: (data) => {
+    //     handleLoading(true, addCardModal, 'Saving...')
+    //       api.addCard(data)
+    //         .then((res) => {
+    //           renderCards(res);
+    //           addCardPopup.close();
+    //           renderCards.showLikes()
+    //           addCardFormValidator.disableSubmitButton()
+    //           renderCards.showDeleteButton()
+    //         })
+    //         .catch(err => console.log(err));
+    //   }
+    // });
+
+    // addCardPopup.setEventListeners();
+
+    // addCardButton.addEventListener('click', () => {
+    //   addCardFormValidator.disableSubmitButton();
+    //   addCardPopup.open();
+    // })
+
+    // function renderCards(data) {
+    //   const newCards = new Card({
+    //     data,
+    //     handleCardClick: () => {
+    //       imagePopup.open(data);
+    //     },
+    //     handleDeleteClick: (cardId) => {
+    //       deleteCardPopup.open();
+    //       deleteCardPopup.setSubmit(() => {
+    //         handleLoading(true, deleteCardModal, "Deleting...")
+
+    //         api.deleteCard(cardId)
+    //           .then(() => {
+    //             newCards.deleteCard();
+    //             handleLoading(false, deleteCardModal, 'Yes')
+    //             deleteCardPopup.close();
+    //           })
+    //           .catch(err => console.log(err));
+    //       })
+    //     },
+    //     handleLikeClick: (cardId) => {
+    //       if (newCards.likeIcon.classList.contains('card__like-button_active')) {
+    //         api.removeLike(cardId)
+    //           .then((res) => {
+    //             newCards.getLikesCount(res.likes.length)
+    //           })
+    //             .then(() => {
+    //               newCards.likeIcon.classList.remove('card__like-button_active')
+    //             })
+    //             .catch(err => console.log(err))
+    //       } else {
+    //         api.addLike(cardId)
+    //           .then((res) => {
+    //             newCards.getLikesCount(res.likes.length)
+    //           })
+    //           .then(() => {
+    //             newCards.likeIcon.classList.add('.card__like-button_active')
+    //           })
+    //           .catch(err => console.log(err))
+    //       }
+    //     }
+    //   }, cardTemplateSelector, userIdInfo)
+    //   cardsList.addItem(newCards.createCard())
+    // }
+
     
 // const cardsList = new Section({
 //     renderer: (data) =>  {
@@ -42,43 +274,6 @@ const api = new Api({
 //       cardsList.addItem(cardElement);
 //     },
 //   }, cardContainerSelector) 
-
-// // Loading User Information from the Server
-// api.getUserInfo()
-//   .then((res) => {
-//     userId = res._id;
-//     userInfo.setUserAvatar(res.avatar)
-//     userInfo.setUserInfo({name: res.name, about: res.about})
-//   })
-//   .catch(err => console.log(err));
-
-
-// //   Profile Modal
-//   const editProfileModal = new PopupWithForm('.modal_type_edit-profile', editProfileSubmitHandler)
-
-//   function editProfileSubmitHandler(data) {
-//     api.setUserInfo(data)
-//       .then((res) => {
-//         userInfo.setUserInfo({name: res.name, about: res.about})
-//         editProfileModal.close();
-//       })
-//       .catch(err => console.log(err))
-//   }
-
-
-//   const editProfileButton = document.querySelector('.profile__edit-button'); 
-//   editProfileButton.addEventListener('click', () => { 
-//   const initialUserInfo = userInfo.getUserInfo(); 
- 
-//   Object.keys(editProfileInputs).forEach((input) => { 
-//     editProfileInputs[input].value = initialUserInfo[input]; 
-//     editFormValidator.checkInputValidity(editProfileInputs[input]); 
-//   }); 
- 
-//   editProfileModal.open(); 
-// }); 
-
-// editProfileModal.setEventListeners();
 
 
 // // Avatar Modal
@@ -129,10 +324,6 @@ const api = new Api({
 //     console.log(userCards)
 //   })
 //   .catch(err => console.log(err));
-
-//   // Image Modal 
-// const imageModal = new PopupWithImage('.modal_type_image'); 
-// imageModal.setEventListeners(); 
 
 
 // // Add Card Modal (Needs improvement on render card on page UI)
@@ -191,12 +382,3 @@ const api = new Api({
 //     console.log('LIKE', like)
 //     console.log('CARDID', cardId)
 // }
-
-// // Form Validation 
-// const editFormValidator = new FormValidator(defaultConfig, editProfileForm);  
-// const addFormValidator = new FormValidator(defaultConfig, addCardForm);  
-// const avatarFormValidator = new FormValidator(defaultConfig, editAvatarForm);
-  
-// editFormValidator.enableValidation();  
-// addFormValidator.enableValidation();  
-// avatarFormValidator.enableValidation();

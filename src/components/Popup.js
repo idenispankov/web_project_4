@@ -1,16 +1,16 @@
 export default class Popup {
   constructor(popupSelector) {
-    this._popupItem = popupSelector;
+    this._popupElement = popupSelector;
     this._handleEscClose = this._handleEscClose.bind(this);
   }
 
   open() {
-    this._popupItem.classList.add('modal_is-open');
+    this._popupElement.classList.add('modal_is-open');
     document.addEventListener('keyup', this._handleEscClose);
   }
 
   close() {
-    this._popupItem.classList.remove('modal_is-open');
+    this._popupElement.classList.remove('modal_is-open');
     document.removeEventListener('keyup', this._handleEscClose);
   }
 
@@ -25,6 +25,6 @@ export default class Popup {
       if(e.target.classList.contains('form__close-button') || e.target.classList.contains('modal')) {
         this.close();
       }
-    });
+    })
   }
 }
