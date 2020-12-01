@@ -94,7 +94,7 @@ addCard({title, url}) {
 }
 
 // DELETE https://around.nomoreparties.co/v1/groupId/cards/cardId
-deleteCard(cardId) {
+removeCard(cardId) {
   return fetch(this._baseUrl + '/cards/' + cardId, {
     method: "DELETE",
     headers: this._headers

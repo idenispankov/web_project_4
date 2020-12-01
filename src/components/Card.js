@@ -2,7 +2,7 @@ export default class Card {
   constructor({data, handleCardClick, handleDeleteClick, handleLikeClick}, templateElementSelector, userId) { 
     this._name = data.name;
     this._link = data.link;
-    this._id = data.id;
+    this._id = data._id;
     this._likes = data.likes;
     this._owner = data.owner;
 
