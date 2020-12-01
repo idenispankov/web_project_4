@@ -198,27 +198,30 @@ api.getAppInfo()
                 .catch(err => console.log(err));
           })
         },
-        handleLikeClick: () => {
-
+        handleLikeClick: (cardId) => {
+          if(newCards.likeIcon.classList.contains('card__like-button_active')) {
+            api.removeLike(cardId)
+              .then((res) => {
+                newCards.getLikesCount(res.likes.length)
+              })
+              .then(() => {
+                newCards.likeIcon.classList.remove('card__like-button_active')
+              })
+              .catch(err => console.log(err))
+          } else {
+            api.addLike(cardId)
+              .then((res) => {
+                newCards.getLikesCount(res.likes.length)
+              })
+              .then(() => {
+                newCards.likeIcon.classList.add('card__like-button_active')
+              })
+              .catch(err => console.log(err))
+          }
         },
       }, cardTemplateSelector, userIdInfo);
       cardsList.addItem(newCards.createCard())
     }
 
     })
-
-// function handleDeleteClick(cardId, card) {
-//   deleteModal.open(cardId, card)
-// }
-
-
-// const deleteModal = new PopupWithForm('.modal_type_delete-card', (cardId, card) => {
-//   api.deleteCard(cardId)
-//     .then(() => {
-//       card.remove();
-//       deleteModal.close();
-//     })
-//     .catch(err => console.log(err))
-// })
-
-// deleteModal.setEventListeners();
+    .catch(err => console.log(err));
