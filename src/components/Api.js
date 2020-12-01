@@ -123,6 +123,7 @@ removeCard(cardId) {
     })
   }
 
+  // DELETE https://around.nomoreparties.co/v1/groupId/cards/likes/cardId
   removeLike(cardId) {
     return fetch(this._baseUrl + "/cards/likes/" + cardId, {
       method: "DELETE",

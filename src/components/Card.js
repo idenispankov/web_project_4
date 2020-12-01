@@ -21,7 +21,7 @@ export default class Card {
     return this._id;
   }
 
-  // Private Getting Card Template Function 
+
   _getCardTemplate() { 
     return document
     .querySelector(this._templateElementSelector)
@@ -29,7 +29,7 @@ export default class Card {
     .cloneNode(true);
   } 
 
-  // Private Event Listeners Function 
+  
   _setEventListeners() { 
     const cardLikeButton = this._card.querySelector('.card__like-button');
     const cardImage = this._card.querySelector('.card__image'); 
@@ -49,9 +49,11 @@ export default class Card {
     }); 
   } 
 
+
   deleteCard() {
     this._card.remove('.card');
   }
+
 
   displayDeleteButton() {
     if(this._owner._id !== this._userId) {
@@ -59,18 +61,19 @@ export default class Card {
     }
   }
 
+
   displayLikes() {
     if (this._likes.some((like) => like._id === this._userId)) {
       this.likeIcon.classList.add('card__like-button_active')
     }
   }
 
+
   getLikesCount(totalLikes) {
     this._card.querySelector('.card__like-button-count').textContent = totalLikes;
   }
  
  
-  // Public Create Card Function 
   createCard() { 
     const cardImage = this._card.querySelector('.card__image'); 
     this._card.querySelector('.card__text').textContent  = this._name;

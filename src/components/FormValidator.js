@@ -3,7 +3,8 @@ class FormValidator {
     this._settings = settings;
     this._formElement = formElement;
   }
-  // Private Show Error Message Function
+  
+
   _showErrorMessage(inputElement, errorMessage) {
     const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.add(this._settings.inputErrorClass);
@@ -11,7 +12,7 @@ class FormValidator {
     errorElement.textContent = errorMessage;
   }
 
-  // Private Hide Error Message Function
+  
   _hideErrorMessage(inputElement) {
     const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.remove(this._settings.inputErrorClass);
@@ -19,14 +20,14 @@ class FormValidator {
     errorElement.textContent = '';
   }
 
-  // Private isValid(Inputs) Function
+  
   _isValid(inputList) {
     return inputList.every((inputElement) => {
       return inputElement.validity.valid;
     });
   }
 
-  // Private Check Inputs Validity Function
+
   checkInputValidity(inputElement) {
     if(inputElement.validity.valid) {
       this._hideErrorMessage(inputElement);
@@ -41,7 +42,7 @@ class FormValidator {
     buttonElement.classList.add(this._settings.inactiveButtonClass);
   }
 
-  // Private Toggle Button State Function
+  
   _toggleButtonState() {
     const inputList = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
     const buttonElement = this._formElement.querySelector(this._settings.submitButtonSelector);
@@ -54,7 +55,7 @@ class FormValidator {
     }
   }
 
-  // Private Inputs Event Lister
+  
   _inputEventListeners() {
     const inputList = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
     const buttonElement = this._formElement.querySelector(this._settings.submitButtonSelector);
@@ -68,7 +69,7 @@ class FormValidator {
   }
   
 
-  // Public Enable Validation Function
+  
   enableValidation() {
     this._formElement.addEventListener('submit', (e) => {
       e.preventDefault();

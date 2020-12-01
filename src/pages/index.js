@@ -7,16 +7,27 @@ import UserInfo from '../components/UserInfo.js';
 import PopupWithImage from '../components/PopupWithImage.js'; 
 import PopupWithForm from '../components/PopupWithForm.js'; 
 import Api from '../components/Api.js';
-
-
-const defaultConfig = {  
-  formSelector: ".form",  
-  inputSelector: ".form__input",  
-  submitButtonSelector: ".form__button",  
-  inactiveButtonClass: "form__button_disabled",  
-  inputErrorClass: "form__input_type_error",  
-  errorClass: "form__error_visible"  
-};
+import {
+  defaultConfig,
+  editProfileModal,
+  addCardModal,
+  editAvatarModal,
+  deleteCardModal,
+  imageModal,
+  editProfileForm,
+  addCardForm,
+  editAvatarForm,
+  editProfileButton,
+  addCardButton,
+  editAvatarButton,
+  profileName,
+  profileAbout,
+  profileInputName,
+  profileInputAbout,
+  profileAvatar,
+  cardTemplateSelector,
+  cardGrid
+} from '../utils/constants.js'
 
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-6",
@@ -26,18 +37,6 @@ const api = new Api({
   }
 });
 
-// MODALS
-const editProfileModal = document.querySelector('.modal_type_edit-profile');
-const addCardModal = document.querySelector('.modal_type_add-card');
-const editAvatarModal = document.querySelector('.modal_type_avatar');
-const deleteCardModal = document.querySelector('.modal_type_delete-card');
-const imageModal = document.querySelector('.modal_type_image');
-
-// FORMS
-const editProfileForm = editProfileModal.querySelector('.form');
-const addCardForm = addCardModal.querySelector('.form');
-const editAvatarForm = editAvatarModal.querySelector('.form');
-
 // VALIDATORS
 const editFormValidator = new FormValidator(defaultConfig, editProfileForm);  
 const addCardFormValidator = new FormValidator(defaultConfig, addCardForm);  
@@ -46,21 +45,6 @@ const editAvatarFormValidator = new FormValidator(defaultConfig, editAvatarForm)
 editFormValidator.enableValidation();  
 addCardFormValidator.enableValidation();  
 editAvatarFormValidator.enableValidation();
-
-// BUTTONS and DOM
-const editProfileButton = document.querySelector('.profile__edit-button');
-const addCardButton = document.querySelector('.profile__add-button');
-const editAvatarButton = document.querySelector('.profile__avatar-edit');
-
-const profileName = document.querySelector('.profile__text');
-const profileAbout = document.querySelector('.profile__paragraph');
-
-const profileInputName = document.querySelector('.form__input_type_name');
-const profileInputAbout = document.querySelector('.form__input_type_about');
-const profileAvatar = document.querySelector('.profile__avatar');
-
-const cardTemplateSelector = '.card-template';
-const cardGrid = document.querySelector('.elements__list');
 
 
 //  HANDLE LOADING FROM SERVER
@@ -138,7 +122,6 @@ const deleteCardPopup = new PopupWithForm({
 
 deleteCardPopup.setEventListeners();
 
-///////////////////////////////////////////////////////////////////////////////////////////
 
 // APP INFO, ADDING, REMOVING CARDS
 api.getAppInfo()
@@ -176,9 +159,8 @@ api.getAppInfo()
     });
 
     addCardPopup.setEventListeners();
-
-    ////////////////////////////////////////////// ADDING CARD DONE /////////////////////////////////
-
+    
+    
     function addNewCards(data) {
       const newCards = new Card({
         data,
@@ -188,7 +170,7 @@ api.getAppInfo()
         handleDeleteClick: (cardId) => {
           deleteCardPopup.open();
           deleteCardPopup.setSubmit(() => {
-            handleLoading(true, deleteCardModal, 'Saving');
+            handleLoading(true, deleteCardModal, 'Saving...');
               api.removeCard(cardId)
                 .then(() => {
                   newCards.deleteCard();
