@@ -22,7 +22,8 @@
 @media screen and (max-width: 750px) {
   .profile__text {
     margin-right: 12px;
-    margin-left: 40px;
-    max-width: 201px;
+    margin-left: 70px;
+    max-width: 145px;
+    text-align: center;
   }
 }
