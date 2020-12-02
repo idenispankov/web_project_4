@@ -13,6 +13,7 @@ different places around U.S.
 BEM (Block__Element_Modifier) methodology.
 * JavaScript files created using ES6 classes (constructor)
 * Compiled a code with webpack
+* Fetching api GET, POST, DELETE, PUT from server
 
 ## 
 * I did this project from scratch using design created in [Figma](https://www.figma.com). 
